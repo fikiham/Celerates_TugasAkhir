@@ -24,12 +24,16 @@ public class RaidSystem : MonoBehaviour
     [SerializeField] int enemiesNumber;
     [SerializeField] int enemiesNumbers;
 
+    [SerializeField] int currentLoot;
+
     [Header("UI STUFF")]
     [SerializeField] GameObject raidUI;
     [SerializeField] TMP_Text raidTimerText;
     [SerializeField] Image raidProgress;
     [SerializeField] GameObject raidEndUI;
     [SerializeField] TMP_Text raidEndText;
+    [SerializeField] TMP_Text raidEndDescText;
+    [SerializeField] Button raidEndButton;
 
     // Update is called once per frame
     void Update()
@@ -62,14 +66,28 @@ public class RaidSystem : MonoBehaviour
                 if (winStatus)
                 {
                     // Win
-                    raidEndText.color = Color.green;
-                    raidEndText.text = "good enough i guess";
+                    raidEndText.color = Color.yellow;
+                    raidEndText.text = "Successfully Defended the Village";
+                    raidEndDescText.text = "Gain some " + " coins";
+                    raidEndButton.image.color = Color.green;
+                    raidEndButton.GetComponentInChildren<TMP_Text>().text = "Ok";
+
+                    // Give Money
+                    GameEconomy.Instance.GainMoney(currentLoot);
+                    currentLoot = 0;
                 }
                 else
                 {
                     // Lost
                     raidEndText.color = Color.red;
-                    raidEndText.text = "dumb b****";
+                    raidEndText.text = "Failed Defending the Village";
+                    raidEndDescText.text = "Lose some " + " coins";
+                    raidEndButton.image.color = Color.red;
+                    raidEndButton.GetComponentInChildren<TMP_Text>().text = "Revive";
+
+                    // Lost money
+                    GameEconomy.Instance.LostMoney(currentLoot);
+
                 }
             }
         }
@@ -78,10 +96,10 @@ public class RaidSystem : MonoBehaviour
     [ContextMenu("Start Raid")]
     void StartRaidFromMenu()
     {
-        StartRaid(1);
+        StartRaid(1, 100);
     }
 
-    void StartRaid(int totalWave)
+    void StartRaid(int totalWave, int theLoot)
     {
         raidStart = true;
         raiding = true;
@@ -91,6 +109,7 @@ public class RaidSystem : MonoBehaviour
         StartCoroutine(EnableSpawners());
         currentWave = 1;
         this.totalWave = totalWave;
+        currentLoot += theLoot;
     }
 
     void NextWave()

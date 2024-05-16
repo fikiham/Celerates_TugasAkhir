@@ -74,17 +74,22 @@ public class CraftUI : MonoBehaviour
             for (int i = 0; i < 3; i++)
             {
                 Image theImage = itemSlotRectTransform.GetChild(i + 1).GetComponent<Image>();
+                TMP_Text theAmount = theImage.GetComponentInChildren<TMP_Text>();
                 // Set ingredients UI accordingly, or empty
                 if (recipe.ingredients.Count > i)
                 {
                     theImage.sprite = recipe.ingredients[i].sprite;
+                    theAmount.text = "X" + recipe.ingredientsCount[i];
 
                     // Set sprite opacity low if player don't have the ingredient
                     theImage.color = new(1, 1, 1,
                         Player_Inventory.Instance.itemList.Exists(x => x.itemName == recipe.ingredients[i].itemName) ? 1 : .3f);
                 }
                 else
+                {
                     theImage.sprite = ItemPool.Instance.GetItem("Empty").sprite;
+                    theAmount.text = string.Empty;
+                }
             }
 
             // Set position of each item
