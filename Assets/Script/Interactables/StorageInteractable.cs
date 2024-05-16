@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StorageInteractable : Interactable
 {
-    public List<Item> Items;
+    public List<Item> Items = new();
     [SerializeField] StorageUI storageUI;
     protected override void Interact()
     {

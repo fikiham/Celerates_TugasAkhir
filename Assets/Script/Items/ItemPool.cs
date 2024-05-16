@@ -14,10 +14,11 @@ public class ItemPool : MonoBehaviour
         Instance = this;
     }
 
-    public Item GetItem(string name, int count = 1)
+    public Item GetItem(string name, int count = 1, int level = 1)
     {
         Item itemToGet = items.Find(x => x.itemName == name);
         itemToGet.stackCount = count;
+        itemToGet.Level = level;
         return Instantiate(itemToGet);
     }
 }

@@ -52,7 +52,7 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
 
     private void Update()
     {
-        if (Input.GetKeyDown(openInventoryInput))
+        if (Input.GetKeyDown(openInventoryInput) && !GameController.Instance.gamePaused)
         {
             inventoryOpened = !inventoryOpened;
             inventoryGO.SetActive(inventoryOpened);
