@@ -83,7 +83,6 @@ public class DialogueSystem : MonoBehaviour
     }
     IEnumerator SettingText(TMP_Text text, string value, float dur = 1)
     {
-        float waitTime = dur / (value.Length * 3);
         float startTime = Time.time;
 
         NextButton.onClick.RemoveAllListeners();
@@ -91,12 +90,11 @@ public class DialogueSystem : MonoBehaviour
         NextButton.onClick.AddListener(() => text.text = value);
         NextButton.onClick.AddListener(() => NextButton.onClick.RemoveAllListeners());
         NextButton.onClick.AddListener(() => NextButton.onClick.AddListener(NextDialogue));
-        for (int i = 0; i < value.Length; i++)
+        while (text.text != value)
         {
-            text.text = value[..(i + 1)];
-            yield return new WaitForSeconds(waitTime);
+            text.text = value[..Mathf.Min((int)((Time.time - startTime) / dur * value.Length), value.Length)];
+            yield return null;
         }
-        print(Time.time - startTime);
         NextButton.onClick.RemoveAllListeners();
         NextButton.onClick.AddListener(NextDialogue);
 
