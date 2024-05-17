@@ -10,7 +10,8 @@ public class InventoryUI : MonoBehaviour // Attach this to the InventoryUI prefa
     List<Item> Items;
 
     [Header("Active Slot")]
-    [SerializeField] Transform equippedItem;
+    [SerializeField] Transform equippedItem1;
+    [SerializeField] Transform equippedItem2;
     [SerializeField] Transform quickSlot1;
     [SerializeField] Transform quickSlot2;
 
@@ -44,10 +45,11 @@ public class InventoryUI : MonoBehaviour // Attach this to the InventoryUI prefa
         Transform pickedSlot;
         switch (slot)
         {
-            case 0: pickedSlot = equippedItem; break;
-            case 1: pickedSlot = quickSlot1; break;
-            case 2: pickedSlot = quickSlot2; break;
-            default: pickedSlot = equippedItem; break;
+            case 0: pickedSlot = equippedItem1; break;
+            case 1: pickedSlot = equippedItem2; break;
+            case 2: pickedSlot = quickSlot1; break;
+            case 3: pickedSlot = quickSlot2; break;
+            default: pickedSlot = equippedItem1; break;
         }
 
         pickedSlot.GetChild(0).GetComponent<Image>().sprite = item.sprite;
@@ -112,8 +114,11 @@ public class InventoryUI : MonoBehaviour // Attach this to the InventoryUI prefa
         itemAction.onClick.RemoveAllListeners();
         switch (item.type)
         {
-            case ItemType.Combat:
-                itemAction.onClick.AddListener(() => Player_Inventory.Instance.EquipItem(item));
+            case ItemType.Melee_Combat:
+                itemAction.onClick.AddListener(() => Player_Inventory.Instance.EquipItem(item,0));
+                break;
+            case ItemType.Ranged_Combat:
+                itemAction.onClick.AddListener(() => Player_Inventory.Instance.EquipItem(item,1));
                 break;
             case ItemType.Heal:
                 itemAction.onClick.AddListener(() => Player_Inventory.Instance.AddQuickSlot(item, 0));

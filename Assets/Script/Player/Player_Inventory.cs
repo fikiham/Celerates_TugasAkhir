@@ -9,14 +9,19 @@ using static UnityEditor.Progress;
 public class Player_Inventory : MonoBehaviour // Handle Player Inventory with InventoryUI as UI Helper
 {
     public static Player_Inventory Instance; // Access this class by its Instance
+    Player_Action pA;
 
     public List<Item> itemList;
 
+    KeyCode switchWeapon = KeyCode.R;
+    [HideInInspector] public bool meleeOrRanged = true;
+
     [Header("UI ELEMENTS")]
-    [SerializeField] Item emptyItem;
-    [HideInInspector] public Item equippedCombat;
+    public Item emptyItem;
+    [HideInInspector] public List<Item> equippedCombat = new(2);
+    [HideInInspector] public Item equippedWeapon;
     [SerializeField] Image equippedUI;
-    [HideInInspector] public List<Item> quickSlots = new List<Item>(2);
+    [HideInInspector] public List<Item> quickSlots = new(2);
     [SerializeField] List<Image> quickSlotsUI;
 
     KeyCode openInventoryInput = KeyCode.B;
@@ -27,6 +32,7 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
     private void Awake()
     {
         Instance = this;
+        pA = GetComponent<Player_Action>();
 
         // Making sure everything in it is a clone
         List<Item> newList = new();
@@ -39,19 +45,20 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
 
         emptyItem = Instantiate(emptyItem);
 
-
         inventoryUI = inventoryGO.GetComponent<InventoryUI>();
     }
     private void Start()
     {
         // Handle so that equipped items never null
-        EquipItem(emptyItem);
+        EquipItem(emptyItem, 0);
+        EquipItem(emptyItem, 1);
         AddQuickSlot(emptyItem, 0);
         AddQuickSlot(emptyItem, 1);
     }
 
     private void Update()
     {
+        // Open inventory on open inventory input (B)
         if (Input.GetKeyDown(openInventoryInput) && !GameController.Instance.gamePaused)
         {
             inventoryOpened = !inventoryOpened;
@@ -66,12 +73,30 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
                 inventoryUI.SetDescription(emptyItem);
         }
 
-
+        // Close inventory with escape when opened
         if (Input.GetKeyDown(KeyCode.Escape) && inventoryOpened)
         {
             inventoryGO.SetActive(false);
             GameController.Instance.ShowPersistentUI(true);
             inventoryOpened = false;
+        }
+
+        // Key to switch weapon
+        if (Input.GetKeyDown(switchWeapon))
+        {
+            meleeOrRanged = !meleeOrRanged;
+        }
+
+        // Use of different weapon
+        if (meleeOrRanged)
+        {
+            equippedWeapon = equippedCombat[0];
+            equippedUI.sprite = equippedWeapon.sprite;
+        }
+        else
+        {
+            equippedWeapon = equippedCombat[1];
+            equippedUI.sprite = equippedWeapon.sprite;
         }
 
 
@@ -82,14 +107,11 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
         item = Instantiate(item);
         if (item.isStackable && itemList.Exists(x => x.itemName == item.itemName))
         {
-            print(itemList.Find(x => x.itemName == item.itemName).itemName + " before " + itemList.Find(x => x.itemName == item.itemName).stackCount);
             itemList.Find(x => x.itemName == item.itemName).stackCount++;
-            print(itemList.Find(x => x.itemName == item.itemName).itemName + " now " + itemList.Find(x => x.itemName == item.itemName).stackCount);
         }
         else
         {
             itemList.Add(item);
-            print(itemList.Find(x => x.itemName == item.itemName).itemName + " just added");
         }
     }
 
@@ -106,19 +128,18 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
             itemList.Remove(itemList.Find(x => x.itemName == item.itemName));
     }
 
-    public void EquipItem(Item item)
+    public void EquipItem(Item item, int index)
     {
-        if (!itemList.Contains(item) && item.itemName != "Empty")
+        if (!itemList.Exists(x => x.itemName == item.itemName) && item.itemName != "Empty")
             return;
-        equippedCombat = item;
-        equippedUI.sprite = item.sprite;
-        inventoryUI.SetActiveItem(0, item);
+        equippedCombat[index] = item;
+        inventoryUI.SetActiveItem(index, item);
     }
 
     // Add item to quick slot according index (0,1)
     public void AddQuickSlot(Item item, int index)
     {
-        if (!itemList.Contains(item) && item.itemName != "Empty")
+        if (!itemList.Exists(x => x.itemName == item.itemName) && item.itemName != "Empty")
             return;
 
         switch (item.type)
@@ -131,9 +152,8 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
 
         quickSlots[index] = item;
         quickSlotsUI[index].sprite = item.sprite;
-        inventoryUI.SetActiveItem(index + 1, item);
+        inventoryUI.SetActiveItem(index + 2, item);
     }
-
 
     // Use which quick slot (1,2)
     public void UseQuickSlot(int which)

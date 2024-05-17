@@ -357,6 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719fdfb7ff443aa4a9d2d8e429602d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cookUI: {fileID: 0}
   inventoryContainer: {fileID: 0}
   itemName: Daging
 --- !u!1 &3349752078532809428
@@ -605,6 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719fdfb7ff443aa4a9d2d8e429602d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cookUI: {fileID: 2331850703674890647}
   inventoryContainer: {fileID: 3681375199530319409}
   itemName: Daging
 --- !u!225 &4385421632973497097

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8bd903c7dd23ff647a6438312cb77b78, type: 3}
-  m_Name: Cabbage
+  m_Name: Kayu
   m_EditorClassIdentifier: 
-  itemName: Cabbage
-  type: 2
-  sprite: {fileID: 21300000, guid: 3fa0ca54723d12a45bf9065f0273201c, type: 3}
-  itemDescription: Not so leafy green
-  Level: 0
+  itemName: Kayu
+  type: 4
+  sprite: {fileID: 0}
+  itemDescription: dari mukul pohon tpi pohonnya ga hancur
+  Level: 1
   Damage: 0
   UpgradeCost: 0
-  isStackable: 1
+  isStackable: 0
   stackCount: 1
-  BuyValue: 20
-  SellValue: 20
+  BuyValue: 0
+  SellValue: 0

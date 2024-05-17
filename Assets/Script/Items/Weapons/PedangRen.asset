@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8bd903c7dd23ff647a6438312cb77b78, type: 3}
-  m_Name: Sword
+  m_Name: PedangRen
   m_EditorClassIdentifier: 
-  itemName: Sword
+  itemName: Pedang Ren
   type: 0
-  sprite: {fileID: 21300000, guid: 776b5b7df3579f848b1bb8a80189948a, type: 3}
-  itemDescription: Just a sword
+  sprite: {fileID: 21300000, guid: 631a17ad459905548ad70b68d6b79d8e, type: 3}
+  itemDescription: "Pedang pemberian ren, cukup untuk mengusir bandit \nSpecial Skill:
+    Meningkatkan atk sebesar 100% selama 30 detik. Cd: 40 detik; Stamina: 20"
   Level: 0
-  Damage: 5
+  Damage: 20
+  AreaOfEffect: 3
+  SpecialAttackCD: 40
   UpgradeCost: 15
   isStackable: 0
   stackCount: 1

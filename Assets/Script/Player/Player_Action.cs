@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,10 +20,10 @@ public class Player_Action : MonoBehaviour
     public bool combatMode = false;
     bool canAttack = true;
     [SerializeField] GameObject normalAttackHitArea;
-    [SerializeField] float normalAttackCD = .5f;
     [SerializeField] GameObject specialAttackHitArea;
     [SerializeField] Image specialAttackUI;
-    [SerializeField] float specialAttackCD = 1;
+
+    float damageMult = 1;
     #endregion
 
     #region QUICK_SLOTS
@@ -53,6 +54,7 @@ public class Player_Action : MonoBehaviour
             if (combatMode && canAttack)
             {
                 Attack();
+                print("Normal Attacking");
             }
         }
 
@@ -62,7 +64,8 @@ public class Player_Action : MonoBehaviour
             if (combatMode && canAttack)
             {
                 SpecialAttack();
-                StartCoroutine(HandleUICD(specialAttackUI, specialAttackCD));
+                print("Special Attacking");
+                StartCoroutine(HandleUICD(specialAttackUI, Player_Inventory.Instance.equippedWeapon.SpecialAttackCD));
             }
         }
 
@@ -92,7 +95,7 @@ public class Player_Action : MonoBehaviour
         canInteract = CheckInteractables();
         // jadi logikanya cek dulu di sekitar ada yang bisa di interact gak
         if (Input.GetKeyDown(actionInput))
-        { 
+        {
             // terus kalo udah dicek, baru bisa pencet interact
             if (canInteract)
             {
@@ -102,6 +105,7 @@ public class Player_Action : MonoBehaviour
         #endregion
     }
 
+    #region UI_HELPER
     // Handling Quick slot cooldown after using
     void HandleQuickSLotUI(int i)
     {
@@ -123,11 +127,12 @@ public class Player_Action : MonoBehaviour
         float startTime = Time.time;
         while (Time.time < startTime + cd)
         {
-            image.fillAmount = Time.time - startTime / cd;
+            image.fillAmount = (Time.time - startTime) / cd;
             yield return null;
         }
         image.fillAmount = 1;
     }
+    #endregion
 
     // Helper function for checking interactables nearby
     bool CheckInteractables()
@@ -149,33 +154,164 @@ public class Player_Action : MonoBehaviour
 
 
     #region COMBAT_ACTIONS
-    void Attack()
+    public void ActivateHitbox(int damage, float area, float howLong = .5f, bool AOE = false)
     {
-        canAttack = false;
-        StartCoroutine(Attacking());
+        if (!AOE)
+        {
+            Transform theTransform = normalAttackHitArea.transform;
+            theTransform.name = damage.ToString();
+            theTransform.localPosition = new(area / 2, theTransform.localPosition.y, theTransform.localPosition.z);
+            theTransform.localScale = new(area, theTransform.localScale.y, theTransform.localScale.z);
+            StartCoroutine(activatingHitbox(normalAttackHitArea, howLong));
+        }
+        else
+        {
+            // Adding constant so the area isn't too small
+            area += 1;
+            Transform theTransform = specialAttackHitArea.transform;
+            theTransform.name = damage.ToString();
+            theTransform.localScale = new(area, area, theTransform.localScale.z);
+            StartCoroutine(activatingHitbox(specialAttackHitArea, howLong));
+        }
     }
 
-    IEnumerator Attacking()
+    IEnumerator activatingHitbox(GameObject theHitbox, float howLong)
     {
-        normalAttackHitArea.SetActive(true);
-        yield return new WaitForSeconds(normalAttackCD);
-        normalAttackHitArea.SetActive(false);
+        theHitbox.SetActive(true);
+        yield return new WaitForSeconds(howLong);
+        theHitbox.SetActive(false);
         canAttack = true;
     }
 
-    void SpecialAttack()
+    public void Attack()
     {
-        canAttack = false;
-        StartCoroutine(SpecialAttacking());
+        Item itemToAttack = Player_Inventory.Instance.equippedWeapon;
+        if (itemToAttack.itemName == "Empty")
+            return;
+
+        if (itemToAttack.type == ItemType.Melee_Combat)
+        {
+            print("melee normal attacking");
+            ActivateHitbox(itemToAttack.Damage, itemToAttack.AreaOfEffect);
+            StartCoroutine(ActivateAttack(.5f));
+        }
+        else if (itemToAttack.itemName == "Batu")
+        {
+            print("throwing rock");
+            // throw rock
+            StartCoroutine(ShootProjectile(itemToAttack.RangedWeapon_ProjectilePrefab, itemToAttack.Damage));
+            // check if rock depleted after use then remove as equipped then remove from inventory
+            if (Player_Inventory.Instance.equippedWeapon.stackCount == 1)
+            {
+                Player_Inventory.Instance.EquipItem(ItemPool.Instance.GetItem("Empty"), 1);
+            }
+            // minus rock count
+            Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem("Batu"));
+
+            StartCoroutine(ActivateAttack(.5f));
+        }
+        else if (itemToAttack.type == ItemType.Ranged_Combat)
+        {
+            // Check for arrow first
+            if (Player_Inventory.Instance.itemList.Exists(x => x.itemName == "Anak Panah"))
+            {
+                print("shooting arrow");
+                // Shoot arrow if possible
+                StartCoroutine(ShootProjectile(itemToAttack.RangedWeapon_ProjectilePrefab, itemToAttack.Damage));
+                // minus arrow count
+                Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem("Anak Panah"));
+            }
+            else
+            {
+                print("no arrow bish");
+            }
+            StartCoroutine(ActivateAttack(1));
+        }
     }
 
-    IEnumerator SpecialAttacking()
+    public void SpecialAttack()
     {
-        specialAttackHitArea.SetActive(true);
-        yield return new WaitForSeconds(specialAttackCD);
-        specialAttackHitArea.SetActive(false);
+        Item itemToAttack = Player_Inventory.Instance.equippedWeapon;
+        if (itemToAttack.itemName == "Empty")
+            return;
+
+        if (itemToAttack.itemName == "Penyiram Tanaman")
+        {
+            print("watering plants");
+            // Water nearby plants
+        }
+        else if (itemToAttack.itemName == "Pedang Ren")
+        {
+            print("buffing");
+            // Buff
+            StartCoroutine(StartBuff_PedangRen(30));
+            StartCoroutine(ActivateAttack(1));
+        }
+        else if (itemToAttack.type == ItemType.Melee_Combat)
+        {
+            print("special attacking with a stick");
+            ActivateHitbox(itemToAttack.Damage * 4, itemToAttack.AreaOfEffect, 1, true);
+            StartCoroutine(ActivateAttack(1));
+        }
+        else if (itemToAttack.itemName == "Batu")
+        {
+            print("rock no special attack");
+        }
+        else if (itemToAttack.type == ItemType.Ranged_Combat)
+        {
+            print("bow special attack");
+            for (int i = 0; i < 5; i++)
+            {
+                // Check for arrow first
+                if (Player_Inventory.Instance.itemList.Exists(x => x.itemName == "Anak Panah"))
+                {
+                    print("shooting arrow");
+                    // Shoot arrow if possible
+                    StartCoroutine(ShootProjectile(itemToAttack.RangedWeapon_ProjectilePrefab, itemToAttack.Damage, i * .1f));
+                    // minus arrow count
+                    Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem("Anak Panah"));
+                }
+                else
+                {
+                    print("no arrow bish");
+                }
+            }
+            StartCoroutine(ActivateAttack(1));
+        }
+    }
+
+    IEnumerator ActivateAttack(float dur)
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(dur);
         canAttack = true;
     }
+
+    #region WEAPON_SPECIFIC
+    IEnumerator StartBuff_PedangRen(float dur)
+    {
+        damageMult *= 2;
+        yield return new WaitForSeconds(dur);
+        damageMult /= 2;
+    }
+
+    IEnumerator ShootProjectile(GameObject prefab, int damage, float delay = 0)
+    {
+        yield return new WaitForSeconds(delay);
+        // Check where to aim using mouse
+        Vector2 aimPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        // Shoot prefab to that general area
+        Vector2 rotation = (Vector2)transform.position - aimPos.normalized;
+        float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+        GameObject projectile = Instantiate(prefab, transform.position, Quaternion.Euler(0, 0, rot));
+        projectile.name = damage.ToString();
+        //GameObject projectile = ObjectPooler.Instance.SpawnFromPool("Bullet", transform.position, Quaternion.Euler(0, 0, rot));
+        //projectile.GetComponent<BulletLogic>().SetBullet(bulletSpd, bulletdamage);
+        projectile.GetComponent<Rigidbody2D>().AddForce(aimPos.normalized * 10, ForceMode2D.Impulse);
+        yield return null;
+    }
+    #endregion
+
     #endregion
 
     #region DEBUG

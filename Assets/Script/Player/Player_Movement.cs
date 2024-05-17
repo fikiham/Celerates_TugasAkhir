@@ -15,6 +15,7 @@ public class Player_Movement : MonoBehaviour
     #endregion
 
     [SerializeField] Transform face;
+    [SerializeField] Transform hitboxes;
 
     #region SPEEDS
     [Header("SPEEDS")]
@@ -44,6 +45,10 @@ public class Player_Movement : MonoBehaviour
     {
         PlayerInput();
         dashUI.color = new(1, 1, 1, Player_Health.Instance.stamina < dashStamina ? .5f : 1);
+        if (movement.x > 0)
+            hitboxes.eulerAngles = new(0, 0, 0);
+        else if (movement.x < 0)
+            hitboxes.eulerAngles = new(0, 180, 0);
     }
 
     private void FixedUpdate()
@@ -102,8 +107,9 @@ public class Player_Movement : MonoBehaviour
         justDash = true;
         noMovement = true;
         Vector2 targetDir = (face.position - transform.position).normalized;
+        float startTime = Time.time;
 
-        while (Vector2.Distance(startPos, transform.position) < dashDistance)
+        while (Vector2.Distance(startPos, transform.position) < dashDistance && Time.time < startTime + 1)
         {
             rb.AddForce(dashForce * Time.deltaTime * targetDir, ForceMode2D.Impulse);
             dashUI.fillAmount = Vector2.Distance(startPos, transform.position) / dashDistance;

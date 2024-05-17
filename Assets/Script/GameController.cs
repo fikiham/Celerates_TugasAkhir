@@ -66,6 +66,13 @@ public class GameController : MonoBehaviour
             Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(item.itemName, item.stackCount, item.level));
         }
 
+        // Load Player Active Items
+        print(data.PlayerInventory_ActiveItemAndCount[0].itemName);
+        Player_Inventory.Instance.EquipItem(ItemPool.Instance.GetItem(data.PlayerInventory_ActiveItemAndCount[0].itemName, 1, data.PlayerInventory_ActiveItemAndCount[0].level), 0);
+        Player_Inventory.Instance.EquipItem(ItemPool.Instance.GetItem(data.PlayerInventory_ActiveItemAndCount[1].itemName, 1, data.PlayerInventory_ActiveItemAndCount[1].level), 1);
+        Player_Inventory.Instance.AddQuickSlot(ItemPool.Instance.GetItem(data.PlayerInventory_ActiveItemAndCount[2].itemName, data.PlayerInventory_ActiveItemAndCount[2].stackCount, 1), 0);
+        Player_Inventory.Instance.AddQuickSlot(ItemPool.Instance.GetItem(data.PlayerInventory_ActiveItemAndCount[3].itemName, data.PlayerInventory_ActiveItemAndCount[3].stackCount, 1), 1);
+
         // Load storage items to each storage container
         foreach (KeyValuePair<int, List<GameData.SimpleItem>> ele in data.Storages_ItemNameAndCount)
         {

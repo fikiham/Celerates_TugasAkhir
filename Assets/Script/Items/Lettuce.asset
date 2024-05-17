@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lettuce
   m_EditorClassIdentifier: 
   itemName: Lettuce
-  type: 1
+  type: 2
   sprite: {fileID: 21300000, guid: 72be7f967b491d1438865cb435a847de, type: 3}
   itemDescription: Inferior cabbage
   Level: 0

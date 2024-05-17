@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8bd903c7dd23ff647a6438312cb77b78, type: 3}
-  m_Name: Cabbage
+  m_Name: KulitSerigala
   m_EditorClassIdentifier: 
-  itemName: Cabbage
-  type: 2
-  sprite: {fileID: 21300000, guid: 3fa0ca54723d12a45bf9065f0273201c, type: 3}
-  itemDescription: Not so leafy green
+  itemName: Kulit Serigala
+  type: 4
+  sprite: {fileID: 21300000, guid: 327f477fcab94e94e939a1c334f34cfc, type: 3}
+  itemDescription: dari grey wolf, bisa dijual
   Level: 0
   Damage: 0
   UpgradeCost: 0
