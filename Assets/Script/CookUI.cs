@@ -8,20 +8,11 @@ using UnityEngine.UI;
 public class CookUI : MonoBehaviour
 {
     public bool isCookUIPanelOpen = false;
-    [SerializeField] Player_Inventory playerInventory;
-    [SerializeField] InventoryUI inventoryUI;
 
     List<Item> Items;
     [Header("Inventory Slot")]
     [SerializeField] Transform itemSlotContainer;
     [SerializeField] Transform itemSlotTemplate;
-
-    [SerializeField] int itemsHorizontalCount = 4;
-    [SerializeField] float itemsPadding = 25;
-
-    Vector2 inventoryContainerSize;
-    Vector2 itemSizeVector;
-    float itemSize;
 
     private void Update()
     {
@@ -38,8 +29,29 @@ public class CookUI : MonoBehaviour
         gameObject.SetActive(true);
         isCookUIPanelOpen = true;
 
-        // Tampilkan inventaris di panel CookUI saat dibuka
-        inventoryUI.SetInventory(Player_Inventory.Instance.itemList);
+        RefreshSlots();
+    }
+
+    public void RefreshSlots()
+    {
+        foreach (Transform child in itemSlotContainer)
+        {
+            if (child == itemSlotTemplate)
+                continue;
+            Destroy(child.gameObject);
+        }
+
+        foreach (Item item in Player_Inventory.Instance.itemList)
+        {
+            Transform theItem = Instantiate(itemSlotTemplate, itemSlotContainer);
+            theItem.name = item.itemName;
+            theItem.gameObject.SetActive(true);
+            theItem.GetChild(0).GetComponent<Image>().sprite = item.sprite;
+            theItem.GetChild(1).GetComponent<TMP_Text>().text = item.stackCount.ToString();
+
+            theItem.GetComponent<DragCook>().itemName = item.itemName;
+
+        }
     }
 
     public void CloseCook()

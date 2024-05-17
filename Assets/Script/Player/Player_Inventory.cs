@@ -86,7 +86,6 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
         }
         else
         {
-            item.stackCount = 1;
             itemList.Add(item);
         }
     }

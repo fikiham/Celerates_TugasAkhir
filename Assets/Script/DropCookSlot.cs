@@ -90,8 +90,8 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
             Debug.Log($"Item in SlotCook1: {item1.itemName}");
             Debug.Log($"Item in SlotCook2: {item2.itemName}");
 
-            if ((item1.itemName == "Daging" && item2.itemName == "Cabai") ||
-                (item1.itemName == "Cabai" && item2.itemName == "Daging"))
+            if ((item1.itemName == "Cabbage" && item2.itemName == "Bear Meat") ||
+                (item1.itemName == "Bear Meat" && item2.itemName == "Cabbage"))
             {
                 Debug.Log("Condition met: Daging and Cabai are in the slots.");
                 // Buat instance dari DagingPedasPrefab
@@ -102,6 +102,15 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
 
                 // Set DagingPedas agar dapat dipindahkan
                 AddDragHandler(dagingPedas);
+
+                Button hasilCookButton = hasilCook.GetComponent<Button>();
+                hasilCookButton.onClick.RemoveAllListeners();
+                hasilCookButton.onClick.AddListener(() => Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(dagingPedas.GetComponent<DragCook>().itemName)));
+                hasilCookButton.onClick.AddListener(() => Destroy(dagingPedas));
+                hasilCookButton.onClick.AddListener(() => hasilCookButton.onClick.RemoveAllListeners());
+
+                Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem(item1.itemName));
+                Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem(item2.itemName));
 
                 // Hapus item dari SlotCook1 dan SlotCook2
                 Destroy(slotCook1.item);
@@ -124,7 +133,7 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
 
     private void AddDragHandler(GameObject dagingPedas)
     {
-        dagingPedas.AddComponent<DragCook>();
+        dagingPedas.AddComponent<DragCook>().itemName = "Wolf Meat";
         // Jika DragCook membutuhkan komponen atau pengaturan lain, tambahkan di sini
         Debug.Log("Drag handler added to DagingPedas.");
     }

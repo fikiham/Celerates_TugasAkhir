@@ -5,6 +5,7 @@ public class DragCook : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 {
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
+    [SerializeField] Transform inventoryContainer;
      public string itemName;
 
     private void Awake()
@@ -35,6 +36,6 @@ public class DragCook : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         canvasGroup.alpha = 1f; // Mengembalikan opacity ke nilai awal
         canvasGroup.blocksRaycasts = true; // Mengaktifkan kembali raycast
         // Mengembalikan item ke posisi awal jika tidak berhasil di-drop
-        rectTransform.localPosition = Vector3.zero;
+        rectTransform.parent = inventoryContainer;
     }
 }
