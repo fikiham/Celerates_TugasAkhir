@@ -5,8 +5,9 @@ public class DragCook : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 {
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
+    [SerializeField] CookUI cookUI;
     [SerializeField] Transform inventoryContainer;
-     public string itemName;
+    public string itemName;
 
     private void Awake()
     {
@@ -36,6 +37,9 @@ public class DragCook : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         canvasGroup.alpha = 1f; // Mengembalikan opacity ke nilai awal
         canvasGroup.blocksRaycasts = true; // Mengaktifkan kembali raycast
         // Mengembalikan item ke posisi awal jika tidak berhasil di-drop
+        rectTransform.parent = cookUI.transform;
         rectTransform.parent = inventoryContainer;
+        //if (rectTransform.parent == inventoryContainer)
+        //    cookUI.RefreshSlots();
     }
 }

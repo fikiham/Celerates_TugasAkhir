@@ -93,6 +93,7 @@ MonoBehaviour:
   slotName: SlotCook1
   hasilCook: {fileID: 6709515870203886122}
   dagingPedasPrefab: {fileID: 7465911372977571097, guid: 52147296b7e1b4c4397ef1fcd905b4fe, type: 3}
+  cookUI: {fileID: 2331850703674890647}
 --- !u!114 &5580036336616510922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719fdfb7ff443aa4a9d2d8e429602d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryContainer: {fileID: 0}
   itemName: Daging
 --- !u!1 &3349752078532809428
 GameObject:
@@ -603,6 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719fdfb7ff443aa4a9d2d8e429602d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryContainer: {fileID: 3681375199530319409}
   itemName: Daging
 --- !u!225 &4385421632973497097
 CanvasGroup:
@@ -628,8 +631,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa5619ed48a32fa438d72efb14c0ee90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotCook1: {fileID: 0}
-  slotCook2: {fileID: 0}
+  slotCook1: {fileID: 6204550872367928456}
+  slotCook2: {fileID: 6676220863362145352}
 --- !u!1 &6124976776473185007
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,6 +726,7 @@ MonoBehaviour:
   slotName: SlotCook2
   hasilCook: {fileID: 6709515870203886122}
   dagingPedasPrefab: {fileID: 7465911372977571097, guid: 52147296b7e1b4c4397ef1fcd905b4fe, type: 3}
+  cookUI: {fileID: 2331850703674890647}
 --- !u!114 &384006595237897299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,6 +896,7 @@ GameObject:
   - component: {fileID: 2946119811261071526}
   - component: {fileID: 5452335572606742781}
   - component: {fileID: 8348245732691646658}
+  - component: {fileID: 3201700336095345698}
   m_Layer: 5
   m_Name: HasilCook
   m_TagString: Untagged
@@ -956,6 +961,50 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3201700336095345698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6709515870203886122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 8348245732691646658}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8051756243109721239
 GameObject:
   m_ObjectHideFlags: 0
@@ -966,14 +1015,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8222417266887828513}
   - component: {fileID: 2331850703674890647}
-  - component: {fileID: 6133427676616549280}
   m_Layer: 5
   m_Name: CookUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8222417266887828513
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1011,20 +1059,6 @@ MonoBehaviour:
   isCookUIPanelOpen: 0
   itemSlotContainer: {fileID: 3681375199530319409}
   itemSlotTemplate: {fileID: 1422476855991100553}
---- !u!114 &6133427676616549280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8051756243109721239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa5619ed48a32fa438d72efb14c0ee90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slotCook1: {fileID: 6204550872367928456}
-  slotCook2: {fileID: 6676220863362145352}
 --- !u!1 &9136266421701280726
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
     private DropCookSlot slotCook1;
     private DropCookSlot slotCook2;
 
+    [SerializeField] CookUI cookUI;
+
     private void Start()
     {
         // Assuming the slots are siblings, find SlotCook1 and SlotCook2
@@ -82,6 +84,7 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
 
     private void CheckAndCreateDagingPedas()
     {
+        Button hasilCookButton = hasilCook.GetComponent<Button>();
         if (slotCook1.item != null && slotCook2.item != null)
         {
             DragCook item1 = slotCook1.item.GetComponent<DragCook>();
@@ -97,44 +100,41 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
                 // Buat instance dari DagingPedasPrefab
                 GameObject dagingPedas = Instantiate(dagingPedasPrefab, hasilCook.transform);
                 dagingPedas.transform.localPosition = Vector3.zero; // Sesuaikan posisi sesuai kebutuhan
+                dagingPedas.name = "Wolf Meat";
 
                 Debug.Log("DagingPedas instance created and positioned.");
 
-                // Set DagingPedas agar dapat dipindahkan
-                AddDragHandler(dagingPedas);
 
-                Button hasilCookButton = hasilCook.GetComponent<Button>();
+
                 hasilCookButton.onClick.RemoveAllListeners();
-                hasilCookButton.onClick.AddListener(() => Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(dagingPedas.GetComponent<DragCook>().itemName)));
+                // Add Item to inventory
+                hasilCookButton.onClick.AddListener(() => Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(dagingPedas.name)));
+
+                // Remove Everything UI
                 hasilCookButton.onClick.AddListener(() => Destroy(dagingPedas));
+                hasilCookButton.onClick.AddListener(() => Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem(item1.itemName)));
+                hasilCookButton.onClick.AddListener(() => Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem(item2.itemName)));
+                hasilCookButton.onClick.AddListener(() => Destroy(slotCook1.item));
+                hasilCookButton.onClick.AddListener(() => slotCook1.item = null);
+                hasilCookButton.onClick.AddListener(() => Destroy(slotCook2.item));
+                hasilCookButton.onClick.AddListener(() => slotCook2.item = null);
+                hasilCookButton.onClick.AddListener(() => cookUI.RefreshSlots());
                 hasilCookButton.onClick.AddListener(() => hasilCookButton.onClick.RemoveAllListeners());
-
-                Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem(item1.itemName));
-                Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem(item2.itemName));
-
-                // Hapus item dari SlotCook1 dan SlotCook2
-                Destroy(slotCook1.item);
-                slotCook1.item = null;
-                Destroy(slotCook2.item);
-                slotCook2.item = null;
 
                 Debug.Log("Items in SlotCook1 and SlotCook2 destroyed.");
             }
             else
             {
+                Destroy(hasilCook.transform.GetChild(0).gameObject!);
+                hasilCookButton.onClick.RemoveAllListeners();
                 Debug.Log("Condition not met: The items in the slots are not Daging and Cabai.");
             }
         }
         else
         {
+            Destroy(hasilCook.transform.GetChild(0).gameObject!);
+            hasilCookButton.onClick.RemoveAllListeners();
             Debug.Log("Slots are not both filled.");
         }
-    }
-
-    private void AddDragHandler(GameObject dagingPedas)
-    {
-        dagingPedas.AddComponent<DragCook>().itemName = "Wolf Meat";
-        // Jika DragCook membutuhkan komponen atau pengaturan lain, tambahkan di sini
-        Debug.Log("Drag handler added to DagingPedas.");
     }
 }

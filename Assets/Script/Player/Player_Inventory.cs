@@ -82,11 +82,14 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
         item = Instantiate(item);
         if (item.isStackable && itemList.Exists(x => x.itemName == item.itemName))
         {
+            print(itemList.Find(x => x.itemName == item.itemName).itemName + " before " + itemList.Find(x => x.itemName == item.itemName).stackCount);
             itemList.Find(x => x.itemName == item.itemName).stackCount++;
+            print(itemList.Find(x => x.itemName == item.itemName).itemName + " now " + itemList.Find(x => x.itemName == item.itemName).stackCount);
         }
         else
         {
             itemList.Add(item);
+            print(itemList.Find(x => x.itemName == item.itemName).itemName + " just added");
         }
     }
 
