@@ -58,20 +58,20 @@ public class GameController : MonoBehaviour
     public void LoadGame()
     {
         GameData data = SaveSystem.LoadData();
+        Player_Inventory inventory = Player_Inventory.Instance;
 
         // Load player inventory data
-        Player_Inventory.Instance.itemList = new();
+        inventory.itemList = new();
         foreach (GameData.SimpleItem item in data.PlayerInventory_ItemNameAndCount)
         {
-            Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(item.itemName, item.stackCount, item.level));
+            inventory.AddItem(ItemPool.Instance.GetItem(item.itemName, item.stackCount, item.level));
         }
 
         // Load Player Active Items
-        print(data.PlayerInventory_ActiveItemAndCount[0].itemName);
-        Player_Inventory.Instance.EquipItem(ItemPool.Instance.GetItem(data.PlayerInventory_ActiveItemAndCount[0].itemName, 1, data.PlayerInventory_ActiveItemAndCount[0].level), 0);
-        Player_Inventory.Instance.EquipItem(ItemPool.Instance.GetItem(data.PlayerInventory_ActiveItemAndCount[1].itemName, 1, data.PlayerInventory_ActiveItemAndCount[1].level), 1);
-        Player_Inventory.Instance.AddQuickSlot(ItemPool.Instance.GetItem(data.PlayerInventory_ActiveItemAndCount[2].itemName, data.PlayerInventory_ActiveItemAndCount[2].stackCount, 1), 0);
-        Player_Inventory.Instance.AddQuickSlot(ItemPool.Instance.GetItem(data.PlayerInventory_ActiveItemAndCount[3].itemName, data.PlayerInventory_ActiveItemAndCount[3].stackCount, 1), 1);
+        inventory.EquipItem(inventory.FindItemInInventory(data.PlayerInventory_ActiveItemAndCount[0].itemName), 0);
+        inventory.EquipItem(inventory.FindItemInInventory(data.PlayerInventory_ActiveItemAndCount[1].itemName), 1);
+        inventory.AddQuickSlot(inventory.FindItemInInventory(data.PlayerInventory_ActiveItemAndCount[2].itemName), 0);
+        inventory.AddQuickSlot(inventory.FindItemInInventory(data.PlayerInventory_ActiveItemAndCount[3].itemName), 1);
 
         // Load storage items to each storage container
         foreach (KeyValuePair<int, List<GameData.SimpleItem>> ele in data.Storages_ItemNameAndCount)

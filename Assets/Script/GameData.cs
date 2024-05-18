@@ -24,18 +24,19 @@ public class GameData
 
     public GameData()
     {
+        Player_Inventory inventory = Player_Inventory.Instance;
         int index;
         // Save Player Inventory Items
-        foreach (Item item in Player_Inventory.Instance.itemList)
+        foreach (Item item in inventory.itemList)
         {
             PlayerInventory_ItemNameAndCount.Add(new SimpleItem(item.itemName, item.stackCount, item.Level));
         }
 
         // Save Player Active Items
-        PlayerInventory_ActiveItemAndCount[0] = (new(Player_Inventory.Instance.equippedCombat[0].itemName, 1, Player_Inventory.Instance.equippedCombat[0].Level));
-        PlayerInventory_ActiveItemAndCount[1] = (new(Player_Inventory.Instance.equippedCombat[1].itemName, 1, Player_Inventory.Instance.equippedCombat[1].Level));
-        PlayerInventory_ActiveItemAndCount[2] = (new(Player_Inventory.Instance.quickSlots[0].itemName, Player_Inventory.Instance.quickSlots[0].stackCount, 1));
-        PlayerInventory_ActiveItemAndCount[3] = (new(Player_Inventory.Instance.quickSlots[1].itemName, Player_Inventory.Instance.quickSlots[1].stackCount, 1));
+        PlayerInventory_ActiveItemAndCount[0] = (new(inventory.equippedCombat[0].itemName, 1, inventory.equippedCombat[0].Level));
+        PlayerInventory_ActiveItemAndCount[1] = (new(inventory.equippedCombat[1].itemName, inventory.equippedCombat[1].stackCount, inventory.equippedCombat[1].Level));
+        PlayerInventory_ActiveItemAndCount[2] = (new(inventory.quickSlots[0].itemName, inventory.quickSlots[0].stackCount, 1));
+        PlayerInventory_ActiveItemAndCount[3] = (new(inventory.quickSlots[1].itemName, inventory.quickSlots[1].stackCount, 1));
 
         // Save Storages 
         index = 0;

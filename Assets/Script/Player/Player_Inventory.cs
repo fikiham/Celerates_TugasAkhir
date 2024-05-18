@@ -128,6 +128,15 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
             itemList.Remove(itemList.Find(x => x.itemName == item.itemName));
     }
 
+    public Item FindItemInInventory(string name)
+    {
+        if (itemList.Exists(x => x.itemName == name))
+        {
+            return itemList.Find(x => x.itemName == name);
+        }
+        return ItemPool.Instance.GetItem("Empty");
+    }
+
     public void EquipItem(Item item, int index)
     {
         if (!itemList.Exists(x => x.itemName == item.itemName) && item.itemName != "Empty")

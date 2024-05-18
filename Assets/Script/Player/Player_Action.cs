@@ -54,7 +54,6 @@ public class Player_Action : MonoBehaviour
             if (combatMode && canAttack)
             {
                 Attack();
-                print("Normal Attacking");
             }
         }
 
@@ -64,7 +63,6 @@ public class Player_Action : MonoBehaviour
             if (combatMode && canAttack)
             {
                 SpecialAttack();
-                print("Special Attacking");
                 StartCoroutine(HandleUICD(specialAttackUI, Player_Inventory.Instance.equippedWeapon.SpecialAttackCD));
             }
         }
@@ -205,6 +203,7 @@ public class Player_Action : MonoBehaviour
             {
                 Player_Inventory.Instance.EquipItem(ItemPool.Instance.GetItem("Empty"), 1);
             }
+
             // minus rock count
             Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem("Batu"));
 
@@ -299,15 +298,15 @@ public class Player_Action : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         // Check where to aim using mouse
-        Vector2 aimPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        Vector2 aimPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         // Shoot prefab to that general area
-        Vector2 rotation = (Vector2)transform.position - aimPos.normalized;
+        Vector2 rotation = aimPos - (Vector2)transform.position;
         float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         GameObject projectile = Instantiate(prefab, transform.position, Quaternion.Euler(0, 0, rot));
         projectile.name = damage.ToString();
         //GameObject projectile = ObjectPooler.Instance.SpawnFromPool("Bullet", transform.position, Quaternion.Euler(0, 0, rot));
         //projectile.GetComponent<BulletLogic>().SetBullet(bulletSpd, bulletdamage);
-        projectile.GetComponent<Rigidbody2D>().AddForce(aimPos.normalized * 10, ForceMode2D.Impulse);
+        projectile.GetComponent<Rigidbody2D>().AddForce(rotation.normalized * 10, ForceMode2D.Impulse);
         yield return null;
     }
     #endregion

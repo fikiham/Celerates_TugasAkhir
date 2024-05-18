@@ -56,6 +56,25 @@ public class InventoryUI : MonoBehaviour // Attach this to the InventoryUI prefa
         pickedSlot.GetChild(1).GetComponent<TMP_Text>().text = item.stackCount <= 0 ? "" : item.stackCount.ToString();
     }
 
+    void RefreshActiveItems()
+    {
+        Item item = Player_Inventory.Instance.equippedCombat[0];
+        equippedItem1.GetChild(0).GetComponent<Image>().sprite = item.sprite;
+        equippedItem1.GetChild(1).GetComponent<TMP_Text>().text = item.stackCount <= 0 ? "" : item.stackCount.ToString();
+
+        item = Player_Inventory.Instance.equippedCombat[1];
+        equippedItem2.GetChild(0).GetComponent<Image>().sprite = item.sprite;
+        equippedItem2.GetChild(1).GetComponent<TMP_Text>().text = item.stackCount <= 0 ? "" : item.stackCount.ToString();
+
+        item = Player_Inventory.Instance.quickSlots[0];
+        quickSlot1.GetChild(0).GetComponent<Image>().sprite = item.sprite;
+        quickSlot1.GetChild(1).GetComponent<TMP_Text>().text = item.stackCount <= 0 ? "" : item.stackCount.ToString();
+
+        item = Player_Inventory.Instance.quickSlots[1];
+        quickSlot2.GetChild(0).GetComponent<Image>().sprite = item.sprite;
+        quickSlot2.GetChild(1).GetComponent<TMP_Text>().text = item.stackCount <= 0 ? "" : item.stackCount.ToString();
+    }
+
     // Handle opened inventory with its items
     public void SetInventory(List<Item> Items)
     {
@@ -65,6 +84,7 @@ public class InventoryUI : MonoBehaviour // Attach this to the InventoryUI prefa
 
     void RefreshInventoryItems()
     {
+        RefreshActiveItems();
         foreach (Transform child in itemSlotContainer)
         {
             if (child == itemSlotTemplate) continue;
