@@ -5,16 +5,20 @@ public class DragCook : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 {
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
-    [SerializeField] CookUI cookUI;
-    [SerializeField] Transform inventoryContainer;
-    public string itemName;
+    public string itemName; // Nama item
+    public Vector2 originalPosition;
+    private Transform originalParent;
+
+    public Transform OriginalParent
+    {
+        get { return originalParent; }
+    }
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
 
-        // Periksa apakah canvasGroup sudah ada, jika belum tambahkan secara dinamis
         if (canvasGroup == null)
         {
             canvasGroup = gameObject.AddComponent<CanvasGroup>();
@@ -23,8 +27,10 @@ public class DragCook : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        canvasGroup.alpha = 0.6f; // Mengurangi opacity saat item di-drag
-        canvasGroup.blocksRaycasts = false; // Menonaktifkan raycast agar tidak menghalangi input
+        originalPosition = rectTransform.anchoredPosition;
+        originalParent = rectTransform.parent;
+        canvasGroup.alpha = 0.6f;
+        canvasGroup.blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -34,12 +40,19 @@ public class DragCook : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        canvasGroup.alpha = 1f; // Mengembalikan opacity ke nilai awal
-        canvasGroup.blocksRaycasts = true; // Mengaktifkan kembali raycast
-        // Mengembalikan item ke posisi awal jika tidak berhasil di-drop
-        rectTransform.parent = cookUI.transform;
-        rectTransform.parent = inventoryContainer;
-        //if (rectTransform.parent == inventoryContainer)
-        //    cookUI.RefreshSlots();
+        canvasGroup.alpha = 1f;
+        canvasGroup.blocksRaycasts = true;
+
+        // Mengecek apakah item di-drop di slot valid, jika tidak, kembalikan ke posisi awal
+        if (eventData.pointerEnter == null || (!eventData.pointerEnter.GetComponent<DropCookSlot>() && !eventData.pointerEnter.GetComponent<CookInventory>()))
+        {
+            ResetPosition();
+        }
+    }
+
+    public void ResetPosition()
+    {
+        rectTransform.SetParent(originalParent);
+        rectTransform.anchoredPosition = originalPosition;
     }
 }

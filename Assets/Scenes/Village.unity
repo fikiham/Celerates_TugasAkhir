@@ -2789,9 +2789,17 @@ PrefabInstance:
       propertyPath: cookUI
       value: 
       objectReference: {fileID: 1027489055}
+    - target: {fileID: 6503499977467080830, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      propertyPath: cookUI
+      value: 
+      objectReference: {fileID: 1027489055}
     - target: {fileID: 8051756243109721239, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
       propertyPath: m_Name
       value: CookUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051756243109721239, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8222417266887828513, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
       propertyPath: m_Pivot.x
@@ -2876,7 +2884,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9136266421701280726, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1967923618}
   m_SourcePrefab: {fileID: 100100000, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
 --- !u!224 &1027489054 stripped
 RectTransform:
@@ -12608,6 +12619,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1967923613 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9136266421701280726, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+  m_PrefabInstance: {fileID: 1027489053}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1967923618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967923613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5619ed48a32fa438d72efb14c0ee90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySlots: {fileID: 0}
 --- !u!1 &1977066323
 GameObject:
   m_ObjectHideFlags: 0

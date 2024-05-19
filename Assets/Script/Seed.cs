@@ -28,20 +28,20 @@ public class Seed : MonoBehaviour
 
             if (growthCount < maxGrowthCount)
             {
-                Debug.Log("Biji tumbuh.");
+               
                 growthCount++;
 
                 // Ubah sprite setiap kali biji tumbuh
                 if (growthCount < growthSprites.Length)
                 {
                     spriteRenderer.sprite = growthSprites[growthCount];
-                    Debug.Log("Mengubah sprite ke tahap pertumbuhan: " + growthCount);
+                   
                 }
 
                 if (growthCount == maxGrowthCount)
                 {
                     isReadyToHarvest = true;
-                    Debug.Log("Biji siap panen.");
+                  
                     isGrowing = false; // Berhenti pertumbuhan setelah biji siap panen
                 }
             }
@@ -66,7 +66,7 @@ public class Seed : MonoBehaviour
 
             // Atur gravityScale kecil untuk efek jatuh ringan
             rb.gravityScale = 1f;
-            Debug.Log("Gravitasi ringan diatur untuk cabai.");
+          
 
             // Tambahkan sedikit force untuk gerakan jatuh
             rb.AddForce(new Vector2(Random.Range(-0.5f, 0.5f), -1f), ForceMode2D.Impulse);
@@ -92,6 +92,6 @@ public class Seed : MonoBehaviour
         yield return new WaitForSeconds(delay);
         rb.gravityScale = 0;
         rb.velocity = Vector2.zero;
-        Debug.Log("Gravitasi dihentikan dan kecepatan diatur ke nol.");
+       
     }
 }

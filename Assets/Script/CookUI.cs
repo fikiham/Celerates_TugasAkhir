@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,6 +8,9 @@ using UnityEngine.UI;
 
 public class CookUI : MonoBehaviour
 {
+    public DropCookSlot slotCook1;
+    public DropCookSlot slotCook2;
+    public GameObject inventorySlots;
     public bool isCookUIPanelOpen = false;
 
     List<Item> Items;
