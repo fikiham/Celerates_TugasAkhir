@@ -10335,11 +10335,11 @@ PrefabInstance:
       objectReference: {fileID: 1012226475}
     - target: {fileID: 5998541882732084300, guid: f582ea4934c566747a7d7495d0a0efc4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.75
+      value: -2.3
       objectReference: {fileID: 0}
     - target: {fileID: 5998541882732084300, guid: f582ea4934c566747a7d7495d0a0efc4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.23
+      value: -1.61
       objectReference: {fileID: 0}
     - target: {fileID: 5998541882732084300, guid: f582ea4934c566747a7d7495d0a0efc4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10665,9 +10665,17 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 306851438}
+    - target: {fileID: 7478595205549105548, guid: 503163db9e087594695fe9af568202e4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 306851438}
     - target: {fileID: 8567960968432657695, guid: 503163db9e087594695fe9af568202e4, type: 3}
       propertyPath: m_Name
       value: PauseUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8567960968432657695, guid: 503163db9e087594695fe9af568202e4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8721327382187894730, guid: 503163db9e087594695fe9af568202e4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

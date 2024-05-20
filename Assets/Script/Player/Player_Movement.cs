@@ -14,6 +14,7 @@ public class Player_Movement : MonoBehaviour
     KeyCode runInput = KeyCode.LeftShift;
     #endregion
 
+    [SerializeField] Transform sprite;
     [SerializeField] Transform face;
     [SerializeField] Transform hitboxes;
 
@@ -46,9 +47,16 @@ public class Player_Movement : MonoBehaviour
         PlayerInput();
         dashUI.color = new(1, 1, 1, Player_Health.Instance.stamina < dashStamina ? .5f : 1);
         if (movement.x > 0)
+        {
             hitboxes.eulerAngles = new(0, 0, 0);
+            sprite.localScale = new(1, 1, 1);
+
+        }
         else if (movement.x < 0)
+        {
             hitboxes.eulerAngles = new(0, 180, 0);
+            sprite.localScale = new(-1, 1, 1);
+        }
     }
 
     private void FixedUpdate()

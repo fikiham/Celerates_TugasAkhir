@@ -30,16 +30,15 @@ public class GameController : MonoBehaviour
         {
             if (canPause)
             {
-                PauseGame();
-                ShowPersistentUI(false);
+                PauseWithUI();
             }
             else if (gamePaused)
             {
                 ResumeGame();
                 ShowPersistentUI(true);
+                pauseUI.SetActive(false);
             }
         }
-        pauseUI.SetActive(gamePaused);
 
     }
 
@@ -50,6 +49,14 @@ public class GameController : MonoBehaviour
         {
             ui.SetActive(show);
         }
+    }
+
+    void PauseWithUI()
+    {
+        PauseGame();
+        ShowPersistentUI(false);
+        pauseUI.SetActive(true);
+
     }
 
     public void PauseGame()
@@ -103,5 +110,8 @@ public class GameController : MonoBehaviour
         }
     }
 
-
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

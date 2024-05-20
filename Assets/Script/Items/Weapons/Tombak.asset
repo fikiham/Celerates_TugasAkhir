@@ -10,16 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8bd903c7dd23ff647a6438312cb77b78, type: 3}
-  m_Name: WolfMeat
+  m_Name: Tombak
   m_EditorClassIdentifier: 
-  itemName: Wolf Meat
-  type: 4
-  sprite: {fileID: 21300000, guid: fc98f02fa7385de47aa30dd975be6774, type: 3}
-  itemDescription: Meat of a predator
+  itemName: 
+  type: 0
+  sprite: {fileID: 0}
+  itemDescription: 
   Level: 0
   Damage: 0
+  AreaOfEffect: 0
+  SpecialAttackCD: 0
   UpgradeCost: 0
-  isStackable: 1
-  stackCount: 1
-  BuyValue: 20
-  SellValue: 20
+  RangedWeapon_ProjectilePrefab: {fileID: 0}
+  isStackable: 0
+  stackCount: 0
+  BuyValue: 0
+  SellValue: 0
