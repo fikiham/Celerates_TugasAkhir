@@ -23,6 +23,6 @@ MonoBehaviour:
   UpgradeCost: 0
   RangedWeapon_ProjectilePrefab: {fileID: 6794102656783284840, guid: 63d9c524196efda4a9b8cb3925b4c084, type: 3}
   isStackable: 1
-  stackCount: 1
+  stackCount: 5
   BuyValue: 0
   SellValue: 0

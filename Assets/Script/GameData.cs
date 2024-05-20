@@ -3,6 +3,10 @@ using System.Collections.Generic;
 [System.Serializable]
 public class GameData
 {
+    public string playerName;
+
+    #region ITEM_STUFF
+
     [System.Serializable]
     public class SimpleItem
     {
@@ -22,9 +26,14 @@ public class GameData
 
     public Dictionary<int, List<SimpleItem>> Storages_ItemNameAndCount = new();
 
+    #endregion
+
     public GameData()
     {
         Player_Inventory inventory = Player_Inventory.Instance;
+
+        playerName = GameController.Instance.playerName;
+
         int index;
         // Save Player Inventory Items
         foreach (Item item in inventory.itemList)

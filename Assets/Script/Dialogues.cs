@@ -14,4 +14,11 @@ public class Dialogues : ScriptableObject
     }
 
     public List<Dialogue> TheDialogues;
+    public string mainSpeaker;
+
+    public string promptAfterDialogue;
+    public void AfterDialogue()
+    {
+        GameEventSystem.Instance.DoAfterDialogue(promptAfterDialogue);
+    }
 }

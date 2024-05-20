@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance;
 
+    public string playerName;
+
     [SerializeField] GameObject[] persistentUI;
 
     bool canPause = true;
@@ -17,12 +19,25 @@ public class GameController : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        DialogueSystem.Instance.StartFirstDialogue();
+    }
+
     private void Update()
     {
-        if (canPause && Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            PauseGame();
-            ShowPersistentUI(false);
+            if (canPause)
+            {
+                PauseGame();
+                ShowPersistentUI(false);
+            }
+            else if (gamePaused)
+            {
+                ResumeGame();
+                ShowPersistentUI(true);
+            }
         }
         pauseUI.SetActive(gamePaused);
 
@@ -59,6 +74,9 @@ public class GameController : MonoBehaviour
     {
         GameData data = SaveSystem.LoadData();
         Player_Inventory inventory = Player_Inventory.Instance;
+
+        playerName = data.playerName;
+
 
         // Load player inventory data
         inventory.itemList = new();
