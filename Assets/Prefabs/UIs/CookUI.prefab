@@ -344,24 +344,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
-<<<<<<< HEAD:Assets/Prefabs/CookUI.prefab
-=======
---- !u!114 &6503499977467080830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3195873895209557843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 719fdfb7ff443aa4a9d2d8e429602d0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cookUI: {fileID: 0}
-  inventoryContainer: {fileID: 0}
-  itemName: Daging
->>>>>>> main:Assets/Prefabs/UIs/CookUI.prefab
+
 --- !u!1 &3349752078532809428
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,11 +603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719fdfb7ff443aa4a9d2d8e429602d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD:Assets/Prefabs/CookUI.prefab
-=======
-  cookUI: {fileID: 2331850703674890647}
-  inventoryContainer: {fileID: 3681375199530319409}
->>>>>>> main:Assets/Prefabs/UIs/CookUI.prefab
+
   itemName: Daging
   originalPosition: {x: 0, y: 0}
 --- !u!225 &4385421632973497097
