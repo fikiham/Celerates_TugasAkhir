@@ -1,34 +1,56 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CookInventory : MonoBehaviour, IDropHandler
 {
-    public DropCookSlot slotCook1; // Slot Cook1
-    public DropCookSlot slotCook2; // Slot Cook2
-
     public void OnDrop(PointerEventData eventData)
     {
+        // Mendapatkan DragCook dari event data
         DragCook dragCook = eventData.pointerDrag.GetComponent<DragCook>();
+
+        // Jika yang di-drop adalah DragCook
         if (dragCook != null)
         {
-            // Mendapatkan RectTransform dari slot tempat item di-drop
-            RectTransform slotRectTransform = GetComponent<RectTransform>();
-            // Mendapatkan RectTransform dari item yang di-drop
+            // Mendapatkan RectTransform item
             RectTransform itemRectTransform = dragCook.GetComponent<RectTransform>();
 
-            // Memindahkan posisi item ke posisi slot
-            itemRectTransform.SetParent(transform); // Mengatur parent menjadi slot tempat item di-drop
-            itemRectTransform.anchoredPosition = Vector3.zero; // Meletakkan item di tengah-tengah slot
-
-            // Mengosongkan SlotCook1 atau SlotCook2 jika item di-drop ke inventory
-            if (slotCook1 != null && slotCook1.item == dragCook.gameObject)
+            // Mencari tahu parent dari item yang di-drop
+            DropCookSlot previousSlot = itemRectTransform.GetComponentInParent<DropCookSlot>();
+            
+            // Jika sebelumnya berada di SlotCook1 atau SlotCook2
+            if (previousSlot != null && (previousSlot.slotName == "SlotCook1" || previousSlot.slotName == "SlotCook2"))
             {
-                slotCook1.item = null;
+                // Mengembalikan item ke inventory
+                // Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(dragCook.itemName));
+                previousSlot.item = null;
+                itemRectTransform.SetParent(transform);
+                itemRectTransform.anchoredPosition = Vector3.zero;
+
+                // Jika item yang kembali ke inventory adalah DagingPedas, maka kita harus membatalkan pembuatannya
+                if (dragCook.itemName == "DagingPedas")
+                {
+                    // Hapus DagingPedas dari hasilCook
+                    Destroy(previousSlot.hasilCook.transform.GetChild(0).gameObject);
+                    // Bersihkan daftar onClick dari button hasilCook
+                    previousSlot.hasilCook.GetComponent<Button>().onClick.RemoveAllListeners();
+                }
+
+                // Batalkan logika pemunculan daging pedas
+                previousSlot.CancelDagingPedas();
+
+                return;
             }
 
-            if (slotCook2 != null && slotCook2.item == dragCook.gameObject)
+            // Jika target drop adalah DropCookSlot (SlotCook1 atau SlotCook2)
+            DropCookSlot dropSlot = eventData.pointerEnter.GetComponent<DropCookSlot>();
+            if (dropSlot != null && (dropSlot.slotName == "SlotCook1" || dropSlot.slotName == "SlotCook2"))
             {
-                slotCook2.item = null;
+                // Menghapus item dari inventory
+                Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem(dragCook.itemName));
+                // Mengatur item ke inventory
+                itemRectTransform.SetParent(dropSlot.transform);
+                itemRectTransform.anchoredPosition = Vector3.zero;
             }
         }
     }
