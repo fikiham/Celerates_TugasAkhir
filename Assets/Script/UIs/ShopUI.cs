@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
@@ -51,8 +52,14 @@ public class ShopUI : MonoBehaviour
         itemsToUpgrade.Clear();
         foreach (Item item in itemsToSell)
         {
-            if (item.type == ItemType.Combat)
-                itemsToUpgrade.Add(item);
+            switch (item.type)
+            {
+                case ItemType.Melee_Combat:
+                case ItemType.Ranged_Combat:
+                    itemsToUpgrade.Add(item);
+                    break;
+                default: break;
+            }
         }
 
         List<Item> temp = new(itemsToBuy);

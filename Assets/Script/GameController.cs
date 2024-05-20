@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance;
 
+    public string playerName;
+
     [SerializeField] GameObject[] persistentUI;
 
     bool canPause = true;
@@ -17,12 +19,25 @@ public class GameController : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        DialogueSystem.Instance.StartFirstDialogue();
+    }
+
     private void Update()
     {
-        if (canPause && Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            PauseGame();
-            ShowPersistentUI(false);
+            if (canPause)
+            {
+                PauseGame();
+                ShowPersistentUI(false);
+            }
+            else if (gamePaused)
+            {
+                ResumeGame();
+                ShowPersistentUI(true);
+            }
         }
         pauseUI.SetActive(gamePaused);
 
@@ -58,13 +73,23 @@ public class GameController : MonoBehaviour
     public void LoadGame()
     {
         GameData data = SaveSystem.LoadData();
+        Player_Inventory inventory = Player_Inventory.Instance;
+
+        playerName = data.playerName;
+
 
         // Load player inventory data
-        Player_Inventory.Instance.itemList = new();
+        inventory.itemList = new();
         foreach (GameData.SimpleItem item in data.PlayerInventory_ItemNameAndCount)
         {
-            Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(item.itemName, item.stackCount, item.level));
+            inventory.AddItem(ItemPool.Instance.GetItem(item.itemName, item.stackCount, item.level));
         }
+
+        // Load Player Active Items
+        inventory.EquipItem(inventory.FindItemInInventory(data.PlayerInventory_ActiveItemAndCount[0].itemName), 0);
+        inventory.EquipItem(inventory.FindItemInInventory(data.PlayerInventory_ActiveItemAndCount[1].itemName), 1);
+        inventory.AddQuickSlot(inventory.FindItemInInventory(data.PlayerInventory_ActiveItemAndCount[2].itemName), 0);
+        inventory.AddQuickSlot(inventory.FindItemInInventory(data.PlayerInventory_ActiveItemAndCount[3].itemName), 1);
 
         // Load storage items to each storage container
         foreach (KeyValuePair<int, List<GameData.SimpleItem>> ele in data.Storages_ItemNameAndCount)

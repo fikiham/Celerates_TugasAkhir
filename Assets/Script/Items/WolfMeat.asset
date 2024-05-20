@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WolfMeat
   m_EditorClassIdentifier: 
   itemName: Wolf Meat
-  type: 2
+  type: 4
   sprite: {fileID: 21300000, guid: fc98f02fa7385de47aa30dd975be6774, type: 3}
   itemDescription: Meat of a predator
   Level: 0

@@ -26,12 +26,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 920648282362804236}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 10, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3446040036883624188}
+  m_Father: {fileID: 1849453207322278355}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7471179660650086089
 SpriteRenderer:
@@ -156,12 +156,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2033105564713796990}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 9, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.5, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3446040036883624188}
+  m_Father: {fileID: 1849453207322278355}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8032780791927186798
 SpriteRenderer:
@@ -260,6 +260,39 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &3358481639717380379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1849453207322278355}
+  m_Layer: 0
+  m_Name: Hitboxes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1849453207322278355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3358481639717380379}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2630859602148433873}
+  - {fileID: 8929092432712695764}
+  m_Father: {fileID: 5998541882732084300}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3665449511758104396
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,9 +438,7 @@ Transform:
   m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
-  m_Children:
-  - {fileID: 2630859602148433873}
-  - {fileID: 8929092432712695764}
+  m_Children: []
   m_Father: {fileID: 5998541882732084300}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &590918729192924437
@@ -584,6 +615,7 @@ Transform:
   m_Children:
   - {fileID: 1373323111909539862}
   - {fileID: 3446040036883624188}
+  - {fileID: 1849453207322278355}
   - {fileID: 6546125317428720215}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -679,6 +711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   face: {fileID: 3446040036883624188}
+  hitboxes: {fileID: 1849453207322278355}
   walkSpd: 5
   runSpd: 9
   dashUI: {fileID: 0}
@@ -699,10 +732,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combatMode: 1
   normalAttackHitArea: {fileID: 2033105564713796990}
-  normalAttackCD: 0.5
   specialAttackHitArea: {fileID: 920648282362804236}
   specialAttackUI: {fileID: 0}
-  specialAttackCD: 1
   quickSlotsUI:
   - {fileID: 0}
   - {fileID: 0}
@@ -745,15 +776,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemList:
+  - {fileID: 11400000, guid: 1ebe7bd27dadd9846881d3f800460ce5, type: 2}
+  - {fileID: 11400000, guid: 2aed1d8e4dd753742aa837c1a52433e4, type: 2}
+  - {fileID: 11400000, guid: 124bb59f573d69c498c9e644c327ab91, type: 2}
   - {fileID: 11400000, guid: de5ba7ded5bd3eb4b89229d8816f79fe, type: 2}
+  - {fileID: 11400000, guid: 3bd66d80fb23e764f9744b7e7fcfaa76, type: 2}
+  - {fileID: 11400000, guid: ad11c4550ca1cba429c788830f9eac28, type: 2}
   - {fileID: 11400000, guid: 4baf81910ecdd224b980c7d945a20266, type: 2}
-  - {fileID: 11400000, guid: e7295591444813c4ca6f0e5c700b7b9c, type: 2}
-  - {fileID: 11400000, guid: 3af936a8fceaf694db4686a262caf9f4, type: 2}
-  - {fileID: 11400000, guid: db44f540d5ad1824bbf06e69aeca994b, type: 2}
+  - {fileID: 11400000, guid: 7389fac145d63824f80e70b41a9ed372, type: 2}
   - {fileID: 11400000, guid: 2fb9dd8e5b608d445967137840ac801b, type: 2}
+  - {fileID: 11400000, guid: e7295591444813c4ca6f0e5c700b7b9c, type: 2}
+  - {fileID: 11400000, guid: 48ef919ca5346b84d9e6eed1d76038b4, type: 2}
+  - {fileID: 11400000, guid: 3af936a8fceaf694db4686a262caf9f4, type: 2}
+  - {fileID: 11400000, guid: 692483cde051eb24a98a89d414f63270, type: 2}
+  - {fileID: 11400000, guid: db44f540d5ad1824bbf06e69aeca994b, type: 2}
   - {fileID: 11400000, guid: b6f7491557836d04b979c05e535782e2, type: 2}
+  meleeOrRanged: 1
   emptyItem: {fileID: 11400000, guid: e8ec75dbb62360e4dbf851e29c1e4062, type: 2}
-  equippedCombat: {fileID: 0}
+  equippedCombat:
+  - {fileID: 0}
+  - {fileID: 0}
+  equippedWeapon: {fileID: 0}
   equippedUI: {fileID: 0}
   quickSlots:
   - {fileID: 0}

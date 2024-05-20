@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bear Meat
   m_EditorClassIdentifier: 
   itemName: Bear Meat
-  type: 2
+  type: 4
   sprite: {fileID: 21300000, guid: 486ea0f9b9721ea4299238d2c375e3d9, type: 3}
   itemDescription: Meat of a bear
   Level: 0
