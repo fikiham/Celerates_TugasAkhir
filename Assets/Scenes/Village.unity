@@ -919,9 +919,73 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1981895837}
     m_Modifications:
+    - target: {fileID: 2331850703674890647, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      propertyPath: recipes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331850703674890647, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      propertyPath: recipes.Array.data[0].result
+      value: 
+      objectReference: {fileID: 11400000, guid: 5ee2a32d0b4b56343bb3f1f9b3cb5fbc, type: 2}
+    - target: {fileID: 2331850703674890647, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      propertyPath: recipes.Array.data[1].result
+      value: 
+      objectReference: {fileID: 11400000, guid: 4baf81910ecdd224b980c7d945a20266, type: 2}
+    - target: {fileID: 2331850703674890647, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      propertyPath: recipes.Array.data[0].ingredients.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331850703674890647, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      propertyPath: recipes.Array.data[1].ingredients.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331850703674890647, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      propertyPath: recipes.Array.data[0].ingredients.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: de5ba7ded5bd3eb4b89229d8816f79fe, type: 2}
+    - target: {fileID: 2331850703674890647, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      propertyPath: recipes.Array.data[0].ingredients.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4baf81910ecdd224b980c7d945a20266, type: 2}
+    - target: {fileID: 2331850703674890647, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      propertyPath: recipes.Array.data[1].ingredients.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: e7295591444813c4ca6f0e5c700b7b9c, type: 2}
+    - target: {fileID: 2331850703674890647, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      propertyPath: recipes.Array.data[1].ingredients.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2fb9dd8e5b608d445967137840ac801b, type: 2}
+    - target: {fileID: 2331850703674890647, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      propertyPath: recipes.Array.data[0].ingredientsCount.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331850703674890647, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      propertyPath: recipes.Array.data[1].ingredientsCount.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331850703674890647, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      propertyPath: recipes.Array.data[0].ingredientsCount.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331850703674890647, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      propertyPath: recipes.Array.data[0].ingredientsCount.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331850703674890647, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      propertyPath: recipes.Array.data[1].ingredientsCount.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331850703674890647, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      propertyPath: recipes.Array.data[1].ingredientsCount.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8051756243109721239, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
       propertyPath: m_Name
       value: CookUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051756243109721239, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8222417266887828513, guid: 7fcf086ce7aa89a44945e2191c628ab1, type: 3}
       propertyPath: m_Pivot.x

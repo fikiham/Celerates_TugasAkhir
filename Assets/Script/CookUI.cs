@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,6 +7,17 @@ using UnityEngine.UI;
 
 public class CookUI : MonoBehaviour
 {
+
+ [System.Serializable]
+    public class CookRecipe
+    {
+        public Item result;
+        public List<Item> ingredients;
+        public List<int> ingredientsCount;
+    }
+
+    public List<CookRecipe> recipes;
+
     public DropCookSlot slotCook1;
     public DropCookSlot slotCook2;
     public GameObject inventorySlots;
@@ -17,6 +27,12 @@ public class CookUI : MonoBehaviour
     [Header("Inventory Slot")]
     [SerializeField] Transform itemSlotContainer;
     [SerializeField] Transform itemSlotTemplate;
+
+
+    private void Start(){
+        //  SetRecipeDescription(recipes[0], CanCraft(recipes[0]));
+        //  LogRecipesToConsole();
+    }
 
     private void Update()
     {
@@ -65,6 +81,26 @@ public class CookUI : MonoBehaviour
         isCookUIPanelOpen = false;
     }
 
+   
+     void LogRecipesToConsole()
+    {
+        // mengambil total recipes 
+        int recipeCount = recipes.Count;
+        Debug.Log($"Total Recipes: {recipeCount}");
+
+        foreach (var recipe in recipes)
+        {
+            // mengambil nama item yang di hasilkan 
+            string recipeDetails = $"Recipe: {recipe.result.itemName}\nIngredients:";
+            // mengecek jumlah item dari sebuah resep 
+            for (int i = 0; i < recipe.ingredients.Count; i++)
+            {
+                // menapilkan ingredients dan ingredients Count
+                recipeDetails += $"\n- {recipe.ingredients[i].itemName} x{recipe.ingredientsCount[i]}";
+            }
+            Debug.Log(recipeDetails);
+        }
+    }
 
 
 

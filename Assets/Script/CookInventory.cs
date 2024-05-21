@@ -27,17 +27,17 @@ public class CookInventory : MonoBehaviour, IDropHandler
                 itemRectTransform.SetParent(transform);
                 itemRectTransform.anchoredPosition = Vector3.zero;
 
-                // Jika item yang kembali ke inventory adalah DagingPedas, maka kita harus membatalkan pembuatannya
-                if (dragCook.itemName == "DagingPedas")
-                {
-                    // Hapus DagingPedas dari hasilCook
-                    Destroy(previousSlot.hasilCook.transform.GetChild(0).gameObject);
-                    // Bersihkan daftar onClick dari button hasilCook
-                    previousSlot.hasilCook.GetComponent<Button>().onClick.RemoveAllListeners();
-                }
+                // // Jika item yang kembali ke inventory adalah DagingPedas, maka kita harus membatalkan pembuatannya
+                // if (dragCook.itemName == "DagingPedas")
+                // {
+                //     // Hapus DagingPedas dari hasilCook
+                //     Destroy(previousSlot.hasilCook.transform.GetChild(0).gameObject);
+                //     // Bersihkan daftar onClick dari button hasilCook
+                //     previousSlot.hasilCook.GetComponent<Button>().onClick.RemoveAllListeners();
+                // }
 
                 // Batalkan logika pemunculan daging pedas
-                previousSlot.CancelDagingPedas();
+                previousSlot.cancelCook();
 
                 return;
             }
