@@ -4,11 +4,12 @@ using UnityEngine.UI;
 
 public class DropCookSlot : MonoBehaviour, IDropHandler
 {
+     
+
     public GameObject item; // Item yang saat ini ada di slot
     public string slotName; // Nama slot, misalnya "SlotCook1" atau "SlotCook2"
 
     public GameObject hasilCook; // Referensi ke GameObject HasilCook
-    public GameObject dagingPedasPrefab; // Prefab untuk DagingPedas
 
     [SerializeField] CookUI cookUI;
 
@@ -41,7 +42,7 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
             {
                 RemoveFromPreviousSlot(draggedItem);
                 SetItemToSlot(draggedItem);
-                CheckAndCreateDagingPedas();
+                CreateCook();
             }
             else
             {
@@ -70,47 +71,84 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
         item = draggedItem;
     }
 
-    private void CheckAndCreateDagingPedas()
-    {
-        if (cookUI.slotCook1.item != null && cookUI.slotCook2.item != null)
-        {
-            DragCook item1 = cookUI.slotCook1.item.GetComponent<DragCook>();
-            DragCook item2 = cookUI.slotCook2.item.GetComponent<DragCook>();
+   
 
-            if ((item1.itemName == "Cabbage" && item2.itemName == "Bear Meat") ||
-                (item1.itemName == "Bear Meat" && item2.itemName == "Cabbage"))
-            {
-                CreateDagingPedas();
-            }
-            else
-            {
-                CancelDagingPedas();
-            }
-        }
-        else
+
+    private void CreateCook()
+{
+    bool recipeFound = false;
+
+    if (cookUI.slotCook1.item != null && cookUI.slotCook2.item != null)
+    {
+        DragCook item1 = cookUI.slotCook1.item.GetComponent<DragCook>();
+        DragCook item2 = cookUI.slotCook2.item.GetComponent<DragCook>();
+
+        foreach (var recipe in cookUI.recipes)
         {
-            CancelDagingPedas();
+            if ((item1.itemName == recipe.ingredients[0].itemName && item2.itemName == recipe.ingredients[1].itemName) ||
+                (item2.itemName == recipe.ingredients[0].itemName && item1.itemName == recipe.ingredients[1].itemName))
+            {
+                recipeFound = true;
+
+                // Implement logic to create the dish here
+                string resultDetails = $"Result: {recipe.result.itemName}";
+                Debug.Log("memunculkan " + resultDetails);
+
+                // Buat GameObject baru untuk hasil masakan
+                GameObject resultItem = new GameObject(recipe.result.itemName);
+
+                // Tambahkan komponen Image dan atur sprite-nya
+                Image imageComponent = resultItem.AddComponent<Image>();
+                imageComponent.sprite = recipe.result.sprite;
+
+                // Tetapkan HasilCook sebagai parent GameObject baru
+                resultItem.transform.SetParent(hasilCook.transform, false); // false untuk menjaga posisi dan rotasi
+
+                // Setelah ditetapkan sebagai anak, akses RectTransform dari GameObject baru
+                RectTransform resultRectTransform = resultItem.GetComponent<RectTransform>();
+
+                // Sesuaikan ukuran, posisi, dan rotasi sesuai kebutuhan
+                // Misalnya, atur ukuran menjadi (100, 100)
+                resultRectTransform.sizeDelta = new Vector2(100, 100);
+
+                // Atur posisi menjadi (0, 0) relatif terhadap parent (HasilCook)
+                resultRectTransform.anchoredPosition = Vector3.zero;
+
+                // Atur rotasi menjadi default (0, 0, 0)
+                resultRectTransform.rotation = Quaternion.identity;
+
+                // Tambahkan listener untuk tombol hasilCook
+                hasilCookButton.onClick.RemoveAllListeners();
+                hasilCookButton.onClick.AddListener(() =>
+                {
+                    // Tambahkan item ke inventori pemain
+                    Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(recipe.result.itemName));
+
+                    // Hapus GameObject hasil masakan dari tampilan
+                    Destroy(resultItem);
+
+                    // Hapus item dari slot masak
+                    RemoveItemsFromSlots();
+                });
+
+                // Jika resep ditemukan, keluar dari loop
+                break;
+            }
         }
     }
 
-    private void CreateDagingPedas()
+    // Jika tidak ada resep yang cocok, panggil cancelCook
+    if (!recipeFound)
     {
-        CancelDagingPedas();
-
-        GameObject dagingPedas = Instantiate(dagingPedasPrefab, hasilCook.transform);
-        dagingPedas.transform.localPosition = Vector3.zero;
-        dagingPedas.name = "Wolf Meat";
-
-        hasilCookButton.onClick.RemoveAllListeners();
-        hasilCookButton.onClick.AddListener(() =>
-        {
-            Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(dagingPedas.name));
-            Destroy(dagingPedas);
-            RemoveItemsFromSlots();
-        });
+        cancelCook();
     }
+}
 
-    public void CancelDagingPedas()
+
+
+    
+
+    public void cancelCook()
     {
         if (hasilCook.transform.childCount > 0)
         {
@@ -136,7 +174,7 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
         }
 
         cookUI.RefreshSlots();
-        CheckAndCreateDagingPedas(); // Memperbarui daging pedas setelah item dihapus
+       CreateCook();
     }
 
     public void ReturnToInventory()
@@ -147,7 +185,7 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
             item.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
             item = null;
 
-            CheckAndCreateDagingPedas();
+            CreateCook();
         }
     }
 }
