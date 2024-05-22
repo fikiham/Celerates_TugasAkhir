@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8bd903c7dd23ff647a6438312cb77b78, type: 3}
-  m_Name: SpicyBeef
+  m_Name: DagingPanggang
   m_EditorClassIdentifier: 
-  itemName: SpicyBeef
+  itemName: Daging Panggang
   type: 4
-  sprite: {fileID: 21300000, guid: fd959386eee05b54abed49e629fe1e45, type: 3}
-  itemDescription: blablabla
+  sprite: {fileID: 21300000, guid: 69e696105ccd83d489b74710b7ee8b45, type: 3}
+  itemDescription: 
   Level: 0
   Damage: 0
   AreaOfEffect: 0
