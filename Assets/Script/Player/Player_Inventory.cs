@@ -20,12 +20,9 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
     public Item emptyItem;
     [HideInInspector] public List<Item> equippedCombat = new(2);
     [HideInInspector] public Item equippedWeapon;
-    [SerializeField] Image equippedUI;
     [HideInInspector] public List<Item> quickSlots = new(2);
-    [SerializeField] List<Image> quickSlotsUI;
 
     KeyCode openInventoryInput = KeyCode.B;
-    [SerializeField] GameObject inventoryGO;
     InventoryUI inventoryUI;
     bool inventoryOpened;
 
@@ -45,7 +42,7 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
 
         emptyItem = Instantiate(emptyItem);
 
-        inventoryUI = inventoryGO.GetComponent<InventoryUI>();
+        inventoryUI = PlayerUI.Instance.inventoryUI.GetComponent<InventoryUI>();
     }
     private void Start()
     {
@@ -64,7 +61,7 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
             if (Input.GetKeyDown(openInventoryInput) && !GameController.Instance.gamePaused)
             {
                 inventoryOpened = !inventoryOpened;
-                inventoryGO.SetActive(inventoryOpened);
+                PlayerUI.Instance.inventoryUI.SetActive(inventoryOpened);
                 GameController.Instance.ShowPersistentUI(!inventoryOpened);
 
                 inventoryUI.HandleItemsSize();
@@ -78,7 +75,7 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
             // Close inventory with escape when opened
             if (Input.GetKeyDown(KeyCode.Escape) && inventoryOpened)
             {
-                inventoryGO.SetActive(false);
+                PlayerUI.Instance.inventoryUI.SetActive(false);
                 GameController.Instance.ShowPersistentUI(true);
                 inventoryOpened = false;
             }
@@ -94,12 +91,12 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
         if (meleeOrRanged)
         {
             equippedWeapon = equippedCombat[0];
-            equippedUI.sprite = equippedWeapon.sprite;
+            PlayerUI.Instance.equippedUI.sprite = equippedWeapon.sprite;
         }
         else
         {
             equippedWeapon = equippedCombat[1];
-            equippedUI.sprite = equippedWeapon.sprite;
+            PlayerUI.Instance.equippedUI.sprite = equippedWeapon.sprite;
         }
 
 
@@ -163,7 +160,7 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
         }
 
         quickSlots[index] = item;
-        quickSlotsUI[index].sprite = item.sprite;
+        PlayerUI.Instance.quickSlotsUI_Inventory[index].sprite = item.sprite;
         inventoryUI.SetActiveItem(index + 2, item);
     }
 

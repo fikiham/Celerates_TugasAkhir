@@ -1,9 +1,14 @@
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class GameData
 {
     public string playerName;
+    
+    public int LatestMap;
+    public float[] playerPos = new float[3];
 
     #region ITEM_STUFF
 
@@ -32,7 +37,13 @@ public class GameData
     {
         Player_Inventory inventory = Player_Inventory.Instance;
 
+        Transform player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerPos[0] = player.position.x;
+        playerPos[1] = player.position.y;
+
+
         playerName = GameController.Instance.playerName;
+        LatestMap = SceneManager.GetActiveScene().buildIndex;
 
         int index;
         // Save Player Inventory Items

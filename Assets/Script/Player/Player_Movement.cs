@@ -27,7 +27,6 @@ public class Player_Movement : MonoBehaviour
 
     #region DASH
     [Header("DASH")]
-    [SerializeField] Image dashUI;
     [SerializeField] float dashStamina = 40f;
     [SerializeField] float dashDistance = 5;
     [SerializeField] float dashForce = 100;
@@ -48,7 +47,7 @@ public class Player_Movement : MonoBehaviour
         {
             PlayerInput();
         }
-        dashUI.color = new(1, 1, 1, Player_Health.Instance.stamina < dashStamina ? .5f : 1);
+        PlayerUI.Instance.dashUI.color = new(1, 1, 1, Player_Health.Instance.stamina < dashStamina ? .5f : 1);
         if (movement.x > 0)
         {
             hitboxes.eulerAngles = new(0, 0, 0);
@@ -123,10 +122,10 @@ public class Player_Movement : MonoBehaviour
         while (Vector2.Distance(startPos, transform.position) < dashDistance && Time.time < startTime + 1)
         {
             rb.AddForce(dashForce * Time.deltaTime * targetDir, ForceMode2D.Impulse);
-            dashUI.fillAmount = Vector2.Distance(startPos, transform.position) / dashDistance;
+            PlayerUI.Instance.dashUI.fillAmount = Vector2.Distance(startPos, transform.position) / dashDistance;
             yield return null;
         }
-        dashUI.fillAmount = 1;
+        PlayerUI.Instance.dashUI.fillAmount = 1;
         rb.velocity = Vector2.zero;
         noMovement = false;
         justDash = false;

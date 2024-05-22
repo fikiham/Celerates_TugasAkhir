@@ -41,3 +41,4 @@ MonoBehaviour:
   - name: 
     sentence: Kesatria melempar batu yang cukup besar untuk dilempar ke hewan.
   mainSpeaker: Kesatria
+  promptAfterDialogue: firstNarration

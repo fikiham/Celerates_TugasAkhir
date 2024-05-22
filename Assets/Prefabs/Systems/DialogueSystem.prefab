@@ -47,7 +47,7 @@ MonoBehaviour:
   theDialogues:
   - {fileID: 11400000, guid: 153ff6b619192ed478b5e08b2eb3a87f, type: 2}
   - {fileID: 11400000, guid: 7585a1b4dae62f744a7f9fb0adcff3f4, type: 2}
-  dialogueSpd: 2
+  dialogueSpd: 1
   dialogueUI: {fileID: 0}
   speakersText:
   - {fileID: 0}

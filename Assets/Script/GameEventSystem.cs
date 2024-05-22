@@ -8,9 +8,13 @@ public class GameEventSystem : MonoBehaviour
 
     [SerializeField] GameObject playerNameInputUI;
 
+
+    public bool DoneFirstNarration;
+
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+            Instance = this;
     }
 
     public void DoAfterDialogue(string prompt)
@@ -18,6 +22,10 @@ public class GameEventSystem : MonoBehaviour
         if (prompt == "playerName")
         {
             playerNameInputUI.SetActive(true);
+        }
+        else if (prompt == "firstNarration")
+        {
+            DoneFirstNarration = true;
         }
         else
         {

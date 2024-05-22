@@ -23,14 +23,12 @@ public class Player_Action : MonoBehaviour
     public bool canAttack = true;
     [SerializeField] GameObject normalAttackHitArea;
     [SerializeField] GameObject specialAttackHitArea;
-    [SerializeField] Image specialAttackUI;
 
     float damageMult = 1;
     #endregion
 
     #region QUICK_SLOTS
     [Header("QUICK SLOTS")]
-    [SerializeField] Image[] quickSlotsUI = new Image[2];
     [SerializeField] float quickSlotCD = 2f;
     float[] quickSlotsTimer = new float[2];
     bool[] canQuickSlots = new bool[2];
@@ -39,7 +37,6 @@ public class Player_Action : MonoBehaviour
     #region INTERACTS
     [Header("INTERACTS")]
     [SerializeField] bool drawInteractCircle;
-    [SerializeField] TMP_Text promptText;
     [SerializeField] LayerMask interactablesLayer;
     [SerializeField] float interactsRadius = 2f;
     bool canInteract = false;
@@ -72,7 +69,7 @@ public class Player_Action : MonoBehaviour
                 if (combatMode && canAttack)
                 {
                     SpecialAttack();
-                    StartCoroutine(HandleUICD(specialAttackUI, Player_Inventory.Instance.equippedWeapon.SpecialAttackCD));
+                    StartCoroutine(HandleUICD(PlayerUI.Instance.specialAttackUI, Player_Inventory.Instance.equippedWeapon.SpecialAttackCD));
                 }
             }
 
@@ -84,7 +81,7 @@ public class Player_Action : MonoBehaviour
                 if (Player_Inventory.Instance.quickSlots[0] != null)
                 {
                     Player_Inventory.Instance.UseQuickSlot(1);
-                    StartCoroutine(HandleUICD(quickSlotsUI[0], quickSlotCD));
+                    StartCoroutine(HandleUICD(PlayerUI.Instance.quickSlotsUI_HUD[0], quickSlotCD));
                 }
             }
             HandleQuickSLotUI(1);
@@ -94,7 +91,7 @@ public class Player_Action : MonoBehaviour
                 if (Player_Inventory.Instance.quickSlots[1] != null)
                 {
                     Player_Inventory.Instance.UseQuickSlot(2);
-                    StartCoroutine(HandleUICD(quickSlotsUI[1], quickSlotCD));
+                    StartCoroutine(HandleUICD(PlayerUI.Instance.quickSlotsUI_HUD[1], quickSlotCD));
                 }
             }
 
@@ -120,7 +117,7 @@ public class Player_Action : MonoBehaviour
         if (!canQuickSlots[i])
         {
             quickSlotsTimer[i] += Time.deltaTime;
-            quickSlotsUI[i].fillAmount = quickSlotsTimer[i] / quickSlotCD;
+            PlayerUI.Instance.quickSlotsUI_HUD[i].fillAmount = quickSlotsTimer[i] / quickSlotCD;
             if (quickSlotsTimer[i] > quickSlotCD)
             {
                 quickSlotsTimer[i] = 0;
@@ -150,12 +147,12 @@ public class Player_Action : MonoBehaviour
         if (hit.transform != null)
         {
             interactable = hit.transform.GetComponent<Interactable>();
-            promptText.text = interactable.promptMessage;
+            PlayerUI.Instance.promptText.text = "Press F to "+interactable.promptMessage;
             return true;
         }
         else
         {
-            promptText.text = string.Empty;
+            PlayerUI.Instance.promptText.text = string.Empty;
             return false;
         }
     }

@@ -10,13 +10,11 @@ public class Player_Health : MonoBehaviour
     [Header("HEALTH VALUE")]
     [SerializeField] int maxHealth = 100;
     [SerializeField] int health = 100;
-    [SerializeField] Image healthUI;
 
     [Header("STAMINA VALUE")]
     [SerializeField] float maxStamina = 100;
     public float stamina = 100;
     [SerializeField] float staminaRegenRate = 15;
-    [SerializeField] Image staminahUI;
 
     private void Awake()
     {
@@ -28,8 +26,8 @@ public class Player_Health : MonoBehaviour
     void Update()
     {
         health = Mathf.Clamp(health, 0, maxHealth);
-        healthUI.fillAmount = (float)health / maxHealth;
-        staminahUI.fillAmount = stamina / maxStamina;
+        PlayerUI.Instance.healthUI.fillAmount = (float)health / maxHealth;
+        PlayerUI.Instance.staminaUI.fillAmount = stamina / maxStamina;
 
         if (stamina < maxStamina)
         {

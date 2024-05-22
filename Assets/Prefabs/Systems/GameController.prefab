@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2686643974254583594}
   - component: {fileID: 1546531876476482124}
   - component: {fileID: 5449077394803582238}
+  - component: {fileID: 2986323977070010781}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -60,6 +61,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: Ryn
+  enablePlayerInput: 0
+  player: {fileID: 0}
   persistentUI:
   - {fileID: 0}
   - {fileID: 0}
@@ -94,3 +97,28 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 692483cde051eb24a98a89d414f63270, type: 2}
   - {fileID: 11400000, guid: db44f540d5ad1824bbf06e69aeca994b, type: 2}
   - {fileID: 11400000, guid: b6f7491557836d04b979c05e535782e2, type: 2}
+--- !u!114 &2986323977070010781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089621543159706998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 682e09eed9b63554f8059dde86afde0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashUI: {fileID: 0}
+  specialAttackUI: {fileID: 0}
+  quickSlotsUI_HUD:
+  - {fileID: 0}
+  - {fileID: 0}
+  promptText: {fileID: 0}
+  healthUI: {fileID: 0}
+  staminaUI: {fileID: 0}
+  equippedUI: {fileID: 0}
+  quickSlotsUI_Inventory:
+  - {fileID: 0}
+  - {fileID: 0}
+  inventoryUI: {fileID: 0}

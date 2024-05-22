@@ -1,13 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    public static GameObject persistent;
     public static GameController Instance;
+
+    public static bool NewGame = true;
+    public static int LatestMap = 1;
+    Vector2 latestPlayerPos;
 
     public string playerName;
     public bool enablePlayerInput;
+
+    public Transform player;
 
     [SerializeField] GameObject[] persistentUI;
 
@@ -17,12 +26,23 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        if (persistent != null)
+        {
+            Destroy(transform.root.gameObject);
+            return;
+        }
+        persistent = transform.root.gameObject;
+        DontDestroyOnLoad(persistent);
         Instance = this;
     }
 
     private void Start()
     {
-        DialogueSystem.Instance.StartFirstDialogue();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        if (PlayerPrefs.GetInt("HaveSaved") == 99)
+        {
+            player.position = latestPlayerPos;
+        }
     }
 
     private void Update()
@@ -84,16 +104,21 @@ public class GameController : MonoBehaviour
 
     public void SaveGame()
     {
+        Debug.Log("Saving Game");
+        PlayerPrefs.SetInt("HaveSaved", 99);
         SaveSystem.SaveData();
     }
 
     public void LoadGame()
     {
+        Debug.Log("Loading Game");
         GameData data = SaveSystem.LoadData();
         Player_Inventory inventory = Player_Inventory.Instance;
 
         playerName = data.playerName;
 
+        LatestMap = data.LatestMap;
+        latestPlayerPos = new(data.playerPos[0], data.playerPos[1]);
 
         // Load player inventory data
         inventory.itemList = new();
@@ -120,8 +145,17 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void QuitGame()
+    public void GoToMainMenu()
     {
-        Application.Quit();
+        SceneManager.LoadScene(0);
+        SaveGame();
     }
+
+    public void GoToScene(int i)
+    {
+        SceneManager.LoadScene(i);
+        SaveGame();
+    }
+
+
 }
