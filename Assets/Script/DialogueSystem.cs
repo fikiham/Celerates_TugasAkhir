@@ -128,17 +128,17 @@ public class DialogueSystem : MonoBehaviour
         NextButton.onClick.AddListener(() => text.text = value);
         NextButton.onClick.AddListener(() => NextButton.onClick.RemoveAllListeners());
         NextButton.onClick.AddListener(() => NextButton.onClick.AddListener(NextDialogue));
-        while (text.text != value)
-        {
-            text.text = value[..Mathf.Min((int)((Time.time - startTime) / dur * value.Length), value.Length)];
-            yield return null;
-        }
-
-        //for (int i = 0; i < value.Length; i++)
+        //while (text.text != value)
         //{
-        //    text.text = value[..(i + 1)];
+        //    text.text = value[..Mathf.Min((int)((Time.time - startTime) / dur * value.Length), value.Length)];
         //    yield return null;
         //}
+
+        for (int i = 0; i < value.Length; i++)
+        {
+            text.text = value[..(i + 1)];
+            yield return null;
+        }
         NextButton.onClick.RemoveAllListeners();
         NextButton.onClick.AddListener(NextDialogue);
 

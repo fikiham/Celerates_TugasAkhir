@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
     public static GameController Instance;
 
     public string playerName;
+    public bool enablePlayerInput;
 
     [SerializeField] GameObject[] persistentUI;
 
@@ -38,6 +39,15 @@ public class GameController : MonoBehaviour
                 ShowPersistentUI(true);
                 pauseUI.SetActive(false);
             }
+        }
+
+        if (!Player_Action.Instance.canAttack || gamePaused)
+        {
+            enablePlayerInput = false;
+        }
+        else
+        {
+            enablePlayerInput = true;
         }
 
     }

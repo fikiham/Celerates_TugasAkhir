@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Pedang Ren
   type: 0
-  sprite: {fileID: 21300000, guid: 631a17ad459905548ad70b68d6b79d8e, type: 3}
+  sprite: {fileID: 21300000, guid: 8d7f4b8f68fec4f4ebf617c0f2892d0d, type: 3}
   itemDescription: "Pedang pemberian ren, cukup untuk mengusir bandit \nSpecial Skill:
     Meningkatkan atk sebesar 100% selama 30 detik. Cd: 40 detik; Stamina: 20"
   Level: 0
@@ -22,6 +22,7 @@ MonoBehaviour:
   AreaOfEffect: 3
   SpecialAttackCD: 40
   UpgradeCost: 15
+  RangedWeapon_ProjectilePrefab: {fileID: 0}
   isStackable: 0
   stackCount: 1
   BuyValue: 20

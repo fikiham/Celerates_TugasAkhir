@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Player_Action : MonoBehaviour
 {
+    public static Player_Action Instance;
+
     #region KEYBINDINGS
     KeyCode normalInput = KeyCode.Mouse0;
     KeyCode specialInput = KeyCode.Mouse1;
@@ -18,7 +20,7 @@ public class Player_Action : MonoBehaviour
     #region COMBAT
     [Header("COMBAT")]
     public bool combatMode = false;
-    bool canAttack = true;
+    public bool canAttack = true;
     [SerializeField] GameObject normalAttackHitArea;
     [SerializeField] GameObject specialAttackHitArea;
     [SerializeField] Image specialAttackUI;
@@ -45,62 +47,70 @@ public class Player_Action : MonoBehaviour
     #endregion
 
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Update()
     {
-        #region INPUTS_ACTION
-        // Main Action (Attacking)
-        if (Input.GetKeyDown(normalInput))
+        if (GameController.Instance.enablePlayerInput)
         {
-            if (combatMode && canAttack)
+            #region INPUTS_ACTION
+            // Main Action (Attacking)
+            if (Input.GetKeyDown(normalInput))
             {
-                Attack();
+                if (combatMode && canAttack)
+                {
+                    Attack();
+                }
             }
-        }
 
-        // Secondary Action (Sepcial Attacking)
-        if (Input.GetKeyDown(specialInput))
-        {
-            if (combatMode && canAttack)
+            // Secondary Action (Sepcial Attacking)
+            if (Input.GetKeyDown(specialInput))
             {
-                SpecialAttack();
-                StartCoroutine(HandleUICD(specialAttackUI, Player_Inventory.Instance.equippedWeapon.SpecialAttackCD));
+                if (combatMode && canAttack)
+                {
+                    SpecialAttack();
+                    StartCoroutine(HandleUICD(specialAttackUI, Player_Inventory.Instance.equippedWeapon.SpecialAttackCD));
+                }
             }
-        }
 
-        // Quick slots
-        HandleQuickSLotUI(0);
-        if (Input.GetKeyDown(quickSlot1) && canQuickSlots[0])
-        {
-            // quick slot 2
-            if (Player_Inventory.Instance.quickSlots[0] != null)
+            // Quick slots
+            HandleQuickSLotUI(0);
+            if (Input.GetKeyDown(quickSlot1) && canQuickSlots[0])
             {
-                Player_Inventory.Instance.UseQuickSlot(1);
-                StartCoroutine(HandleUICD(quickSlotsUI[0], quickSlotCD));
+                // quick slot 2
+                if (Player_Inventory.Instance.quickSlots[0] != null)
+                {
+                    Player_Inventory.Instance.UseQuickSlot(1);
+                    StartCoroutine(HandleUICD(quickSlotsUI[0], quickSlotCD));
+                }
             }
-        }
-        HandleQuickSLotUI(1);
-        if (Input.GetKeyDown(quickSlot2) && canQuickSlots[1])
-        {
-            // quick slot 2
-            if (Player_Inventory.Instance.quickSlots[1] != null)
+            HandleQuickSLotUI(1);
+            if (Input.GetKeyDown(quickSlot2) && canQuickSlots[1])
             {
-                Player_Inventory.Instance.UseQuickSlot(2);
-                StartCoroutine(HandleUICD(quickSlotsUI[1], quickSlotCD));
+                // quick slot 2
+                if (Player_Inventory.Instance.quickSlots[1] != null)
+                {
+                    Player_Inventory.Instance.UseQuickSlot(2);
+                    StartCoroutine(HandleUICD(quickSlotsUI[1], quickSlotCD));
+                }
             }
-        }
 
-        // Interact action (for interacting with environment)
-        canInteract = CheckInteractables();
-        // jadi logikanya cek dulu di sekitar ada yang bisa di interact gak
-        if (Input.GetKeyDown(actionInput))
-        {
-            // terus kalo udah dicek, baru bisa pencet interact
-            if (canInteract)
+            // Interact action (for interacting with environment)
+            canInteract = CheckInteractables();
+            // jadi logikanya cek dulu di sekitar ada yang bisa di interact gak
+            if (Input.GetKeyDown(actionInput))
             {
-                interactable.BaseInteract();
+                // terus kalo udah dicek, baru bisa pencet interact
+                if (canInteract)
+                {
+                    interactable.BaseInteract();
+                }
             }
+            #endregion
         }
-        #endregion
     }
 
     #region UI_HELPER

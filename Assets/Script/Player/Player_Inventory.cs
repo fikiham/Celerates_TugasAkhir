@@ -58,33 +58,36 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
 
     private void Update()
     {
-        // Open inventory on open inventory input (B)
-        if (Input.GetKeyDown(openInventoryInput) && !GameController.Instance.gamePaused)
+        if (GameController.Instance.enablePlayerInput)
         {
-            inventoryOpened = !inventoryOpened;
-            inventoryGO.SetActive(inventoryOpened);
-            GameController.Instance.ShowPersistentUI(!inventoryOpened);
+            // Open inventory on open inventory input (B)
+            if (Input.GetKeyDown(openInventoryInput) && !GameController.Instance.gamePaused)
+            {
+                inventoryOpened = !inventoryOpened;
+                inventoryGO.SetActive(inventoryOpened);
+                GameController.Instance.ShowPersistentUI(!inventoryOpened);
 
-            inventoryUI.HandleItemsSize();
-            inventoryUI.SetInventory(itemList);
-            if (itemList.Count > 0)
-                inventoryUI.SetDescription(itemList[0]);
-            else
-                inventoryUI.SetDescription(emptyItem);
-        }
+                inventoryUI.HandleItemsSize();
+                inventoryUI.SetInventory(itemList);
+                if (itemList.Count > 0)
+                    inventoryUI.SetDescription(itemList[0]);
+                else
+                    inventoryUI.SetDescription(emptyItem);
+            }
 
-        // Close inventory with escape when opened
-        if (Input.GetKeyDown(KeyCode.Escape) && inventoryOpened)
-        {
-            inventoryGO.SetActive(false);
-            GameController.Instance.ShowPersistentUI(true);
-            inventoryOpened = false;
-        }
+            // Close inventory with escape when opened
+            if (Input.GetKeyDown(KeyCode.Escape) && inventoryOpened)
+            {
+                inventoryGO.SetActive(false);
+                GameController.Instance.ShowPersistentUI(true);
+                inventoryOpened = false;
+            }
 
-        // Key to switch weapon
-        if (Input.GetKeyDown(switchWeapon))
-        {
-            meleeOrRanged = !meleeOrRanged;
+            // Key to switch weapon
+            if (Input.GetKeyDown(switchWeapon))
+            {
+                meleeOrRanged = !meleeOrRanged;
+            }
         }
 
         // Use of different weapon

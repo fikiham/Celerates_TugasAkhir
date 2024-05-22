@@ -44,7 +44,10 @@ public class Player_Movement : MonoBehaviour
 
     void Update()
     {
-        PlayerInput();
+        if (GameController.Instance.enablePlayerInput)
+        {
+            PlayerInput();
+        }
         dashUI.color = new(1, 1, 1, Player_Health.Instance.stamina < dashStamina ? .5f : 1);
         if (movement.x > 0)
         {
