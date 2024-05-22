@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Daging Sapi
   type: 4
-  sprite: {fileID: 21300000, guid: fc98f02fa7385de47aa30dd975be6774, type: 3}
+  sprite: {fileID: 21300000, guid: a14745de345ea3145b8917068801ece2, type: 3}
   itemDescription: 
   Level: 0
   Damage: 0

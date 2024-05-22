@@ -28,10 +28,14 @@ public class CookUI : MonoBehaviour
     [SerializeField] Transform itemSlotContainer;
     [SerializeField] Transform itemSlotTemplate;
 
+    
+
 
     private void Start(){
         //  SetRecipeDescription(recipes[0], CanCraft(recipes[0]));
         //  LogRecipesToConsole();
+
+        
     }
 
     private void Update()
