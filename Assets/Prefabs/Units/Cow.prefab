@@ -179,12 +179,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   theSpawner: {fileID: 0}
-  knockbackDistance: 1
+  knockbackDistance: 0.5
   knockbackForce: 1
   knockbackCD: 2
   maxHealth: 100
   health: 100
   justGotHit: 0
+  ItemDrops:
+  - Daging Sapi
 --- !u!114 &-1846528052898874401
 MonoBehaviour:
   m_ObjectHideFlags: 0

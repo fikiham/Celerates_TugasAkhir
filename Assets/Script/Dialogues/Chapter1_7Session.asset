@@ -54,4 +54,4 @@ MonoBehaviour:
   - name: Charibert
     sentence: Oh tentu, aku akan eksplor sebentar
   mainSpeaker: 
-  promptAfterDialogue: 
+  promptAfterDialogue: 6Dialogue

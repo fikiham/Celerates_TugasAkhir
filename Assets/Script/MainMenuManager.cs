@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
@@ -23,7 +22,7 @@ public class MainMenuManager : MonoBehaviour
     public void StartGame(bool newGame)
     {
         GameController.NewGame = newGame;
-        SceneManager.LoadScene(GameController.LatestMap);
+        LoadingScreenUI.Instance.LoadScene(GameController.LatestMap);
     }
 
     public void QuitGame()

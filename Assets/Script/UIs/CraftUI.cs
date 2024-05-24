@@ -12,6 +12,7 @@ public class CraftUI : MonoBehaviour
     public class CraftRecipe
     {
         public Item result;
+        public int resultCount = 1;
         public List<Item> ingredients;
         public List<int> ingredientsCount;
     }
@@ -127,13 +128,18 @@ public class CraftUI : MonoBehaviour
     void Craft(CraftRecipe recipe)
     {
         // Add recipe result to player's inventory
-        Player_Inventory.Instance.AddItem(recipe.result);
+        Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(recipe.result.itemName, recipe.resultCount));
         print("crafted " + recipe.result.itemName);
         // Remove ingredients from player's inventory
+        int index = 0;
         foreach (Item item in recipe.ingredients)
         {
-            Player_Inventory.Instance.RemoveItem(item);
-            print(item.itemName + " removed from inventory");
+            for (int i = 0; i < recipe.ingredientsCount[index]; i++)
+            {
+                Player_Inventory.Instance.RemoveItem(item);
+            }
+            index++;
+            print(recipe.ingredientsCount[index] + " " + item.itemName + " removed from inventory");
         }
         // Refresh the menu and set description to last crafted
         OpenCraft();

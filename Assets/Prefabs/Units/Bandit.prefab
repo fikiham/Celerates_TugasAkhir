@@ -264,12 +264,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   theSpawner: {fileID: 0}
-  knockbackDistance: 2
+  knockbackDistance: 1
   knockbackForce: 2
   knockbackCD: 2
   maxHealth: 100
   health: 100
   justGotHit: 0
+  ItemDrops:
+  - Tombak Berburu
 --- !u!114 &764866580618355577
 MonoBehaviour:
   m_ObjectHideFlags: 0

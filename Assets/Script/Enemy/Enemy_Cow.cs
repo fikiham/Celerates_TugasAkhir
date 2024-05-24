@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy_Cow : MonoBehaviour
@@ -26,7 +27,7 @@ public class Enemy_Cow : MonoBehaviour
     [SerializeField] float waitTime = 4f;
     float waitTimer;
 
-
+    bool caughtInCollision;
     private void Awake()
     {
         eh = GetComponent<Enemy_Health>();
@@ -56,7 +57,7 @@ public class Enemy_Cow : MonoBehaviour
         else if (waitTimer > waitTime)
         {
             // Target Idle is zero if it reach targetted idling pos
-            if (targetIdle == Vector2.zero)
+            if (targetIdle == Vector2.zero || caughtInCollision)
             {
                 waitTimer = 0;
                 targetIdle.x = Random.Range(-idleDistance, idleDistance);
@@ -76,6 +77,11 @@ public class Enemy_Cow : MonoBehaviour
     bool IsNearPlayer()
     {
         return Vector2.Distance(transform.position, target.position) < aggroDistance;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        caughtInCollision = true;
     }
 
     #region DEBUG

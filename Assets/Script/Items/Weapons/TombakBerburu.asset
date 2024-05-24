@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8bd903c7dd23ff647a6438312cb77b78, type: 3}
-  m_Name: Tombak
+  m_Name: TombakBerburu
   m_EditorClassIdentifier: 
-  itemName: Tombak
+  itemName: TombakBerburu
   type: 0
   sprite: {fileID: 21300000, guid: d497a64bf306e49489a51745ee0b5418, type: 3}
-  itemDescription: 
+  itemDescription: Tombak yang digunakan untuk berburu
   Level: 0
-  Damage: 0
-  AreaOfEffect: 0
+  Damage: 10
+  AreaOfEffect: 5
   SpecialAttackCD: 0
   UpgradeCost: 0
   RangedWeapon_ProjectilePrefab: {fileID: 0}

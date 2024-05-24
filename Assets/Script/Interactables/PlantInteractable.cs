@@ -4,26 +4,29 @@ using UnityEngine;
 
 public class PlantInteractable : Interactable
 {
-    // ya intinya inherit Interactable
-
-    // terus bikin function
-
-    // Misal aku bikin logika tanemanya
-    float siramValue = 0;
-    protected override void Interact()
+    Seed seed;
+    private void Start()
     {
-        // nah disini masukkin logika interaksinya
+        seed = GetComponent<Seed>();
+    }
 
-        if (siramValue >= 100)
+    private void Update()
+    {
+        if (seed.isReadyToHarvest)
         {
-            // kalo siramValue lebih dari 100, masukkin taneman ke inventory
-            print("panen bro");
+            promptMessage = "Panen Tanaman";
         }
         else
         {
-            // kalo belom siap panen, ya berarti siram
-            siramValue += 30;
-            print("Sirammmm");
+            promptMessage = "Tanaman Sedang Tumbuh";
+        }
+
+    }
+    protected override void Interact()
+    {
+        if (seed.isReadyToHarvest)
+        {
+            seed.Harvest();
         }
     }
 

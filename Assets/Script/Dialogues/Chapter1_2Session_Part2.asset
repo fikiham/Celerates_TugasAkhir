@@ -24,3 +24,4 @@ MonoBehaviour:
     sentence: Tentu! Mari ikut aku ke desa! Kami menerima orang-orang dan selalu
       membantu siapapun yang membutuhkan pertolongan
   mainSpeaker: Kesatria
+  promptAfterDialogue: 1Dialogue

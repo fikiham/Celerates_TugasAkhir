@@ -7,6 +7,7 @@ using UnityEngine;
 public class Enemy_Health : MonoBehaviour
 {
     Rigidbody2D rb;
+    SpriteRenderer sr;
     [HideInInspector] public Transform player;
 
     public Enemy_Spawner theSpawner;
@@ -22,10 +23,12 @@ public class Enemy_Health : MonoBehaviour
     [SerializeField] int maxHealth = 100;
     [SerializeField] int health = 100;
     public bool justGotHit;
+    [SerializeField] List<string> ItemDrops;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         health = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -48,16 +51,28 @@ public class Enemy_Health : MonoBehaviour
     }
 
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         health -= damage;
         justGotHit = true;
+
+        StartCoroutine(TakeDamageVisual());
 
         if (!justKnockbacked)
             StartCoroutine(Knockback());
 
         if (health <= 0)
             Die();
+    }
+
+    IEnumerator TakeDamageVisual()
+    {
+        float startTime = Time.time;
+        while (Time.time < startTime + .5f)
+        {
+            sr.color = Color.Lerp(new(1, 0, 0), new(1, 1, 1), (Time.time - startTime) / .5f);
+            yield return null;
+        }
     }
 
     // Knockbacked until set distance
@@ -85,7 +100,9 @@ public class Enemy_Health : MonoBehaviour
             theSpawner.enemies.Remove(gameObject);
             theSpawner.enemies.TrimExcess();
         }
+        GameEconomy.Instance.GainMoney(10);
         Destroy(gameObject);
+        ItemPool.Instance.DropItem(ItemDrops[Random.Range(0, ItemDrops.Count)], transform.position);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

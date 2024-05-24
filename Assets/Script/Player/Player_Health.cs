@@ -65,5 +65,14 @@ public class Player_Health : MonoBehaviour
     void Die()
     {
         print("Player Died");
+        GameController.Instance.PlayerDied();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 7)
+        {
+            TakeDamage(10);
+        }
     }
 }

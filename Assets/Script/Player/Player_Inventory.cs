@@ -42,10 +42,10 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
 
         emptyItem = Instantiate(emptyItem);
 
-        inventoryUI = PlayerUI.Instance.inventoryUI.GetComponent<InventoryUI>();
     }
     private void Start()
     {
+        inventoryUI = PlayerUI.Instance.inventoryUI.GetComponent<InventoryUI>();
         // Handle so that equipped items never null
         EquipItem(emptyItem, 0);
         EquipItem(emptyItem, 1);
@@ -58,11 +58,12 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
         if (GameController.Instance.enablePlayerInput)
         {
             // Open inventory on open inventory input (B)
-            if (Input.GetKeyDown(openInventoryInput) && !GameController.Instance.gamePaused)
+            if (Input.GetKeyDown(openInventoryInput))
             {
                 inventoryOpened = !inventoryOpened;
                 PlayerUI.Instance.inventoryUI.SetActive(inventoryOpened);
                 GameController.Instance.ShowPersistentUI(!inventoryOpened);
+                GameController.Instance.gamePaused = inventoryOpened;
 
                 inventoryUI.HandleItemsSize();
                 inventoryUI.SetInventory(itemList);
@@ -78,6 +79,7 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
                 PlayerUI.Instance.inventoryUI.SetActive(false);
                 GameController.Instance.ShowPersistentUI(true);
                 inventoryOpened = false;
+                GameController.Instance.gamePaused = false;
             }
 
             // Key to switch weapon
@@ -142,7 +144,7 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
         if (!itemList.Exists(x => x.itemName == item.itemName) && item.itemName != "Empty")
             return;
         equippedCombat[index] = item;
-        inventoryUI.SetActiveItem(index, item);
+        PlayerUI.Instance.inventoryUI.GetComponent<InventoryUI>().SetActiveItem(index, item);
     }
 
     // Add item to quick slot according index (0,1)
@@ -161,7 +163,7 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
 
         quickSlots[index] = item;
         PlayerUI.Instance.quickSlotsUI_Inventory[index].sprite = item.sprite;
-        inventoryUI.SetActiveItem(index + 2, item);
+        PlayerUI.Instance.inventoryUI.GetComponent<InventoryUI>().SetActiveItem(index + 2, item);
     }
 
     // Use which quick slot (1,2)

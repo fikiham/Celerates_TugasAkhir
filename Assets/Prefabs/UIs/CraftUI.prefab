@@ -1357,7 +1357,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 559, y: 0.7770386}
+  m_AnchoredPosition: {x: 559, y: 0.77697754}
   m_SizeDelta: {x: -1495.7, y: -376.78}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1815927730258700342
@@ -1451,16 +1451,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recipes:
-  - result: {fileID: 11400000, guid: db44f540d5ad1824bbf06e69aeca994b, type: 2}
+  - result: {fileID: 11400000, guid: ad11c4550ca1cba429c788830f9eac28, type: 2}
+    resultCount: 1
     ingredients:
-    - {fileID: 11400000, guid: 4baf81910ecdd224b980c7d945a20266, type: 2}
-    - {fileID: 11400000, guid: de5ba7ded5bd3eb4b89229d8816f79fe, type: 2}
-    ingredientsCount: 0100000001000000
-  - result: {fileID: 11400000, guid: 3af936a8fceaf694db4686a262caf9f4, type: 2}
+    - {fileID: 11400000, guid: 7389fac145d63824f80e70b41a9ed372, type: 2}
+    ingredientsCount: 05000000
+  - result: {fileID: 11400000, guid: 2aed1d8e4dd753742aa837c1a52433e4, type: 2}
+    resultCount: 5
     ingredients:
-    - {fileID: 11400000, guid: db44f540d5ad1824bbf06e69aeca994b, type: 2}
-    - {fileID: 11400000, guid: db44f540d5ad1824bbf06e69aeca994b, type: 2}
+    - {fileID: 11400000, guid: 3bd66d80fb23e764f9744b7e7fcfaa76, type: 2}
+    - {fileID: 11400000, guid: 7389fac145d63824f80e70b41a9ed372, type: 2}
     ingredientsCount: 0100000001000000
+  - result: {fileID: 11400000, guid: 34333ede38949fc469ad5408dd54430d, type: 2}
+    resultCount: 1
+    ingredients:
+    - {fileID: 11400000, guid: 3bd66d80fb23e764f9744b7e7fcfaa76, type: 2}
+    - {fileID: 11400000, guid: 7389fac145d63824f80e70b41a9ed372, type: 2}
+    ingredientsCount: 0100000003000000
+  - result: {fileID: 11400000, guid: 6098f8da990ec0042b6c5c6fa93abdaf, type: 2}
+    resultCount: 1
+    ingredients:
+    - {fileID: 11400000, guid: 3bd66d80fb23e764f9744b7e7fcfaa76, type: 2}
+    - {fileID: 11400000, guid: 7389fac145d63824f80e70b41a9ed372, type: 2}
+    ingredientsCount: 0300000003000000
   craftSlotContainer: {fileID: 8368777752899002504}
   craftSlotTemplate: {fileID: 9178707492666613053}
   resultTransform: {fileID: 5624324011953401142}

@@ -50,3 +50,4 @@ MonoBehaviour:
   - name: 
     sentence: "Mereka pun melanjutkan perjalanannya ke desa.\r"
   mainSpeaker: Charibert
+  promptAfterDialogue: 2Dialogue

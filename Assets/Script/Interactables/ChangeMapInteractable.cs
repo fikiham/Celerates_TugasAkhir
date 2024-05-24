@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ChangeMapInteractable : Interactable
 {
@@ -11,7 +10,10 @@ public class ChangeMapInteractable : Interactable
     {
         string direction = goToVillage ? "Village" : "Forest";
         Debug.Log("Going to " + direction);
-        SceneManager.LoadScene(goToVillage ? 2 : 1);
+        GameController.Instance.SaveGame();
+        LoadingScreenUI.Instance.LoadScene(goToVillage ? 2 : 1);
+        //SceneManager.LoadScene(goToVillage ? 2 : 1);
+        GameController.Instance.LoadGame();
     }
 
 }

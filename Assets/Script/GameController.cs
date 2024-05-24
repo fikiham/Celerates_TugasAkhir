@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -34,10 +33,21 @@ public class GameController : MonoBehaviour
         persistent = transform.root.gameObject;
         DontDestroyOnLoad(persistent);
         Instance = this;
+
     }
 
     private void Start()
     {
+        if (NewGame)
+        {
+            GameData newGameData = new(true);
+            newGameData.ResetGameData();
+            LoadGame(newGameData);
+        }
+        else
+        {
+            LoadGame();
+        }
         player = GameObject.FindGameObjectWithTag("Player").transform;
         if (PlayerPrefs.GetInt("HaveSaved") == 99)
         {
@@ -109,10 +119,14 @@ public class GameController : MonoBehaviour
         SaveSystem.SaveData();
     }
 
-    public void LoadGame()
+    public void LoadGame(GameData theData = null)
     {
         Debug.Log("Loading Game");
-        GameData data = SaveSystem.LoadData();
+        GameData data;
+        if (theData == null)
+            data = SaveSystem.LoadData();
+        else
+            data = theData;
         Player_Inventory inventory = Player_Inventory.Instance;
 
         playerName = data.playerName;
@@ -143,18 +157,29 @@ public class GameController : MonoBehaviour
                 storage.Add(ItemPool.Instance.GetItem(item.itemName, item.stackCount, item.level));
             }
         }
+
+        GameEventSystem.Instance.DoneFirstNarration = data.gameEvent_DoneFirstNarration;
+        GameEventSystem.Instance.DoneDialogue_1 = data.gameEvent_DoneDialogue_1;
+        GameEventSystem.Instance.DoneDialogue_2 = data.gameEvent_DoneDialogue_2;
+        GameEventSystem.Instance.DoneDialogue_3 = data.gameEvent_DoneDialogue_3;
+        GameEventSystem.Instance.DoneDialogue_4 = data.gameEvent_DoneDialogue_4;
+        GameEventSystem.Instance.DoneDialogue_5 = data.gameEvent_DoneDialogue_5;
+        GameEventSystem.Instance.DoneDialogue_6 = data.gameEvent_DoneDialogue_6;
+        GameEventSystem.Instance.DoneDialogue_7 = data.gameEvent_DoneDialogue_7;
     }
 
     public void GoToMainMenu()
     {
-        SceneManager.LoadScene(0);
         SaveGame();
+        NewGame = false;
+        LoadingScreenUI.Instance.LoadScene(0);
+        Destroy(transform.root.gameObject);
+        //SceneManager.LoadScene(0);
     }
 
-    public void GoToScene(int i)
+    public void PlayerDied()
     {
-        SceneManager.LoadScene(i);
-        SaveGame();
+        PauseGame();
     }
 
 

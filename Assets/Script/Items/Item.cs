@@ -26,6 +26,7 @@ public class Item : ScriptableObject
     public int Damage;
     public int AreaOfEffect;
     public int SpecialAttackCD;
+    public int SpecialAttackStamina;
     public int UpgradeCost;
     public GameObject RangedWeapon_ProjectilePrefab;
 

@@ -30,6 +30,8 @@ public class Enemy_Wolf : MonoBehaviour
     [SerializeField] float waitTime = 2f;
     float waitTimer;
 
+    bool caughtInCollision;
+
 
     private void Awake()
     {
@@ -71,8 +73,9 @@ public class Enemy_Wolf : MonoBehaviour
             else // Idle if neither
             {
                 // Target Idle is zero if it reach targetted idling pos
-                if (targetIdle == Vector2.zero)
+                if (targetIdle == Vector2.zero || caughtInCollision)
                 {
+                    caughtInCollision = false;
                     waitTimer = 0;
                     targetIdle.x = Random.Range(-idleDistance, idleDistance);
                     targetIdle.y = Random.Range(-idleDistance, idleDistance);
@@ -96,6 +99,11 @@ public class Enemy_Wolf : MonoBehaviour
     bool IsInReach()
     {
         return Vector2.Distance(transform.position, target.position) < attackDistance;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        caughtInCollision = true;
     }
 
     #region DEBUG

@@ -27,6 +27,7 @@ public class Player_Movement : MonoBehaviour
 
     #region DASH
     [Header("DASH")]
+    [SerializeField] ParticleSystem dashParticle;
     [SerializeField] float dashStamina = 40f;
     [SerializeField] float dashDistance = 5;
     [SerializeField] float dashForce = 100;
@@ -114,6 +115,7 @@ public class Player_Movement : MonoBehaviour
     // Dashing until certain distance
     IEnumerator StartDashing(Vector2 startPos)
     {
+        dashParticle.Play();
         justDash = true;
         noMovement = true;
         Vector2 targetDir = (face.position - transform.position).normalized;
@@ -125,6 +127,7 @@ public class Player_Movement : MonoBehaviour
             PlayerUI.Instance.dashUI.fillAmount = Vector2.Distance(startPos, transform.position) / dashDistance;
             yield return null;
         }
+        dashParticle.Stop();
         PlayerUI.Instance.dashUI.fillAmount = 1;
         rb.velocity = Vector2.zero;
         noMovement = false;

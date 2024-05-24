@@ -24,6 +24,10 @@ public class Player_Action : MonoBehaviour
     [SerializeField] GameObject normalAttackHitArea;
     [SerializeField] GameObject specialAttackHitArea;
 
+    [SerializeField] ParticleSystem swordParticle;
+    [SerializeField] ParticleSystem swordAOEParticle;
+    [SerializeField] ParticleSystem tombakParticle;
+
     float damageMult = 1;
     #endregion
 
@@ -147,7 +151,7 @@ public class Player_Action : MonoBehaviour
         if (hit.transform != null)
         {
             interactable = hit.transform.GetComponent<Interactable>();
-            PlayerUI.Instance.promptText.text = "Press F to "+interactable.promptMessage;
+            PlayerUI.Instance.promptText.text = "Press F to " + interactable.promptMessage;
             return true;
         }
         else
@@ -163,6 +167,7 @@ public class Player_Action : MonoBehaviour
     {
         if (!AOE)
         {
+            ParticleFollow.Instance.StartPath(area);
             Transform theTransform = normalAttackHitArea.transform;
             theTransform.name = damage.ToString();
             theTransform.localPosition = new(area / 2, theTransform.localPosition.y, theTransform.localPosition.z);
@@ -171,6 +176,9 @@ public class Player_Action : MonoBehaviour
         }
         else
         {
+            ParticleSystem.ShapeModule theShape = swordAOEParticle.shape;
+            theShape.scale = new(area, 1, 1);
+            swordAOEParticle.Play();
             // Adding constant so the area isn't too small
             area += 1;
             Transform theTransform = specialAttackHitArea.transform;
@@ -197,7 +205,19 @@ public class Player_Action : MonoBehaviour
         if (itemToAttack.type == ItemType.Melee_Combat)
         {
             print("melee normal attacking");
-            ActivateHitbox(itemToAttack.Damage, itemToAttack.AreaOfEffect);
+            switch (itemToAttack.itemName)
+            {
+                case "Tombak Berburu":
+                case "Halberd":
+                    if (Player_Health.Instance.SpendStamina(itemToAttack.SpecialAttackStamina))
+                    {
+                        ActivateHitbox(itemToAttack.Damage, itemToAttack.AreaOfEffect);
+                    }
+                    break;
+
+                default:
+                    ActivateHitbox(itemToAttack.Damage, itemToAttack.AreaOfEffect); break;
+            }
             StartCoroutine(ActivateAttack(.5f));
         }
         else if (itemToAttack.itemName == "Batu")
@@ -241,48 +261,57 @@ public class Player_Action : MonoBehaviour
         if (itemToAttack.itemName == "Empty")
             return;
 
-        if (itemToAttack.itemName == "Penyiram Tanaman")
+        if (Player_Health.Instance.SpendStamina(itemToAttack.SpecialAttackStamina))
         {
-            print("watering plants");
-            // Water nearby plants
-        }
-        else if (itemToAttack.itemName == "Pedang Ren")
-        {
-            print("buffing");
-            // Buff
-            StartCoroutine(StartBuff_PedangRen(30));
-            StartCoroutine(ActivateAttack(1));
-        }
-        else if (itemToAttack.type == ItemType.Melee_Combat)
-        {
-            print("special attacking with a stick");
-            ActivateHitbox(itemToAttack.Damage * 4, itemToAttack.AreaOfEffect, 1, true);
-            StartCoroutine(ActivateAttack(1));
-        }
-        else if (itemToAttack.itemName == "Batu")
-        {
-            print("rock no special attack");
-        }
-        else if (itemToAttack.type == ItemType.Ranged_Combat)
-        {
-            print("bow special attack");
-            for (int i = 0; i < 5; i++)
+            if (itemToAttack.itemName == "Penyiram Tanaman")
             {
-                // Check for arrow first
-                if (Player_Inventory.Instance.itemList.Exists(x => x.itemName == "Anak Panah"))
-                {
-                    print("shooting arrow");
-                    // Shoot arrow if possible
-                    StartCoroutine(ShootProjectile(itemToAttack.RangedWeapon_ProjectilePrefab, itemToAttack.Damage, i * .1f));
-                    // minus arrow count
-                    Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem("Anak Panah"));
-                }
-                else
-                {
-                    print("no arrow bish");
-                }
+                print("watering plants");
+                // Water nearby plants
             }
-            StartCoroutine(ActivateAttack(1));
+            else if (itemToAttack.itemName == "Pedang Ren")
+            {
+                print("buffing");
+                // Buff
+                StartCoroutine(StartBuff_PedangRen(30));
+                StartCoroutine(ActivateAttack(1));
+
+            }
+            else if (itemToAttack.itemName == "Ranting Pohon")
+            {
+                print("special attacking with a stick");
+                ActivateHitbox(itemToAttack.Damage * 4, itemToAttack.AreaOfEffect, 1, true);
+                StartCoroutine(ActivateAttack(1));
+
+            }
+            else if (itemToAttack.type == ItemType.Melee_Combat)
+            {
+                print("No Special Attack");
+            }
+            else if (itemToAttack.itemName == "Batu")
+            {
+                print("rock no special attack");
+            }
+            else if (itemToAttack.type == ItemType.Ranged_Combat)
+            {
+                print("bow special attack");
+                for (int i = 0; i < 5; i++)
+                {
+                    // Check for arrow first
+                    if (Player_Inventory.Instance.itemList.Exists(x => x.itemName == "Anak Panah"))
+                    {
+                        print("shooting arrow");
+                        // Shoot arrow if possible
+                        StartCoroutine(ShootProjectile(itemToAttack.RangedWeapon_ProjectilePrefab, itemToAttack.Damage, i * .1f));
+                        // minus arrow count
+                        Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem("Anak Panah"));
+                    }
+                    else
+                    {
+                        print("no arrow bish");
+                    }
+                }
+                StartCoroutine(ActivateAttack(1));
+            }
         }
     }
 
