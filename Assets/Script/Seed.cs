@@ -13,7 +13,7 @@ public class Seed : MonoBehaviour
     private float growthTime = 10f; // Waktu pertumbuhan dalam detik
 
     private SpriteRenderer spriteRenderer;
-    public GameObject hasilPanenPrefab; // Prefab hasil panen (buah cabai)
+    // public GameObject hasilPanenPrefab; // Prefab hasil panen (buah cabai)
 
     private void Start()
     {
@@ -50,47 +50,29 @@ public class Seed : MonoBehaviour
     }
 
    public void Harvest()
-{
-    if (isReadyToHarvest)
     {
-        Debug.Log("Biji dipanen!");
-        // Instantiate hasil panen (buah cabai) sedikit di atas tanaman
-        Vector3 spawnPosition = transform.position + new Vector3(0, 0.5f, 0); // Mengatur posisi sedikit di atas tanaman
-        GameObject hasilPanen = Instantiate(hasilPanenPrefab, spawnPosition, Quaternion.identity);
-
-        // Tambahkan Rigidbody2D jika belum ada
-        Rigidbody2D rb = hasilPanen.GetComponent<Rigidbody2D>();
-        if (rb == null)
+        if (isReadyToHarvest)
         {
-            rb = hasilPanen.AddComponent<Rigidbody2D>();
+            Debug.Log("Biji dipanen!");
+            // Drop item menggunakan ItemPool
+            ItemPool.Instance.DropItem("BuahCabai", transform.position + new Vector3(0, 0.5f, 0));
+            // Atur ulang fase pertumbuhan ke awal dan lain-lain...
+
+            growthCount = 0;
+            spriteRenderer.sprite = growthSprites[growthCount];
+            isReadyToHarvest = false;
+            siram = true;
         }
-
-        // Atur gravityScale kecil untuk efek jatuh ringan
-        rb.gravityScale = 1f;
-
-        // Tambahkan sedikit force untuk gerakan jatuh
-        rb.AddForce(new Vector2(Random.Range(-0.5f, 0.5f), -1f), ForceMode2D.Impulse);
-
-        // Hentikan gravitasi setelah beberapa waktu
-        StartCoroutine(StopGravity(rb, 0.5f)); // Hentikan gravitasi setelah 0.5 detik
-
-        // Atur ulang fase pertumbuhan ke awal
-        growthCount = 0;
-        spriteRenderer.sprite = growthSprites[growthCount];
-        isReadyToHarvest = false;
-        siram = true;
-        // isGrowing = true; // Mulai pertumbuhan kembali
-        // StartCoroutine(Grow());
+        else if (siram)
+        {
+            Debug.Log("Siram dulu bos");
+        }
+        else
+        {
+            Debug.Log("Biji belum siap dipanen bos");
+        }
     }
-    else if (siram)
-    {
-        Debug.Log("Siram dulu bos");
-    }
-    else
-    {
-        Debug.Log("Biji belum siap dipanen bos");
-    }
-}
+
 
 
     private IEnumerator StopGravity(Rigidbody2D rb, float delay)

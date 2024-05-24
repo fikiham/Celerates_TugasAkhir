@@ -9,6 +9,6 @@ public class ItemDropInteractable : Interactable
     protected override void Interact()
     {
         Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(item.itemName));
-        Destroy(gameObject);
+        
     }
 }
