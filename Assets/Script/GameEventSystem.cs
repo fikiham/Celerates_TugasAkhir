@@ -36,16 +36,19 @@ public class GameEventSystem : MonoBehaviour
         {
             DoneFirstNarration = true;
             Player_Direction.Instance.Target = ForestController.Instance.FirstSpawner.transform;
+            Player_Quest.Instance.SetQuest("Kill all wolves");
         }
         else if (prompt == "1Dialogue")
         {
             DoneDialogue_1 = true;
             Player_Direction.Instance.Target = ForestController.Instance.DanauKetenangan;
+            Player_Quest.Instance.SetQuest("Pergi ke danau ketenangan");
         }
         else if (prompt == "2Dialogue")
         {
             DoneDialogue_2 = true;
             Player_Direction.Instance.Target = ForestController.Instance.VillagePortal;
+            Player_Quest.Instance.SetQuest("Kembali ke desa");
         }
         else if (prompt == "3Dialogue")
         {
@@ -55,9 +58,15 @@ public class GameEventSystem : MonoBehaviour
         {
             DoneDialogue_4 = true;
         }
+        else if (prompt == "givePedang")
+        {
+            Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Pedang Ren"));
+            ItemDisplay.Instance.ShowItemDisplay(ItemPool.Instance.GetItem("Pedang Ren"));
+        }
         else if (prompt == "5Dialogue")
         {
             DoneDialogue_5 = true;
+            Player_Quest.Instance.SetQuest("Bunuh semua bandit");
         }
         else if (prompt == "6Dialogue")
         {
