@@ -172,5 +172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useEvents: 0
-  promptMessage: 
-  item: {fileID: 0}
+  promptMessage: 'Cabai '
+  item: {fileID: 11400000, guid: 4baf81910ecdd224b980c7d945a20266, type: 2}
+  gravityDuration: 2
