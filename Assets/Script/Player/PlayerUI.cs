@@ -21,6 +21,8 @@ public class PlayerUI : MonoBehaviour
     public Image[] quickSlotsUI_Inventory = new Image[2];
     public GameObject inventoryUI;
 
+    public TMP_Text currentQuestText;
+
 
     private void Awake()
     {
