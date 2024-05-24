@@ -50,7 +50,7 @@ public class CookIngredients : MonoBehaviour
             buttonComponent.onClick.AddListener(() =>
             {
                 // button cek ingredient
-                if(slotCook1.item != null){
+                if(slotCook1.item != null || slotCook2.item != null || slotCook3.item != null){
                     Debug.Log("resep tidak bisa di lihat");
                     ShowErrorPopupForSeconds(2.0f);
                 }else {
@@ -113,7 +113,7 @@ public class CookIngredients : MonoBehaviour
 
     public void DestroyRecipeInHasilCook()
     {
-        if(slotCook1.item != null){
+         if(slotCook1.item != null || slotCook2.item != null || slotCook3.item != null){
             Debug.Log("Ada isi nya bro ga boleh di hapus ");
         } else {
             foreach (Transform child in hasilCook.transform)

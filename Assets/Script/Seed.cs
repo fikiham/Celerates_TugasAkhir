@@ -5,6 +5,7 @@ using UnityEngine;
 public class Seed : MonoBehaviour
 {
     public bool isReadyToHarvest = false;
+    public bool siram = false;
     public Sprite[] growthSprites; // Array sprite untuk setiap tahap pertumbuhan
     private bool isGrowing = true;
     private int growthCount = 0;
@@ -48,44 +49,49 @@ public class Seed : MonoBehaviour
         }
     }
 
-    public void Harvest()
+   public void Harvest()
+{
+    if (isReadyToHarvest)
     {
-        if (isReadyToHarvest)
+        Debug.Log("Biji dipanen!");
+        // Instantiate hasil panen (buah cabai) sedikit di atas tanaman
+        Vector3 spawnPosition = transform.position + new Vector3(0, 0.5f, 0); // Mengatur posisi sedikit di atas tanaman
+        GameObject hasilPanen = Instantiate(hasilPanenPrefab, spawnPosition, Quaternion.identity);
+
+        // Tambahkan Rigidbody2D jika belum ada
+        Rigidbody2D rb = hasilPanen.GetComponent<Rigidbody2D>();
+        if (rb == null)
         {
-            Debug.Log("Biji dipanen!");
-            // Instantiate hasil panen (buah cabai) sedikit di atas tanaman
-            Vector3 spawnPosition = transform.position + new Vector3(0, 0.5f, 0); // Mengatur posisi sedikit di atas tanaman
-            GameObject hasilPanen = Instantiate(hasilPanenPrefab, spawnPosition, Quaternion.identity);
-
-            // Tambahkan Rigidbody2D jika belum ada
-            Rigidbody2D rb = hasilPanen.GetComponent<Rigidbody2D>();
-            if (rb == null)
-            {
-                rb = hasilPanen.AddComponent<Rigidbody2D>();
-            }
-
-            // Atur gravityScale kecil untuk efek jatuh ringan
-            rb.gravityScale = 1f;
-          
-
-            // Tambahkan sedikit force untuk gerakan jatuh
-            rb.AddForce(new Vector2(Random.Range(-0.5f, 0.5f), -1f), ForceMode2D.Impulse);
-
-            // Hentikan gravitasi setelah beberapa waktu
-            StartCoroutine(StopGravity(rb, 0.5f)); // Hentikan gravitasi setelah 0.5 detik
-
-            // Atur ulang fase pertumbuhan ke awal
-            growthCount = 0;
-            spriteRenderer.sprite = growthSprites[growthCount];
-            isReadyToHarvest = false;
-            isGrowing = true; // Mulai pertumbuhan kembali
-            StartCoroutine(Grow());
+            rb = hasilPanen.AddComponent<Rigidbody2D>();
         }
-        else
-        {
-            Debug.Log("Biji belum siap dipanen!");
-        }
+
+        // Atur gravityScale kecil untuk efek jatuh ringan
+        rb.gravityScale = 1f;
+
+        // Tambahkan sedikit force untuk gerakan jatuh
+        rb.AddForce(new Vector2(Random.Range(-0.5f, 0.5f), -1f), ForceMode2D.Impulse);
+
+        // Hentikan gravitasi setelah beberapa waktu
+        StartCoroutine(StopGravity(rb, 0.5f)); // Hentikan gravitasi setelah 0.5 detik
+
+        // Atur ulang fase pertumbuhan ke awal
+        growthCount = 0;
+        spriteRenderer.sprite = growthSprites[growthCount];
+        isReadyToHarvest = false;
+        siram = true;
+        // isGrowing = true; // Mulai pertumbuhan kembali
+        // StartCoroutine(Grow());
     }
+    else if (siram)
+    {
+        Debug.Log("Siram dulu bos");
+    }
+    else
+    {
+        Debug.Log("Biji belum siap dipanen bos");
+    }
+}
+
 
     private IEnumerator StopGravity(Rigidbody2D rb, float delay)
     {
@@ -93,5 +99,16 @@ public class Seed : MonoBehaviour
         rb.gravityScale = 0;
         rb.velocity = Vector2.zero;
        
+    }
+
+    public void Siram(){
+        if(siram == true){
+            isGrowing = true; // Mulai pertumbuhan kembali
+            StartCoroutine(Grow());
+            siram = false;
+        }else {
+            Debug.Log("bukan waktunya siram bro ");
+        }
+
     }
 }
