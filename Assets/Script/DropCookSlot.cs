@@ -12,6 +12,7 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
     public GameObject hasilCook; // Referensi ke GameObject HasilCook
 
     [SerializeField] CookUI cookUI;
+    [SerializeField] CookIngredients cookIngredients;
 
     private Button hasilCookButton;
 
@@ -40,9 +41,12 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
         {
             if (!item)
             {
+                cookIngredients.DestroyRecipeInHasilCook();
                 RemoveFromPreviousSlot(draggedItem);
                 SetItemToSlot(draggedItem);
                 CreateCook();
+                Debug.Log("Item di pindahkan");
+
             }
             else
             {
@@ -80,6 +84,7 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
 
     if (cookUI.slotCook1.item != null && cookUI.slotCook2.item != null)
     {
+        Debug.Log(cookUI.slotCook1.item);
         DragCook item1 = cookUI.slotCook1.item.GetComponent<DragCook>();
         DragCook item2 = cookUI.slotCook2.item.GetComponent<DragCook>();
 
