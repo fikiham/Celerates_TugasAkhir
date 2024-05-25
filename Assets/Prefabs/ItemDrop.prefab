@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6932704164668996086}
   - component: {fileID: 1902903126511668618}
   - component: {fileID: 8525742863988145026}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ItemDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,6 +101,7 @@ MonoBehaviour:
   useEvents: 0
   promptMessage: 
   item: {fileID: 0}
+  gravityDuration: 1
 --- !u!61 &8525742863988145026
 BoxCollider2D:
   m_ObjectHideFlags: 0

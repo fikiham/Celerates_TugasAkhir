@@ -49,16 +49,13 @@ public class ItemPool : MonoBehaviour
         // Tambahkan sedikit force untuk gerakan jatuh
         rb.AddForce(new Vector2(Random.Range(-0.5f, 0.5f), -1f), ForceMode2D.Impulse);
 
-        // Hentikan gravitasi setelah beberapa waktu
-        StartCoroutine(StopGravity(rb, 0.5f)); // Hentikan gravitasi setelah 0.5 detik
+        // Panggil StopGravity dari komponen ItemDropInteractable
+        ItemDropInteractable interactable = droppedItem.GetComponent<ItemDropInteractable>();
+        if (interactable != null)
+        {
+            interactable.StartCoroutine(interactable.StopGravity(rb, 0.5f));
+        }
 
         droppedItem.GetComponent<ItemDropInteractable>().item = GetItem(itemName, count, level);
-    }
-
-    private IEnumerator StopGravity(Rigidbody2D rb, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        rb.gravityScale = 0;
-        rb.velocity = Vector2.zero;
     }
 }

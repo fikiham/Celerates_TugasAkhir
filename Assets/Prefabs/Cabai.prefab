@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4459120725376062254}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.00085, y: 0.00174, z: 0}
   m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -143,10 +143,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 2.44561, y: 0.15379524}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -157,7 +157,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0001, y: 0.0001}
+  m_Size: {x: 25.178745, y: 29.761711}
   m_EdgeRadius: 0
 --- !u!114 &1245937808901146366
 MonoBehaviour:
@@ -174,4 +174,4 @@ MonoBehaviour:
   useEvents: 0
   promptMessage: 'Cabai '
   item: {fileID: 11400000, guid: 4baf81910ecdd224b980c7d945a20266, type: 2}
-  gravityDuration: 2
+  gravityDuration: 1

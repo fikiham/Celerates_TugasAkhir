@@ -27,6 +27,8 @@ public class PlantInteractable : Interactable
         if (seed.isReadyToHarvest)
         {
             seed.Harvest();
+        }else if(seed.siram){
+            seed.Siram();
         }
     }
 

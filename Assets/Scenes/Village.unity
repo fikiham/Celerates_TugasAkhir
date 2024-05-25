@@ -444,7 +444,6 @@ GameObject:
   - component: {fileID: 845131786}
   - component: {fileID: 845131785}
   - component: {fileID: 845131784}
-  - component: {fileID: 845131783}
   - component: {fileID: 845131787}
   m_Layer: 8
   m_Name: Cabai
@@ -453,20 +452,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &845131783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 845131782}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4feacc05248dc73439894c2ff8dc30fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useEvents: 0
-  promptMessage: Tanaman Cabe
 --- !u!61 &845131784
 BoxCollider2D:
   m_ObjectHideFlags: 0
