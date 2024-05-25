@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemDropInteractable : Interactable
@@ -28,8 +29,8 @@ public class ItemDropInteractable : Interactable
     protected override void Interact()
     {
         Debug.Log("item di ambil.");
-        // Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(item.itemName));
-        // Destroy(gameObject);
+        Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(item.itemName));
+        Destroy(gameObject);
     }
 
     public IEnumerator StopGravity(Rigidbody2D rb, float delay)

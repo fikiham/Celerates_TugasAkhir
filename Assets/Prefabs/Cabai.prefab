@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5689379069804323596}
   - component: {fileID: -3298569906305986760}
   - component: {fileID: 1245937808901146366}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cabai
   m_TagString: Untagged
   m_Icon: {fileID: 0}

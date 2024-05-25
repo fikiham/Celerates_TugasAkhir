@@ -16,9 +16,11 @@ public class PlantInteractable : Interactable
         {
             promptMessage = "Panen Tanaman";
         }
-        else
+        else if (seed.siram)
         {
-            promptMessage = "Tanaman Sedang Tumbuh";
+            promptMessage = "Siram Tanaman";
+        }else{
+            promptMessage = "Tanaman Tumbuh";
         }
 
     }
