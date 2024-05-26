@@ -114,6 +114,8 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
         {
             itemList.Add(item);
         }
+
+        print(item.itemName + " added to inventory");
     }
 
     public void RemoveItem(Item item)
@@ -144,6 +146,7 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
             return;
         equippedCombat[index] = item;
         PlayerUI.Instance.inventoryUI.GetComponent<InventoryUI>().SetActiveItem(index, item);
+        print(item.itemName + " equipped");
     }
 
     // Add item to quick slot according index (0,1)

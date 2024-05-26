@@ -72,7 +72,7 @@ public class Player_Health : MonoBehaviour
     {
         if (collision.gameObject.layer == 7)
         {
-            TakeDamage(10);
+            TakeDamage(3);
         }
     }
 }

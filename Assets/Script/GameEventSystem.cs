@@ -35,9 +35,14 @@ public class GameEventSystem : MonoBehaviour
         else if (prompt == "firstNarration")
         {
             DoneFirstNarration = true;
+
+            Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Ranting Pohon"));
+            Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Batu", 5));
+            Player_Inventory.Instance.EquipItem(Player_Inventory.Instance.FindItemInInventory("Ranting Pohon"), 0);
+            Player_Inventory.Instance.EquipItem(Player_Inventory.Instance.FindItemInInventory("Batu"), 1);
+
             Player_Direction.Instance.Target = ForestController.Instance.FirstSpawner.transform;
-            if (Player_Quest.Instance != null)
-                Player_Quest.Instance.SetQuest("Bunuh semua serigala");
+            Player_Quest.Instance.SetQuest("Bunuh semua serigala");
         }
         else if (prompt == "1Dialogue")
         {
