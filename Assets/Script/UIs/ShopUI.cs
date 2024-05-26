@@ -14,23 +14,17 @@ public class ShopUI : MonoBehaviour
     [SerializeField] Transform itemsToBuyContainer;
     [SerializeField] Transform itemsToBuyTemplate;
     public List<Item> itemsToBuy;
-    [SerializeField] int buyHorizontalCount = 4;
-    [SerializeField] float buyPadding = 15;
 
 
     [Header("SELL UI")]
     [SerializeField] Transform itemsToSellContainer;
     [SerializeField] Transform itemsToSellTemplate;
     public List<Item> itemsToSell;
-    [SerializeField] int sellHorizontalCount = 4;
-    [SerializeField] float sellPadding = 15;
 
     [Header("UPGRADE UI")]
     [SerializeField] Transform itemsToUpgradeContainer;
     [SerializeField] Transform itemsToUpgradeTemplate;
     public List<Item> itemsToUpgrade;
-    [SerializeField] int upgradeHorizontalCount = 1;
-    [SerializeField] float upgradePadding = 10;
 
     private void Update()
     {
@@ -69,25 +63,20 @@ public class ShopUI : MonoBehaviour
             AddToStore(item);
         }
 
-        RefreshListUI(itemsToBuy, itemsToBuyContainer, itemsToBuyTemplate, buyHorizontalCount, buyPadding);
-        RefreshListUI(itemsToSell, itemsToSellContainer, itemsToSellTemplate, sellHorizontalCount, sellPadding, buySellOrUpgrade: 2);
-        RefreshListUI(itemsToUpgrade, itemsToUpgradeContainer, itemsToUpgradeTemplate, upgradeHorizontalCount, upgradePadding, 3);
+        RefreshListUI(itemsToBuy, itemsToBuyContainer, itemsToBuyTemplate, 1);
+        RefreshListUI(itemsToSell, itemsToSellContainer, itemsToSellTemplate, 2);
+        RefreshListUI(itemsToUpgrade, itemsToUpgradeContainer, itemsToUpgradeTemplate, 3);
     }
 
 
-    void RefreshListUI(List<Item> Items, Transform container, Transform template, int horizontalCount, float itemsPadding, int buySellOrUpgrade = 1)
+    void RefreshListUI(List<Item> Items, Transform container, Transform template, int buySellOrUpgrade = 1)
     {
         foreach (Transform child in container)
         {
             if (child == template) continue;
             Destroy(child.gameObject);
         }
-        Vector2 containerSize = container.GetComponent<RectTransform>().sizeDelta;
-        float itemSize = (containerSize.x / horizontalCount) - itemsPadding;
-        Vector2 itemSizeVector = Vector2.one * itemSize;
-        float itemSlotCellSize = itemSize + itemsPadding;
-        float correction = itemSize / 2;
-        int x = 0, y = 0;
+
         foreach (Item item in Items)
         {
             Transform itemInInventory = Instantiate(template, container);
@@ -102,15 +91,6 @@ public class ShopUI : MonoBehaviour
                 itemInInventory.GetChild(2).GetComponentInChildren<TMP_Text>().text = "SOLD";
             }
 
-            RectTransform itemSlotRectTransform = itemInInventory.GetComponent<RectTransform>();
-            if (buySellOrUpgrade != 3)
-            {
-                itemSlotRectTransform.sizeDelta = itemSizeVector;
-                itemSlotRectTransform.anchoredPosition = new((x * itemSlotCellSize) + correction, (y * -itemSlotCellSize) - correction);
-            }
-            else
-                itemSlotRectTransform.anchoredPosition = new((x * itemSlotCellSize) + correction, (y * -template.GetComponent<RectTransform>().sizeDelta.y + itemsPadding) - template.GetComponent<RectTransform>().sizeDelta.y / 1.5f);
-
             itemInInventory.GetComponentInChildren<Button>().onClick.RemoveAllListeners();
             switch (buySellOrUpgrade)
             {
@@ -123,12 +103,6 @@ public class ShopUI : MonoBehaviour
                 case 3:
                     itemInInventory.GetComponentInChildren<Button>().onClick.AddListener(() => UpgradeItem(item));
                     break;
-            }
-            x++;
-            if (x >= horizontalCount)
-            {
-                x = 0;
-                y++;
             }
         }
     }

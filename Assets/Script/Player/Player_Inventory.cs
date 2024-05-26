@@ -65,7 +65,6 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
                 GameController.Instance.ShowPersistentUI(!inventoryOpened);
                 GameController.Instance.gamePaused = inventoryOpened;
 
-                inventoryUI.HandleItemsSize();
                 inventoryUI.SetInventory(itemList);
                 if (itemList.Count > 0)
                     inventoryUI.SetDescription(itemList[0]);

@@ -11,7 +11,9 @@ public class VillageController : MonoBehaviour
 
 
     public Transform KakRenTransform;
+    public Transform TanamanCabaiTransform;
     public Transform TengahKota;
+    public Transform SumberBandit;
 
 
     private void Awake()

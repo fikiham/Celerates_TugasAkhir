@@ -57,5 +57,6 @@ public class ItemPool : MonoBehaviour
         }
 
         droppedItem.GetComponent<ItemDropInteractable>().item = GetItem(itemName, count, level);
+        droppedItem.GetComponent<ItemDropInteractable>().promptMessage = "Take " + itemName;
     }
 }

@@ -11,12 +11,6 @@ public class ItemDropInteractable : Interactable
     private void Start()
     {
         Debug.Log("ItemDropInteractable: Start method called.");
-        rb = GetComponent<Rigidbody2D>(); // Inisialisasi Rigidbody2D
-        if (rb == null)
-        {
-            rb = gameObject.AddComponent<Rigidbody2D>(); // Tambahkan Rigidbody2D jika belum ada
-            Debug.Log("ItemDropInteractable: Rigidbody2D component added.");
-        }
     }
 
      private void Update()

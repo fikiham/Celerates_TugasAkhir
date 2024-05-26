@@ -176,6 +176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useEvents: 0
-  promptMessage: Open Storage
+  promptMessage: Buka Gubuk
   Items: []
   storageUI: {fileID: 0}
