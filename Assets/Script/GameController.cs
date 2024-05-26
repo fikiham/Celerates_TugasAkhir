@@ -112,6 +112,7 @@ public class GameController : MonoBehaviour
         ShowPersistentUI(true);
     }
 
+    [ContextMenu("Save Game")]
     public void SaveGame()
     {
         Debug.Log("Saving Game");
@@ -119,6 +120,7 @@ public class GameController : MonoBehaviour
         SaveSystem.SaveData();
     }
 
+    [ContextMenu("Load Game")]
     public void LoadGame(GameData theData = null)
     {
         Debug.Log("Loading Game");

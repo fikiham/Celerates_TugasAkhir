@@ -18,6 +18,8 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] Transform face;
     [SerializeField] Transform hitboxes;
 
+    public bool isMoving;
+
     #region SPEEDS
     [Header("SPEEDS")]
     float moveSpd;
@@ -48,7 +50,17 @@ public class Player_Movement : MonoBehaviour
         {
             PlayerInput();
         }
+        else
+        {
+            movement = Vector2.zero;
+        }
+
+        isMoving = movement != Vector2.zero;
+
+
         PlayerUI.Instance.dashUI.color = new(1, 1, 1, Player_Health.Instance.stamina < dashStamina ? .5f : 1);
+
+
         if (movement.x > 0)
         {
             hitboxes.eulerAngles = new(0, 0, 0);
@@ -127,7 +139,6 @@ public class Player_Movement : MonoBehaviour
             PlayerUI.Instance.dashUI.fillAmount = Vector2.Distance(startPos, transform.position) / dashDistance;
             yield return null;
         }
-        dashParticle.Stop();
         PlayerUI.Instance.dashUI.fillAmount = 1;
         rb.velocity = Vector2.zero;
         noMovement = false;

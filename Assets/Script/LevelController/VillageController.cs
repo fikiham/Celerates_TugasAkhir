@@ -23,7 +23,7 @@ public class VillageController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        player.position = playerSpawnSpot.position;
+        //player.position = playerSpawnSpot.position;
     }
 
     // Update is called once per frame
