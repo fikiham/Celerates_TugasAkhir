@@ -15,29 +15,16 @@ public class InventoryUI : MonoBehaviour // Attach this to the InventoryUI prefa
     [SerializeField] Transform quickSlot1;
     [SerializeField] Transform quickSlot2;
 
+    [Header("UI STUFF")]
+    [SerializeField] Transform ContentGO;
+    [SerializeField] Transform SlotTemplate;
 
-    [Header("Inventory Slot")]
-    [SerializeField] Transform itemSlotContainer;
-    [SerializeField] Transform itemSlotTemplate;
-
-    [SerializeField] int itemsHorizontalCount = 4;
-    [SerializeField] float itemsPadding = 25;
-
-    Vector2 inventoryContainerSize;
-    Vector2 itemSizeVector;
-    float itemSize;
 
     [Header("Item Description")]
     [SerializeField] Image itemSprite;
     [SerializeField] TMP_Text itemName;
     [SerializeField] TMP_Text itemDesc;
     [SerializeField] Button itemAction;
-
-
-    private void Start()
-    {
-        HandleItemsSize();
-    }
 
     // Handle equipped items
     public void SetActiveItem(int slot, Item item)
@@ -85,42 +72,25 @@ public class InventoryUI : MonoBehaviour // Attach this to the InventoryUI prefa
     void RefreshInventoryItems()
     {
         RefreshActiveItems();
-        foreach (Transform child in itemSlotContainer)
+        foreach (Transform child in ContentGO)
         {
-            if (child == itemSlotTemplate) continue;
+            if (child == SlotTemplate) continue;
             Destroy(child.gameObject);
         }
-        float itemSlotCellSize = itemSize + itemsPadding;
-        float correction = itemSize / 2;
-        int x = 0, y = 0;
+
         foreach (Item item in Items)
         {
-            Transform itemInInventory = Instantiate(itemSlotTemplate, itemSlotContainer);
-            RectTransform itemSlotRectTransform = itemInInventory.GetComponent<RectTransform>();
-            itemSlotRectTransform.gameObject.SetActive(true);
-            itemSlotRectTransform.sizeDelta = itemSizeVector;
-            itemSlotRectTransform.gameObject.name = item.itemName;
-            itemSlotRectTransform.GetChild(0).GetComponent<Image>().sprite = item.sprite;
-            itemSlotRectTransform.GetChild(1).GetComponent<TMP_Text>().text = item.stackCount.ToString();
-            itemSlotRectTransform.anchoredPosition = new((x * itemSlotCellSize) + correction, (y * -itemSlotCellSize) - correction);
+            Transform itemInInventory = Instantiate(SlotTemplate, ContentGO);
+            itemInInventory.gameObject.SetActive(true);
+            itemInInventory.gameObject.name = item.itemName;
+            itemInInventory.GetChild(0).GetComponent<Image>().sprite = item.sprite;
+            itemInInventory.GetChild(1).GetComponent<TMP_Text>().text = item.stackCount.ToString();
+
+
 
             itemInInventory.GetComponent<Button>().onClick.RemoveAllListeners();
             itemInInventory.GetComponent<Button>().onClick.AddListener(() => SetDescription(item));
-            x++;
-            if (x >= itemsHorizontalCount)
-            {
-                x = 0;
-                y++;
-            }
         }
-    }
-
-    // Function Helper for UI
-    public void HandleItemsSize()
-    {
-        inventoryContainerSize = itemSlotContainer.GetComponent<RectTransform>().sizeDelta;
-        itemSize = (inventoryContainerSize.x / itemsHorizontalCount) - itemsPadding;
-        itemSizeVector = Vector2.one * itemSize;
     }
 
     public void SetDescription(Item item)

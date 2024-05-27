@@ -27,10 +27,6 @@ public class ForestController : MonoBehaviour
         if (!GameEventSystem.Instance.DoneFirstNarration)
         {
             DialogueSystem.Instance.StartFirstDialogue();
-            Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Ranting Pohon"));
-            Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Batu", 5));
-            Player_Inventory.Instance.EquipItem(Player_Inventory.Instance.FindItemInInventory("Ranting Pohon"), 0);
-            Player_Inventory.Instance.EquipItem(Player_Inventory.Instance.FindItemInInventory("Batu"), 1);
         }
         else
         {

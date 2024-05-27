@@ -8,6 +8,9 @@ public class LoadingScreenUI : MonoBehaviour
 {
     public static LoadingScreenUI Instance;
     [SerializeField] TMP_Text loadingText;
+    [SerializeField] TMP_Text tipsText;
+
+    [SerializeField] string[] tips;
 
     private void Awake()
     {
@@ -17,6 +20,7 @@ public class LoadingScreenUI : MonoBehaviour
 
     public void LoadScene(int i)
     {
+        tipsText.text = "Tips: \n" + tips[Random.Range(0, tips.Length)];
         transform.GetChild(0).gameObject.SetActive(true);
         StartCoroutine(LoadingScene(i));
     }
@@ -25,15 +29,15 @@ public class LoadingScreenUI : MonoBehaviour
     {
         AsyncOperation loadLevel = SceneManager.LoadSceneAsync(i);
         string loading = "Loading...";
-        int index = 6;
+        int index = 7;
 
         while (!loadLevel.isDone)
         {
             if (index > 9)
-                index = 6;
+                index = 7;
             loadingText.text = loading[..index];
             index++;
-            yield return new WaitForSeconds(.1f);
+            yield return null;
         }
         transform.GetChild(0).gameObject.SetActive(false);
     }

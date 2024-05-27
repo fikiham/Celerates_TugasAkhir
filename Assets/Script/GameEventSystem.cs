@@ -35,8 +35,14 @@ public class GameEventSystem : MonoBehaviour
         else if (prompt == "firstNarration")
         {
             DoneFirstNarration = true;
+
+            Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Ranting Pohon"));
+            Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Batu", 5));
+            Player_Inventory.Instance.EquipItem(Player_Inventory.Instance.FindItemInInventory("Ranting Pohon"), 0);
+            Player_Inventory.Instance.EquipItem(Player_Inventory.Instance.FindItemInInventory("Batu"), 1);
+
             Player_Direction.Instance.Target = ForestController.Instance.FirstSpawner.transform;
-            Player_Quest.Instance.SetQuest("Kill all wolves");
+            Player_Quest.Instance.SetQuest("Bunuh semua serigala");
         }
         else if (prompt == "1Dialogue")
         {
@@ -53,10 +59,14 @@ public class GameEventSystem : MonoBehaviour
         else if (prompt == "3Dialogue")
         {
             DoneDialogue_3 = true;
+            Player_Direction.Instance.Target = VillageController.Instance.KakRenTransform;
+            Player_Quest.Instance.SetQuest("Bertemu Kak Ren");
         }
         else if (prompt == "4Dialogue")
         {
             DoneDialogue_4 = true;
+            Player_Direction.Instance.Target = VillageController.Instance.TanamanCabaiTransform;
+            Player_Quest.Instance.SetQuest("Pergi ke Kebun");
         }
         else if (prompt == "givePedang")
         {

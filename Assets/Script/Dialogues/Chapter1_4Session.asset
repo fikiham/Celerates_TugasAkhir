@@ -29,7 +29,6 @@ MonoBehaviour:
     sentence: baik paman, paman jangan lupa jaga diri ya
   - name: 
     sentence: Tamashii dan Charibert melanjutkan perjalanannya menuju rumah dan kebun
-      milik Tamashii. Setibanya disana, mereka bertemu dengan kakaknya, dan Tamashii
-      diminta untuk membantunya di Perkebunan
+      milik Tamashii. Setibanya disana, mereka bertemu dengan kakaknya.
   mainSpeaker: Tamashii
   promptAfterDialogue: 3Dialogue

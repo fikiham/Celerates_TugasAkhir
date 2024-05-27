@@ -13,10 +13,6 @@ MonoBehaviour:
   m_Name: Chapter1_6Session_Part 1
   m_EditorClassIdentifier: 
   TheDialogues:
-  - name: 
-    sentence: "Saat mereka selesai berkebun, mereka beristirahat bersama, minum dan
-      makan, kemudian Charibert secara tidak sengaja menemukan pedang yang cukup
-      standar.\r"
   - name: Charibert
     sentence: Pedang yang indah, milik siapa itu?
   - name: Kak Ren

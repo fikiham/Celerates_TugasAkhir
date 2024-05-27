@@ -151,7 +151,7 @@ public class Player_Action : MonoBehaviour
         if (hit.transform != null)
         {
             interactable = hit.transform.GetComponent<Interactable>();
-            PlayerUI.Instance.promptText.text = "Press F to " + interactable.promptMessage;
+            PlayerUI.Instance.promptText.text = "Tekan F untuk " + interactable.promptMessage;
             return true;
         }
         else

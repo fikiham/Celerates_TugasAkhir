@@ -11,7 +11,9 @@ public class VillageController : MonoBehaviour
 
 
     public Transform KakRenTransform;
+    public Transform TanamanCabaiTransform;
     public Transform TengahKota;
+    public Transform SumberBandit;
 
 
     private void Awake()
@@ -23,7 +25,7 @@ public class VillageController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        player.position = playerSpawnSpot.position;
+        //player.position = playerSpawnSpot.position;
     }
 
     // Update is called once per frame
