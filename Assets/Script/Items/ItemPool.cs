@@ -53,7 +53,7 @@ public class ItemPool : MonoBehaviour
         ItemDropInteractable interactable = droppedItem.GetComponent<ItemDropInteractable>();
         if (interactable != null)
         {
-            interactable.StartCoroutine(interactable.StopGravity(rb, 0.8f));
+            interactable.StartCoroutine(interactable.StopGravity(rb, 0.5f));
         }
 
         droppedItem.GetComponent<ItemDropInteractable>().item = GetItem(itemName, count, level);
