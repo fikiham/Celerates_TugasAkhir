@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2733230255810905508}
   - component: {fileID: 9206981023511161924}
   - component: {fileID: 4863667371651220497}
-  - component: {fileID: 4030357009069167577}
   m_Layer: 8
   m_Name: Cabai 1
   m_TagString: Untagged
@@ -28,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2120680195082938319}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -12.93, y: 3.1, z: -0.08456559}
   m_LocalScale: {x: 2.0644, y: 1.9697, z: 1}
   m_ConstrainProportionsScale: 0
@@ -150,17 +149,3 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 277bc0ab817f1064cb3bb24de4e43de0, type: 3}
   - {fileID: 21300000, guid: 7df15aef90504274999b604d71cb93a8, type: 3}
   - {fileID: 21300000, guid: 537fcc645b177794b8c01828c540b066, type: 3}
---- !u!114 &4030357009069167577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2120680195082938319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4feacc05248dc73439894c2ff8dc30fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useEvents: 0
-  promptMessage: ini cabai

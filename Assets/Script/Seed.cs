@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Seed : MonoBehaviour
@@ -12,6 +13,7 @@ public class Seed : MonoBehaviour
     private float growthTime = 10f; // Waktu pertumbuhan dalam detik
 
     private SpriteRenderer spriteRenderer;
+    // public GameObject hasilPanenPrefab; // Prefab hasil panen (buah cabai)
 
     private void Start()
     {
@@ -23,36 +25,31 @@ public class Seed : MonoBehaviour
     {
         while (isGrowing)
         {
-            yield return new WaitForSeconds(growthTime); // Tunggu growthTime detik
+            yield return new WaitForSeconds(growthTime); // Tunggu 10 detik
 
             if (growthCount < maxGrowthCount)
             {
+               
                 growthCount++;
 
                 // Ubah sprite setiap kali biji tumbuh
                 if (growthCount < growthSprites.Length)
                 {
                     spriteRenderer.sprite = growthSprites[growthCount];
-                }
-
-                // Pindahkan objek ke posisi tertentu pada growthCount
-                if (growthCount == 1 )
-                {
-                    Vector3 newPosition = transform.position;
-                    newPosition.y += 0.83f;
-                    transform.position = newPosition;
+                   
                 }
 
                 if (growthCount == maxGrowthCount)
                 {
                     isReadyToHarvest = true;
+                  
                     isGrowing = false; // Berhenti pertumbuhan setelah biji siap panen
                 }
             }
         }
     }
 
-    public void Harvest()
+   public void Harvest()
     {
         if (isReadyToHarvest)
         {
@@ -65,16 +62,6 @@ public class Seed : MonoBehaviour
             spriteRenderer.sprite = growthSprites[growthCount];
             isReadyToHarvest = false;
             siram = true;
-
-            // Reset posisi y
-            Vector3 newPosition = transform.position;
-            newPosition.y -= 0.83f * (maxGrowthCount - 1); // Reset posisi sesuai dengan growthCount maksimum
-            transform.position = newPosition;
-
-
-            // contoh
-            Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Daging Sapi"));
-
         }
         else if (siram)
         {
@@ -86,17 +73,24 @@ public class Seed : MonoBehaviour
         }
     }
 
-    public void Siram()
+
+
+    private IEnumerator StopGravity(Rigidbody2D rb, float delay)
     {
-        if (siram == true)
-        {
+        yield return new WaitForSeconds(delay);
+        rb.gravityScale = 0;
+        rb.velocity = Vector2.zero;
+       
+    }
+
+    public void Siram(){
+        if(siram == true){
             isGrowing = true; // Mulai pertumbuhan kembali
             StartCoroutine(Grow());
             siram = false;
-        }
-        else
-        {
+        }else {
             Debug.Log("bukan waktunya siram bro ");
         }
+
     }
 }
