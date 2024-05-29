@@ -160,9 +160,12 @@ Transform:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of e0f6f32 (bruh)
+=======
+>>>>>>> parent of 776c776 (cek)
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
@@ -245,9 +248,12 @@ GameObject:
 =======
   - component: {fileID: 83575572}
   - component: {fileID: 83575573}
+<<<<<<< HEAD
 =======
   - component: {fileID: 83575572}
   - component: {fileID: 83575573}
+=======
+>>>>>>> parent of 776c776 (cek)
   m_Layer: 0
   m_Name: Pohon (4)
   m_TagString: Untagged
@@ -271,6 +277,155 @@ Transform:
   m_Father: {fileID: 1645329843}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 
+<<<<<<< HEAD
+=======
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83575571}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: e194eac98e3797e458f920bde6738d61, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 906908347}
+    m_Modifications:
+    - target: {fileID: 1926727346964493745, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.1299996
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926727346964493745, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.0800004
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926727346964493745, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.08456559
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926727346964493745, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926727346964493745, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926727346964493745, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926727346964493745, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926727346964493745, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926727346964493745, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926727346964493745, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2120680195082938319, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
+      propertyPath: m_Name
+      value: Cabai (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
+--- !u!4 &89034672 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1926727346964493745, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
+  m_PrefabInstance: {fileID: 89034671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &90227671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 90227672}
+  - component: {fileID: 90227673}
+  m_Layer: 0
+  m_Name: Pohon (17)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &90227672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90227671}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 21.49, y: -26.45, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1645329843}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &90227673
+>>>>>>> parent of 776c776 (cek)
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -768,6 +923,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
   m_Offset: {x: 0, y: 0}
@@ -775,6 +931,9 @@ BoxCollider2D:
 =======
   m_Offset: {x: 0, y: 0}
 >>>>>>> parent of e0f6f32 (bruh)
+=======
+  m_Offset: {x: 0, y: 0}
+>>>>>>> parent of 776c776 (cek)
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -787,6 +946,7 @@ BoxCollider2D:
   serializedVersion: 2
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
   m_Size: {x: 1, y: 1}
@@ -794,6 +954,9 @@ BoxCollider2D:
 =======
   m_Size: {x: 1, y: 1}
 >>>>>>> parent of e0f6f32 (bruh)
+=======
+  m_Size: {x: 1, y: 1}
+>>>>>>> parent of 776c776 (cek)
   m_EdgeRadius: 0
 --- !u!212 &112118408
 SpriteRenderer:
@@ -1511,6 +1674,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Offset: {x: -0.011176288, y: -0.18999717}
 =======
   m_Offset: {x: 0, y: 0}
@@ -1518,6 +1682,9 @@ BoxCollider2D:
 =======
   m_Offset: {x: 0, y: 0}
 >>>>>>> parent of e0f6f32 (bruh)
+=======
+  m_Offset: {x: 0, y: 0}
+>>>>>>> parent of 776c776 (cek)
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1530,6 +1697,7 @@ BoxCollider2D:
   serializedVersion: 2
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Size: {x: 0.4784391, y: 0.62000567}
 =======
   m_Size: {x: 1, y: 1}
@@ -1537,6 +1705,9 @@ BoxCollider2D:
 =======
   m_Size: {x: 1, y: 1}
 >>>>>>> parent of e0f6f32 (bruh)
+=======
+  m_Size: {x: 1, y: 1}
+>>>>>>> parent of 776c776 (cek)
   m_EdgeRadius: 0
 --- !u!212 &317054965
 SpriteRenderer:
@@ -2182,6 +2353,7 @@ BoxCollider2D:
   serializedVersion: 2
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Size: {x: 0.4784391, y: 0.62000567}
 =======
   m_Size: {x: 1, y: 1}
@@ -2189,6 +2361,9 @@ BoxCollider2D:
 =======
   m_Size: {x: 1, y: 1}
 >>>>>>> parent of e0f6f32 (bruh)
+=======
+  m_Size: {x: 1, y: 1}
+>>>>>>> parent of 776c776 (cek)
   m_EdgeRadius: 0
 --- !u!212 &861481999
 SpriteRenderer:
@@ -3006,6 +3181,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Offset: {x: -0.011176288, y: -0.18999717}
 =======
   m_Offset: {x: 0, y: 0}
@@ -3013,6 +3189,9 @@ BoxCollider2D:
 =======
   m_Offset: {x: 0, y: 0}
 >>>>>>> parent of e0f6f32 (bruh)
+=======
+  m_Offset: {x: 0, y: 0}
+>>>>>>> parent of 776c776 (cek)
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3025,6 +3204,7 @@ BoxCollider2D:
   serializedVersion: 2
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Size: {x: 0.4784391, y: 0.62000567}
 =======
   m_Size: {x: 1, y: 1}
@@ -3032,6 +3212,9 @@ BoxCollider2D:
 =======
   m_Size: {x: 1, y: 1}
 >>>>>>> parent of e0f6f32 (bruh)
+=======
+  m_Size: {x: 1, y: 1}
+>>>>>>> parent of 776c776 (cek)
   m_EdgeRadius: 0
 --- !u!212 &1088554070
 SpriteRenderer:
@@ -3085,6 +3268,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 --- !u!1 &1108108459
@@ -3204,6 +3388,8 @@ RectTransform:
 >>>>>>> parent of 776c776 (cek)
 =======
 >>>>>>> parent of e0f6f32 (bruh)
+=======
+>>>>>>> parent of 776c776 (cek)
 --- !u!1 &1128868229
 GameObject:
   m_ObjectHideFlags: 0
@@ -5630,6 +5816,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
   m_Offset: {x: 0, y: 0}
@@ -5637,6 +5824,9 @@ BoxCollider2D:
 =======
   m_Offset: {x: 0, y: 0}
 >>>>>>> parent of e0f6f32 (bruh)
+=======
+  m_Offset: {x: 0, y: 0}
+>>>>>>> parent of 776c776 (cek)
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5649,6 +5839,7 @@ BoxCollider2D:
   serializedVersion: 2
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
   m_Size: {x: 1, y: 1}
@@ -5656,6 +5847,9 @@ BoxCollider2D:
 =======
   m_Size: {x: 1, y: 1}
 >>>>>>> parent of e0f6f32 (bruh)
+=======
+  m_Size: {x: 1, y: 1}
+>>>>>>> parent of 776c776 (cek)
   m_EdgeRadius: 0
 --- !u!212 &1794519945
 SpriteRenderer:
@@ -19128,6 +19322,93 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
 
+<<<<<<< HEAD
+=======
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004120803}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: e194eac98e3797e458f920bde6738d61, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &2032046225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2032046226}
+  - component: {fileID: 2032046227}
+  m_Layer: 0
+  m_Name: Pohon (8)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2032046226
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2032046225}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 34.07, y: -13.49, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1645329843}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &2032046227
+>>>>>>> parent of 776c776 (cek)
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
