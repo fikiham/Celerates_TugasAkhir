@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class Player_Inventory : MonoBehaviour // Handle Player Inventory with InventoryUI as UI Helper
 {

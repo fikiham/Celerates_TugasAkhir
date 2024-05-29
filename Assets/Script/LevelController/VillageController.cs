@@ -25,17 +25,17 @@ public class VillageController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        //player.position = playerSpawnSpot.position;
+        player.position = playerSpawnSpot.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameEventSystem.Instance.DoneDialogue_1 && !GameEventSystem.Instance.DoneDialogue_2)
+        if (GameEventSystem.Instance.DoneDialogue_3 && !GameEventSystem.Instance.DoneDialogue_4)
         {
             Player_Direction.Instance.Target = KakRenTransform;
         }
-        if (!GameEventSystem.Instance.DoneDialogue_3 && GameEventSystem.Instance.DoneDialogue_2)
+        if (!GameEventSystem.Instance.DoneDialogue_6 && GameEventSystem.Instance.DoneDialogue_5)
         {
             Player_Direction.Instance.Target = TengahKota;
         }
