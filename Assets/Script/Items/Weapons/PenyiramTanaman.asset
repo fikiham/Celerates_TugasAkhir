@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Penyiram Tanaman
   type: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 420485eb36712fd4097517e47f203945, type: 3}
   itemDescription: 'Ayolah, masa kalian tidak tahu item ini?
 
     Special skill:
@@ -23,7 +23,9 @@ MonoBehaviour:
   Damage: 1
   AreaOfEffect: 1
   SpecialAttackCD: 0
+  SpecialAttackStamina: 0
   UpgradeCost: 0
+  RangedWeapon_ProjectilePrefab: {fileID: 0}
   isStackable: 0
   stackCount: 1
   BuyValue: 0

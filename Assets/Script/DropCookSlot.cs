@@ -43,9 +43,6 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
                 RemoveFromPreviousSlot(draggedItem);
                 SetItemToSlot(draggedItem);
                 CreateCook();
-
-
-
             }
             else
             {
@@ -74,7 +71,6 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
         item = draggedItem;
     }
 
-
     public void CreateCook()
     {
         bool recipeFound = false;
@@ -84,10 +80,8 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
 
         Debug.Log($"Item1: {item1?.itemName}, Item2: {item2?.itemName}");
 
-
-        if(cookUI.slotCook1.item != null && cookUI.slotCook2.item == null)
+        foreach (var recipe in cookUI.recipes)
         {
-
             Debug.Log($"Checking recipe for result: {recipe.result.itemName}");
 
             if (recipe.ingredients.Count == 1)
@@ -96,7 +90,7 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
                 {
                     recipeFound = true;
                     DisplayCookResult(recipe);
-                    break;
+                    break; // Exit the loop once a matching recipe is found
                 }
             }
             else if (recipe.ingredients.Count == 2)
@@ -107,7 +101,7 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
                 {
                     recipeFound = true;
                     DisplayCookResult(recipe);
-                    break;
+                    break; // Exit the loop once a matching recipe is found
                 }
             }
         }
@@ -151,7 +145,6 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
             }
         });
     }
-
 
     public void CancelCook()
     {

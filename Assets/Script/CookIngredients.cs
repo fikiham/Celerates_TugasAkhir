@@ -7,59 +7,39 @@ public class CookIngredients : MonoBehaviour
 {
     [SerializeField] CookUI cookUI; // Referensi ke skrip CookUI
     [SerializeField] Transform parentTransform; // Parent untuk menempatkan hasil resep
-    [SerializeField] Color backgroundColor = new Color(0.85f, 0.85f, 0.85f); // Warna latar belakang
     [SerializeField] GameObject hasilCook; // Referensi ke tampilan hasil masakan
     [SerializeField] DropCookSlot slotCook1; // Referensi ke DropCookSlot untuk SlotCook1
     [SerializeField] DropCookSlot slotCook2; // Referensi ke DropCookSlot untuk SlotCook2
     [SerializeField] DropCookSlot slotCook3; // Referensi ke DropCookSlot untuk SlotCook3
+
     [SerializeField] GameObject errorPopup; // Referensi ke tampilan pesan error
-    [SerializeField] Sprite backgroundImage; // Referensi ke background image
 
-
-    public Sprite backgroundImage; // Tetapkan ini di inspector
-
-    
+    // Background
+    [SerializeField] Color backgroundColor = new Color(0.85f, 0.85f, 0.85f); // Warna latar belakang
+    [SerializeField] Sprite backgroundImage; // Tetapkan ini di inspector
 
     void Start()
     {
         CekIngredients();
     }
 
-   public void CekIngredients()
+    public void CekIngredients()
     {
         Debug.Log("Fungsi CekIngredients dijalankan");
 
-        if (cookUI == null)
+        if (cookUI == null || parentTransform == null)
         {
-            Debug.LogError("CookUI tidak ditetapkan!");
+            Debug.LogError("CookUI atau parentTransform tidak ditetapkan!");
             return;
         }
-
-        if (parentTransform == null)
-        {
-            Debug.LogError("ParentTransform tidak ditetapkan!");
-            return;
-        }
-
-        if (backgroundImage == null)
-        {
-            Debug.LogError("Background Image tidak ditetapkan!");
-            return;
-        }
-
-        Debug.Log("Memulai proses pengecekan ingredients...");
 
         foreach (var recipe in cookUI.recipes)
         {
-            Debug.Log("Membuat wrapper untuk: " + recipe.result.itemName);
-
             GameObject wrapper = new GameObject("Wrapper_" + recipe.result.itemName);
             wrapper.transform.SetParent(parentTransform, false);
 
             RectTransform wrapperRectTransform = wrapper.AddComponent<RectTransform>();
-
-            wrapperRectTransform.sizeDelta = new Vector2(270, 270);
-
+            wrapperRectTransform.sizeDelta = new Vector2(120, 120);
 
             Image wrapperImage = wrapper.AddComponent<Image>();
             wrapperImage.color = backgroundColor;
@@ -77,26 +57,21 @@ public class CookIngredients : MonoBehaviour
                 // button cek ingredient
                 if (slotCook1.item != null || slotCook2.item != null || slotCook3.item != null)
                 {
-
                     Debug.Log("resep tidak bisa di lihat");
-
                     ShowErrorPopupForSeconds(2.0f);
                 }
                 else
                 {
-
-                    DisplayRecipeInHasilCook(recipe, 0.5f);
-
+                    DisplayRecipeInHasilCook(recipe, 0.8f);
                 }
             });
 
             RectTransform rectTransform = resultItem.GetComponent<RectTransform>();
-            rectTransform.sizeDelta = new Vector2(220, 220);
+            rectTransform.sizeDelta = new Vector2(240, 240);
             rectTransform.localPosition = Vector3.zero;
             rectTransform.localScale = Vector3.one;
         }
     }
-
 
     public void DisplayRecipeInHasilCook(CookUI.CookRecipe recipe, float opacity)
     {
@@ -127,7 +102,7 @@ public class CookIngredients : MonoBehaviour
         imageComponent.color = imageColor;
 
         RectTransform rectTransform = resultItem.GetComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(220, 220);
+        rectTransform.sizeDelta = new Vector2(240, 240);
         rectTransform.localPosition = Vector3.zero;
         rectTransform.localScale = Vector3.one;
 
@@ -166,98 +141,101 @@ public class CookIngredients : MonoBehaviour
         }
     }
 
-    void CekIngredient1(CookUI.CookRecipe recipe, float opacity)
+   void CekIngredient1(CookUI.CookRecipe recipe, float opacity)
+{
+    if (recipe.ingredients.Count > 0 && recipe.ingredients[0] != null)
     {
-        if (recipe.ingredients[0] != null)
+        GameObject resultItemIngredients1 = new GameObject(recipe.ingredients[0].itemName);
+        resultItemIngredients1.transform.SetParent(slotCook1.transform, false);
+
+        Image imageComponentIngredients1 = resultItemIngredients1.AddComponent<Image>();
+        imageComponentIngredients1.sprite = recipe.ingredients[0].sprite;
+
+        Color imageColorIngredients1 = imageComponentIngredients1.color;
+        imageColorIngredients1.a = opacity;
+        imageComponentIngredients1.color = imageColorIngredients1;
+
+        RectTransform rectTransformIngredients1 = resultItemIngredients1.GetComponent<RectTransform>();
+        rectTransformIngredients1.sizeDelta = new Vector2(240, 240);
+        rectTransformIngredients1.localPosition = Vector3.zero;
+        rectTransformIngredients1.localScale = Vector3.one;
+    }
+    else
+    {
+        Debug.Log("Resep ke-1 Kosong");
+    }
+}
+
+void CekIngredient2(CookUI.CookRecipe recipe, float opacity)
+{
+    if (recipe.ingredients.Count > 1 && recipe.ingredients[1] != null)
+    {
+        GameObject resultItemIngredients2 = new GameObject(recipe.ingredients[1].itemName);
+        resultItemIngredients2.transform.SetParent(slotCook2.transform, false);
+
+        Image imageComponentIngredients2 = resultItemIngredients2.AddComponent<Image>();
+        imageComponentIngredients2.sprite = recipe.ingredients[1].sprite;
+
+        Color imageColorIngredients2 = imageComponentIngredients2.color;
+        imageColorIngredients2.a = opacity;
+        imageComponentIngredients2.color = imageColorIngredients2;
+
+        RectTransform rectTransformIngredients2 = resultItemIngredients2.GetComponent<RectTransform>();
+        rectTransformIngredients2.sizeDelta = new Vector2(240, 240);
+        rectTransformIngredients2.localPosition = Vector3.zero;
+        rectTransformIngredients2.localScale = Vector3.one;
+    }
+    else
+    {
+        Debug.Log("Resep ke-2 kosong");
+    }
+}
+
+void CekIngredient3(CookUI.CookRecipe recipe, float opacity)
+{
+    if (recipe.ingredients.Count > 2 && recipe.ingredients[2] != null)
+    {
+        GameObject resultItemIngredients3 = new GameObject(recipe.ingredients[2].itemName);
+        resultItemIngredients3.transform.SetParent(slotCook3.transform, false);
+
+        Image imageComponentIngredients3 = resultItemIngredients3.AddComponent<Image>();
+        imageComponentIngredients3.sprite = recipe.ingredients[2].sprite;
+
+        Color imageColorIngredients3 = imageComponentIngredients3.color;
+        imageColorIngredients3.a = opacity;
+        imageComponentIngredients3.color = imageColorIngredients3;
+
+        RectTransform rectTransformIngredients3 = resultItemIngredients3.GetComponent<RectTransform>();
+        rectTransformIngredients3.sizeDelta = new Vector2(240, 240);
+        rectTransformIngredients3.localPosition = Vector3.zero;
+        rectTransformIngredients3.localScale = Vector3.one;
+    }
+    else
+    {
+        Debug.Log("Resep ke-3 kosong");
+    }
+}
+
+
+    void ShowErrorPopupForSeconds(float seconds)
+    {
+        if (errorPopup != null)
         {
-            GameObject resultItemIngredients1 = new GameObject(recipe.ingredients[0].itemName);
-            resultItemIngredients1.transform.SetParent(slotCook1.transform, false);
-
-            Image imageComponentIngredients1 = resultItemIngredients1.AddComponent<Image>();
-            imageComponentIngredients1.sprite = recipe.ingredients[0].sprite;
-
-            Color imageColorIngredients1 = imageComponentIngredients1.color;
-            imageColorIngredients1.a = opacity;
-            imageComponentIngredients1.color = imageColorIngredients1;
-
-            RectTransform rectTransformIngredients1 = resultItemIngredients1.GetComponent<RectTransform>();
-            rectTransformIngredients1.sizeDelta = new Vector2(100, 100);
-            rectTransformIngredients1.localPosition = Vector3.zero;
-            rectTransformIngredients1.localScale = Vector3.one;
+            errorPopup.SetActive(true);
+            StartCoroutine(HideErrorPopupAfterSeconds(seconds));
         }
         else
         {
-            Debug.Log("Resep ke-1 Kosong");
+            Debug.LogError("Error popup tidak ditetapkan!");
         }
     }
 
-    void CekIngredient2(CookUI.CookRecipe recipe, float opacity)
+    IEnumerator HideErrorPopupAfterSeconds(float seconds)
     {
-        if (recipe.ingredients[1] != null)
+        yield return new WaitForSeconds(seconds);
+        if (errorPopup != null)
         {
-            GameObject resultItemIngredients2 = new GameObject(recipe.ingredients[1].itemName);
-            resultItemIngredients2.transform.SetParent(slotCook2.transform, false);
-
-            Image imageComponentIngredients2 = resultItemIngredients2.AddComponent<Image>();
-            imageComponentIngredients2.sprite = recipe.ingredients[1].sprite;
-
-            Color imageColorIngredients2 = imageComponentIngredients2.color;
-            imageColorIngredients2.a = opacity;
-            imageComponentIngredients2.color = imageColorIngredients2;
-
-            RectTransform rectTransformIngredients2 = resultItemIngredients2.GetComponent<RectTransform>();
-            rectTransformIngredients2.sizeDelta = new Vector2(100, 100);
-            rectTransformIngredients2.localPosition = Vector3.zero;
-            rectTransformIngredients2.localScale = Vector3.one;
+            errorPopup.SetActive(false);
         }
-        else
-        {
-            Debug.Log("Resep ke-2 kosong");
-        }
-    }
-
-    void CekIngredient3(CookUI.CookRecipe recipe, float opacity)
-    {
-        if (recipe.ingredients[2] != null)
-        {
-            GameObject resultItemIngredients3 = new GameObject(recipe.ingredients[2].itemName);
-            resultItemIngredients3.transform.SetParent(slotCook3.transform, false);
-
-            Image imageComponentIngredients3 = resultItemIngredients3.AddComponent<Image>();
-            imageComponentIngredients3.sprite = recipe.ingredients[2].sprite;
-
-            Color imageColorIngredients3 = imageComponentIngredients3.color;
-            imageColorIngredients3.a = opacity;
-            imageComponentIngredients3.color = imageColorIngredients3;
-
-            RectTransform rectTransformIngredients3 = resultItemIngredients3.GetComponent<RectTransform>();
-            rectTransformIngredients3.sizeDelta = new Vector2(100, 100);
-            rectTransformIngredients3.localPosition = Vector3.zero;
-            rectTransformIngredients3.localScale = Vector3.one;
-        }
-        else
-        {
-            Debug.Log("Resep ke-3 kosong");
-        }
-    }
-
-    // Method untuk menampilkan popup kesalahan selama beberapa detik
-    public void ShowErrorPopupForSeconds(float duration)
-    {
-        // Aktifkan popup
-        errorPopup.SetActive(true);
-
-        // Mulai coroutine untuk menonaktifkan popup setelah durasi tertentu
-        StartCoroutine(HidePopupAfterSeconds(duration));
-    }
-
-    // Coroutine untuk menonaktifkan popup setelah durasi tertentu
-    private IEnumerator HidePopupAfterSeconds(float duration)
-    {
-        // Tunggu durasi yang ditentukan
-        yield return new WaitForSeconds(duration);
-
-        // Nonaktifkan popup setelah durasi tertentu
-        errorPopup.SetActive(false);
     }
 }
