@@ -43,7 +43,9 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
                 RemoveFromPreviousSlot(draggedItem);
                 SetItemToSlot(draggedItem);
                 CreateCook();
-                Debug.Log("Item dipindahkan");
+
+
+
             }
             else
             {
@@ -72,151 +74,86 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
         item = draggedItem;
     }
 
-    private void CreateCook()
+
+    public void CreateCook()
     {
         bool recipeFound = false;
 
+        DragCook item1 = cookUI.slotCook1.item != null ? cookUI.slotCook1.item.GetComponent<DragCook>() : null;
+        DragCook item2 = cookUI.slotCook2.item != null ? cookUI.slotCook2.item.GetComponent<DragCook>() : null;
+
+        Debug.Log($"Item1: {item1?.itemName}, Item2: {item2?.itemName}");
+
+
         if(cookUI.slotCook1.item != null && cookUI.slotCook2.item == null)
         {
-            Debug.Log(cookUI.slotCook1.item);
-            DragCook item1 = cookUI.slotCook1.item.GetComponent<DragCook>();
-           
 
-            foreach (var recipe in cookUI.recipes)
+            Debug.Log($"Checking recipe for result: {recipe.result.itemName}");
+
+            if (recipe.ingredients.Count == 1)
             {
-                if (recipe.ingredients.Count >= 2)
+                if (item1 != null && item1.itemName == recipe.ingredients[0].itemName && item2 == null)
                 {
-                    if ((item1.itemName == recipe.ingredients[0].itemName))
-                    {
-                        recipeFound = true;
-
-                        // Implement logic to create the dish here
-                        string resultDetails = $"Result: {recipe.result.itemName}";
-                        Debug.Log("memunculkan " + resultDetails);
-
-                        // Buat GameObject baru untuk hasil masakan
-                        GameObject resultItem = new GameObject(recipe.result.itemName);
-
-                        // Tambahkan komponen Image dan atur sprite-nya
-                        Image imageComponent = resultItem.AddComponent<Image>();
-                        imageComponent.sprite = recipe.result.sprite;
-
-                        // Tetapkan HasilCook sebagai parent GameObject baru
-                        resultItem.transform.SetParent(hasilCook.transform, false); // false untuk menjaga posisi dan rotasi
-
-                        // Setelah ditetapkan sebagai anak, akses RectTransform dari GameObject baru
-                        RectTransform resultRectTransform = resultItem.GetComponent<RectTransform>();
-
-                        // Sesuaikan ukuran, posisi, dan rotasi sesuai kebutuhan
-                        resultRectTransform.sizeDelta = new Vector2(100, 100);
-                        resultRectTransform.anchoredPosition = Vector3.zero;
-                        resultRectTransform.rotation = Quaternion.identity;
-
-                        // Tambahkan listener untuk tombol hasilCook
-                        hasilCookButton.onClick.RemoveAllListeners();
-                        hasilCookButton.onClick.AddListener(() =>
-                        {
-                            // Pastikan item yang dihasilkan tidak null sebelum menambahkannya ke inventori
-                            Item resultItemInstance = ItemPool.Instance.GetItem(recipe.result.itemName);
-
-                            if (resultItemInstance != null)
-                            {
-                                Player_Inventory.Instance.AddItem(resultItemInstance);
-                                // Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Pedang Ren"));
-
-                                // Hapus GameObject hasil masakan dari tampilan
-                                Destroy(resultItem);
-
-                                // Hapus item dari slot masak
-                                RemoveItemsFromSlots();
-                            }
-                            else
-                            {
-                                Debug.LogError("Item hasil masakan tidak ditemukan di ItemPool!");
-                            }
-                        });
-
-                        // Jika resep ditemukan, keluar dari loop
-                        break;
-                    }
+                    recipeFound = true;
+                    DisplayCookResult(recipe);
+                    break;
                 }
             }
-        } else if (cookUI.slotCook1.item != null && cookUI.slotCook2.item != null)
-        {
-            Debug.Log(cookUI.slotCook1.item);
-            DragCook item1 = cookUI.slotCook1.item.GetComponent<DragCook>();
-            DragCook item2 = cookUI.slotCook2.item.GetComponent<DragCook>();
-
-            foreach (var recipe in cookUI.recipes)
+            else if (recipe.ingredients.Count == 2)
             {
-                if (recipe.ingredients.Count >= 2)
+                if (item1 != null && item2 != null &&
+                    ((item1.itemName == recipe.ingredients[0].itemName && item2.itemName == recipe.ingredients[1].itemName) ||
+                     (item2.itemName == recipe.ingredients[0].itemName && item1.itemName == recipe.ingredients[1].itemName)))
                 {
-                    if ((item1.itemName == recipe.ingredients[0].itemName && item2.itemName == recipe.ingredients[1].itemName) ||
-                        (item2.itemName == recipe.ingredients[0].itemName && item1.itemName == recipe.ingredients[1].itemName))
-                    {
-                        recipeFound = true;
-
-                        // Implement logic to create the dish here
-                        string resultDetails = $"Result: {recipe.result.itemName}";
-                        Debug.Log("memunculkan " + resultDetails);
-
-                        // Buat GameObject baru untuk hasil masakan
-                        GameObject resultItem = new GameObject(recipe.result.itemName);
-
-                        // Tambahkan komponen Image dan atur sprite-nya
-                        Image imageComponent = resultItem.AddComponent<Image>();
-                        imageComponent.sprite = recipe.result.sprite;
-
-                        // Tetapkan HasilCook sebagai parent GameObject baru
-                        resultItem.transform.SetParent(hasilCook.transform, false); // false untuk menjaga posisi dan rotasi
-
-                        // Setelah ditetapkan sebagai anak, akses RectTransform dari GameObject baru
-                        RectTransform resultRectTransform = resultItem.GetComponent<RectTransform>();
-
-                        // Sesuaikan ukuran, posisi, dan rotasi sesuai kebutuhan
-                        resultRectTransform.sizeDelta = new Vector2(100, 100);
-                        resultRectTransform.anchoredPosition = Vector3.zero;
-                        resultRectTransform.rotation = Quaternion.identity;
-
-                        // Tambahkan listener untuk tombol hasilCook
-                        hasilCookButton.onClick.RemoveAllListeners();
-                        hasilCookButton.onClick.AddListener(() =>
-                        {
-                            // Pastikan item yang dihasilkan tidak null sebelum menambahkannya ke inventori
-                            Item resultItemInstance = ItemPool.Instance.GetItem(recipe.result.itemName);
-
-                            if (resultItemInstance != null)
-                            {
-                                Player_Inventory.Instance.AddItem(resultItemInstance);
-                                // Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Pedang Ren"));
-
-                                // Hapus GameObject hasil masakan dari tampilan
-                                Destroy(resultItem);
-
-                                // Hapus item dari slot masak
-                                RemoveItemsFromSlots();
-                            }
-                            else
-                            {
-                                Debug.LogError("Item hasil masakan tidak ditemukan di ItemPool!");
-                            }
-                        });
-
-                        // Jika resep ditemukan, keluar dari loop
-                        break;
-                    }
+                    recipeFound = true;
+                    DisplayCookResult(recipe);
+                    break;
                 }
             }
         }
 
-        // Jika tidak ada resep yang cocok, panggil cancelCook
         if (!recipeFound)
         {
-            cancelCook();
+            Debug.Log("No matching recipe found. Cancel cooking.");
+            CancelCook();
         }
     }
 
-    public void cancelCook()
+    public void DisplayCookResult(CookUI.CookRecipe recipe)
+    {
+        CancelCook();
+        string resultDetails = $"Result: {recipe.result.itemName}";
+        Debug.Log("Displaying result: " + resultDetails);
+
+        GameObject resultItem = new GameObject(recipe.result.itemName);
+        Image imageComponent = resultItem.AddComponent<Image>();
+        imageComponent.sprite = recipe.result.sprite;
+        resultItem.transform.SetParent(hasilCook.transform, false);
+        RectTransform resultRectTransform = resultItem.GetComponent<RectTransform>();
+        resultRectTransform.sizeDelta = new Vector2(270, 270);
+        resultRectTransform.anchoredPosition = Vector3.zero;
+        resultRectTransform.rotation = Quaternion.identity;
+
+        hasilCookButton.onClick.RemoveAllListeners();
+        hasilCookButton.onClick.AddListener(() =>
+        {
+            Item resultItemInstance = ItemPool.Instance.GetItem(recipe.result.itemName);
+
+            if (resultItemInstance != null)
+            {
+                Player_Inventory.Instance.AddItem(resultItemInstance);
+                Destroy(resultItem);
+                RemoveItemsFromSlots();
+            }
+            else
+            {
+                Debug.LogError("Item hasil masakan tidak ditemukan di ItemPool!");
+            }
+        });
+    }
+
+
+    public void CancelCook()
     {
         if (hasilCook.transform.childCount > 0)
         {

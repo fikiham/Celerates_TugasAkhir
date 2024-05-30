@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class CookInventory : MonoBehaviour, IDropHandler
 {
+     [SerializeField] DropCookSlot dropCookSlot;
     public void OnDrop(PointerEventData eventData)
     {
         // Mendapatkan DragCook dari event data
@@ -36,8 +37,11 @@ public class CookInventory : MonoBehaviour, IDropHandler
                 //     previousSlot.hasilCook.GetComponent<Button>().onClick.RemoveAllListeners();
                 // }
 
-                // Batalkan logika pemunculan daging pedas
-                previousSlot.cancelCook();
+                // cekk 
+                dropCookSlot.CancelCook();
+                dropCookSlot.CreateCook();
+
+                
 
                 return;
             }

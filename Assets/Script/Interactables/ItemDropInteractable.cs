@@ -6,7 +6,7 @@ public class ItemDropInteractable : Interactable
 {
     public Item item;
     private Rigidbody2D rb;
-    public float gravityDuration = 1f; // Durasi gravitasi setelah item jatuh
+    public float gravityDuration = 2f; // Durasi gravitasi setelah item jatuh
 
     private void Start()
     {
