@@ -15,30 +15,51 @@ public class CookIngredients : MonoBehaviour
 
     [SerializeField] GameObject errorPopup; // Referensi ke tampilan pesan error
 
+    public Sprite backgroundImage; // Tetapkan ini di inspector
+
     
     void Start()
     {
         CekIngredients();
     }
 
-    public void CekIngredients()
+   public void CekIngredients()
     {
         Debug.Log("Fungsi CekIngredients dijalankan");
 
-        if (cookUI == null || parentTransform == null)
+        if (cookUI == null)
         {
-            Debug.LogError("CookUI atau parentTransform tidak ditetapkan!");
+            Debug.LogError("CookUI tidak ditetapkan!");
             return;
         }
 
+        if (parentTransform == null)
+        {
+            Debug.LogError("ParentTransform tidak ditetapkan!");
+            return;
+        }
+
+        if (backgroundImage == null)
+        {
+            Debug.LogError("Background Image tidak ditetapkan!");
+            return;
+        }
+
+        Debug.Log("Memulai proses pengecekan ingredients...");
+
         foreach (var recipe in cookUI.recipes)
         {
+            Debug.Log("Membuat wrapper untuk: " + recipe.result.itemName);
+
             GameObject wrapper = new GameObject("Wrapper_" + recipe.result.itemName);
             wrapper.transform.SetParent(parentTransform, false);
-            wrapper.AddComponent<RectTransform>().sizeDelta = new Vector2(120, 120);
+
+            RectTransform wrapperRectTransform = wrapper.AddComponent<RectTransform>();
+            wrapperRectTransform.sizeDelta = new Vector2(270, 270);
 
             Image wrapperImage = wrapper.AddComponent<Image>();
             wrapperImage.color = backgroundColor;
+            wrapperImage.sprite = backgroundImage; // Set the background image sprite
 
             GameObject resultItem = new GameObject(recipe.result.itemName);
             resultItem.transform.SetParent(wrapper.transform, false);
@@ -50,20 +71,24 @@ public class CookIngredients : MonoBehaviour
             buttonComponent.onClick.AddListener(() =>
             {
                 // button cek ingredient
-                if(slotCook1.item != null || slotCook2.item != null || slotCook3.item != null){
+                if (slotCook1.item != null || slotCook2.item != null || slotCook3.item != null)
+                {
                     Debug.Log("resep tidak bisa di lihat");
                     ShowErrorPopupForSeconds(2.0f);
-                }else {
-                    DisplayRecipeInHasilCook(recipe, 0.8f);
+                }
+                else
+                {
+                    DisplayRecipeInHasilCook(recipe, 0.5f);
                 }
             });
 
             RectTransform rectTransform = resultItem.GetComponent<RectTransform>();
-            rectTransform.sizeDelta = new Vector2(100, 100);
+            rectTransform.sizeDelta = new Vector2(220, 220);
             rectTransform.localPosition = Vector3.zero;
             rectTransform.localScale = Vector3.one;
         }
     }
+
 
     public void DisplayRecipeInHasilCook(CookUI.CookRecipe recipe, float opacity)
     {
@@ -94,7 +119,7 @@ public class CookIngredients : MonoBehaviour
         imageComponent.color = imageColor;
 
         RectTransform rectTransform = resultItem.GetComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(100, 100);
+        rectTransform.sizeDelta = new Vector2(220, 220);
         rectTransform.localPosition = Vector3.zero;
         rectTransform.localScale = Vector3.one;
 
