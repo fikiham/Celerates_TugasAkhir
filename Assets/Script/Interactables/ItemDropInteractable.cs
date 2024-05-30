@@ -26,6 +26,8 @@ public class ItemDropInteractable : Interactable
         Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(item.itemName));
         Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Daging Sapi"));
         Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Kayu"));
+        Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Penyiram Tanaman"));
+        
         Destroy(gameObject);
     }
 
