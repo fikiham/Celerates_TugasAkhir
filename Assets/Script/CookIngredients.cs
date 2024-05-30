@@ -12,12 +12,14 @@ public class CookIngredients : MonoBehaviour
     [SerializeField] DropCookSlot slotCook1; // Referensi ke DropCookSlot untuk SlotCook1
     [SerializeField] DropCookSlot slotCook2; // Referensi ke DropCookSlot untuk SlotCook2
     [SerializeField] DropCookSlot slotCook3; // Referensi ke DropCookSlot untuk SlotCook3
-
     [SerializeField] GameObject errorPopup; // Referensi ke tampilan pesan error
+    [SerializeField] Sprite backgroundImage; // Referensi ke background image
+
 
     public Sprite backgroundImage; // Tetapkan ini di inspector
 
     
+
     void Start()
     {
         CekIngredients();
@@ -55,7 +57,9 @@ public class CookIngredients : MonoBehaviour
             wrapper.transform.SetParent(parentTransform, false);
 
             RectTransform wrapperRectTransform = wrapper.AddComponent<RectTransform>();
+
             wrapperRectTransform.sizeDelta = new Vector2(270, 270);
+
 
             Image wrapperImage = wrapper.AddComponent<Image>();
             wrapperImage.color = backgroundColor;
@@ -73,12 +77,16 @@ public class CookIngredients : MonoBehaviour
                 // button cek ingredient
                 if (slotCook1.item != null || slotCook2.item != null || slotCook3.item != null)
                 {
+
                     Debug.Log("resep tidak bisa di lihat");
+
                     ShowErrorPopupForSeconds(2.0f);
                 }
                 else
                 {
+
                     DisplayRecipeInHasilCook(recipe, 0.5f);
+
                 }
             });
 
@@ -123,24 +131,19 @@ public class CookIngredients : MonoBehaviour
         rectTransform.localPosition = Vector3.zero;
         rectTransform.localScale = Vector3.one;
 
-        // if(slotCook1.item != null){
-        //     Debug.Log("ada isi nya bro ga bisa cek ingredient");
-        // }else {
-        //     CekIngredient1(recipe, opacity);
-        //     CekIngredient2(recipe, opacity);
-        //     CekIngredient3(recipe, opacity);
-        // }
-
-            CekIngredient1(recipe, opacity);
-            CekIngredient2(recipe, opacity);
-            CekIngredient3(recipe, opacity);
+        CekIngredient1(recipe, opacity);
+        CekIngredient2(recipe, opacity);
+        CekIngredient3(recipe, opacity);
     }
 
     public void DestroyRecipeInHasilCook()
     {
-         if(slotCook1.item != null || slotCook2.item != null || slotCook3.item != null){
+        if (slotCook1.item != null || slotCook2.item != null || slotCook3.item != null)
+        {
             Debug.Log("Ada isi nya bro ga boleh di hapus ");
-        } else {
+        }
+        else
+        {
             foreach (Transform child in hasilCook.transform)
             {
                 Destroy(child.gameObject);
@@ -237,8 +240,6 @@ public class CookIngredients : MonoBehaviour
             Debug.Log("Resep ke-3 kosong");
         }
     }
-
-
 
     // Method untuk menampilkan popup kesalahan selama beberapa detik
     public void ShowErrorPopupForSeconds(float duration)

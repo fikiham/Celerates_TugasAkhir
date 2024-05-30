@@ -36,7 +36,9 @@ public class Seed : MonoBehaviour
                 }
 
                 // Pindahkan objek ke posisi tertentu pada growthCount
+
                 if (growthCount == 1 )
+
                 {
                     Vector3 newPosition = transform.position;
                     newPosition.y += 0.83f;
