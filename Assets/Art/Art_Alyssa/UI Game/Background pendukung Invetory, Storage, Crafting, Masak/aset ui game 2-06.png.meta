@@ -113,13 +113,13 @@ TextureImporter:
       name: aset ui game 2-06_0
       rect:
         serializedVersion: 2
-        x: 357
-        y: 2619
-        width: 4493
-        height: 1359
+        x: 369
+        y: 2629
+        width: 4472
+        height: 1338
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 171, y: 124, z: 134, w: 123}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -139,7 +139,7 @@ TextureImporter:
         width: 695
         height: 234
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -160,7 +160,7 @@ TextureImporter:
         width: 696
         height: 236
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -181,7 +181,7 @@ TextureImporter:
         width: 695
         height: 236
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -202,7 +202,7 @@ TextureImporter:
         width: 699
         height: 235
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -223,7 +223,7 @@ TextureImporter:
         width: 699
         height: 235
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -244,7 +244,7 @@ TextureImporter:
         width: 695
         height: 235
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -260,13 +260,13 @@ TextureImporter:
       name: aset ui game 2-06_7
       rect:
         serializedVersion: 2
-        x: 295
-        y: 119
-        width: 7418
-        height: 1852
+        x: 379
+        y: 170
+        width: 7306
+        height: 1763
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 203, y: 227, z: 217, w: 204}
       outline: []
       physicsShape: []
       tessellationDetail: 0

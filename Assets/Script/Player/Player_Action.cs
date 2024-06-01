@@ -188,7 +188,10 @@ public class Player_Action : MonoBehaviour
     {
         if (!AOE)
         {
-            ParticleFollow.Instance.StartPath(area);
+            //ParticleFollow.Instance.StartPath(area);
+            ParticleSystem.ShapeModule theShape = swordParticle.shape;
+            theShape.scale = new(area, 1, 1);
+            swordParticle.Play();
             Transform theTransform = normalAttackHitArea.transform;
             theTransform.name = damage.ToString();
             theTransform.localPosition = new(area / 2, theTransform.localPosition.y, theTransform.localPosition.z);

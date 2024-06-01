@@ -55,6 +55,16 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
 
     private void Update()
     {
+
+        // Close inventory with escape when opened
+        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(openInventoryInput)) && inventoryOpened)
+        {
+            PlayerUI.Instance.inventoryUI.SetActive(false);
+            GameController.Instance.ShowPersistentUI(true);
+            inventoryOpened = false;
+            GameController.Instance.gamePaused = false;
+        }
+
         if (GameController.Instance.enablePlayerInput)
         {
             // Open inventory on open inventory input (B)
@@ -70,15 +80,6 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
                     inventoryUI.SetDescription(itemList[0]);
                 else
                     inventoryUI.SetDescription(emptyItem);
-            }
-
-            // Close inventory with escape when opened
-            if (Input.GetKeyDown(KeyCode.Escape) && inventoryOpened)
-            {
-                PlayerUI.Instance.inventoryUI.SetActive(false);
-                GameController.Instance.ShowPersistentUI(true);
-                inventoryOpened = false;
-                GameController.Instance.gamePaused = false;
             }
 
             // Key to switch weapon
