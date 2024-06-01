@@ -144,22 +144,43 @@ public class Player_Action : MonoBehaviour
     #endregion
 
     // Helper function for checking interactables nearby
-    bool CheckInteractables()
+   bool CheckInteractables()
     {
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, interactsRadius, Vector2.up, 0, interactablesLayer); // yang ngurus layer ada di sini
-        // jadi ini cek kalo ada interactable, bisa interact, kalo gaada ya gabisa
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, interactsRadius, Vector2.up, 0, interactablesLayer);
         if (hit.transform != null)
         {
             interactable = hit.transform.GetComponent<Interactable>();
-            PlayerUI.Instance.promptText.text = "Tekan F untuk " + interactable.promptMessage;
-            return true;
+            
+            if (interactable != null)
+            {
+                if (interactable is PlantInteractable plantInteractable)
+                {
+                    // Check if the seed is ready to be watered
+                    if (plantInteractable.seed.siram)
+                    {
+                        PlayerUI.Instance.promptText.text = " klik kanan untuk " + interactable.promptMessage;
+                    }
+                    else if(plantInteractable.seed.isReadyToHarvest == false)
+                    {
+                        PlayerUI.Instance.promptText.text =  interactable.promptMessage;
+                    }else
+                    {
+                        PlayerUI.Instance.promptText.text = "Tekan F untuk " + interactable.promptMessage;
+                    }
+                }
+                else
+                {
+                    PlayerUI.Instance.promptText.text = "Tekan F untuk " + interactable.promptMessage;
+                }
+                
+                return true;
+            }
         }
-        else
-        {
-            PlayerUI.Instance.promptText.text = string.Empty;
-            return false;
-        }
+        
+        PlayerUI.Instance.promptText.text = string.Empty;
+        return false;
     }
+
 
 
     #region COMBAT_ACTIONS
@@ -263,10 +284,10 @@ public class Player_Action : MonoBehaviour
 
         if (Player_Health.Instance.SpendStamina(itemToAttack.SpecialAttackStamina))
         {
-            if (itemToAttack.itemName == "Penyiram Tanaman")
+           if (itemToAttack.itemName == "Penyiram Tanaman")
             {
                 print("watering plants");
-                // Water nearby plants
+                WaterNearbyPlants();
             }
             else if (itemToAttack.itemName == "Pedang Ren")
             {
@@ -311,6 +332,19 @@ public class Player_Action : MonoBehaviour
                     }
                 }
                 StartCoroutine(ActivateAttack(1));
+            }
+        }
+    }
+
+    private void WaterNearbyPlants()
+    {
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, 1.5f); // Adjust radius as needed
+        foreach (var hitCollider in hitColliders)
+        {
+            Seed seed = hitCollider.GetComponent<Seed>();
+            if (seed != null)
+            {
+                seed.Siram();
             }
         }
     }

@@ -42,8 +42,10 @@ public class CookIngredients : MonoBehaviour
             wrapperRectTransform.sizeDelta = new Vector2(120, 120);
 
             Image wrapperImage = wrapper.AddComponent<Image>();
-            wrapperImage.color = backgroundColor;
-            wrapperImage.sprite = backgroundImage; // Set the background image sprite
+            Color transparentColor = backgroundColor;
+            transparentColor.a = 0f; // Mengatur opasitas menjadi 0
+            wrapperImage.color = transparentColor;
+            // wrapperImage.sprite = backgroundImage; // Tidak perlu mengatur background image
 
             GameObject resultItem = new GameObject(recipe.result.itemName);
             resultItem.transform.SetParent(wrapper.transform, false);
@@ -57,7 +59,7 @@ public class CookIngredients : MonoBehaviour
                 // button cek ingredient
                 if (slotCook1.item != null || slotCook2.item != null || slotCook3.item != null)
                 {
-                    Debug.Log("resep tidak bisa di lihat");
+                    Debug.Log("Resep tidak bisa dilihat");
                     ShowErrorPopupForSeconds(2.0f);
                 }
                 else
@@ -72,6 +74,7 @@ public class CookIngredients : MonoBehaviour
             rectTransform.localScale = Vector3.one;
         }
     }
+
 
     public void DisplayRecipeInHasilCook(CookUI.CookRecipe recipe, float opacity)
     {

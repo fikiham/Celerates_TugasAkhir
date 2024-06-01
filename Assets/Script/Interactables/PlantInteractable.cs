@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlantInteractable : Interactable
 {
-    Seed seed;
+    public Seed seed; // Changed to public to be accessible
+
     private void Start()
     {
         seed = GetComponent<Seed>();
@@ -19,19 +20,18 @@ public class PlantInteractable : Interactable
         else if (seed.siram)
         {
             promptMessage = "Siram Tanaman";
-        }else{
+        }
+        else
+        {
             promptMessage = "Tanaman Tumbuh";
         }
-
     }
+
     protected override void Interact()
     {
         if (seed.isReadyToHarvest)
         {
             seed.Harvest();
-        }else if(seed.siram){
-            seed.Siram();
         }
     }
-
 }
