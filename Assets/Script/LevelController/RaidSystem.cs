@@ -103,12 +103,18 @@ public class RaidSystem : MonoBehaviour
     {
         raidStart = true;
         raiding = true;
+
+        Player_Quest.Instance.SetQuest("Bunuh semua bandit");
+
         raidUI.SetActive(true);
         SetNumberTotal(enemiesNumber);
         enemiesNumbers = enemiesNumber;
+
         StartCoroutine(EnableSpawners());
+
         currentWave = 1;
         this.totalWave = totalWave;
+
         currentLoot += theLoot;
     }
 

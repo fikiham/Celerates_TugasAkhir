@@ -1,3 +1,4 @@
+using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,9 @@ public class Enemy_Wolf : MonoBehaviour
     Transform target;
     Enemy_Health eh;
     Rigidbody2D rb;
+    AIDestinationSetter aids;
+    AIPath path;
+    SpriteRenderer sr;
 
     [SerializeField] bool drawSpawnRadius;
 
@@ -37,22 +41,36 @@ public class Enemy_Wolf : MonoBehaviour
     {
         eh = GetComponent<Enemy_Health>();
         rb = GetComponent<Rigidbody2D>();
+        aids = GetComponent<AIDestinationSetter>();
+        path = GetComponent<AIPath>();
+        sr = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         target = eh.player;
+        aids.target = target;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (path.desiredVelocity.x > 0)
+        {
+            sr.flipX = false;
+        }
+        else if (path.desiredVelocity.x < 0)
+        {
+            sr.flipX = true;
+        }
+
         waitTimer += Time.deltaTime;
         if (waitTimer > waitTime)
         {
             if (IsInReach()) // Attack if in reach
             {
+                path.canMove = false;
                 //Try to attack player
                 attackTimer += Time.deltaTime;
                 if (attackTimer > attackDelay)
@@ -69,9 +87,13 @@ public class Enemy_Wolf : MonoBehaviour
                 }
             }
             else if (IsNearPlayer()) // Aggro if near
-                rb.position = Vector2.MoveTowards(rb.position, target.position, runSpd * Time.deltaTime);
+            {
+                //rb.position = Vector2.MoveTowards(rb.position, target.position, runSpd * Time.deltaTime);
+                path.canMove = true;
+            }
             else // Idle if neither
             {
+                path.canMove = false;
                 // Target Idle is zero if it reach targetted idling pos
                 if (targetIdle == Vector2.zero || caughtInCollision)
                 {
