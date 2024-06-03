@@ -556,7 +556,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3681375199530319409}
-  - {fileID: 3873893779673377366}
   m_Father: {fileID: 7675429192464698682}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -626,7 +625,6 @@ GameObject:
   - component: {fileID: 7675429192464698682}
   - component: {fileID: 8869412240672152731}
   - component: {fileID: 1310090912735907792}
-  - component: {fileID: 7060398972294764561}
   m_Layer: 5
   m_Name: CookInventory
   m_TagString: Untagged
@@ -692,19 +690,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7060398972294764561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3349752078532809428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa5619ed48a32fa438d72efb14c0ee90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropCookSlot: {fileID: 6204550872367928456}
 --- !u!1 &3714091617786462129
 GameObject:
   m_ObjectHideFlags: 0
@@ -1436,7 +1421,6 @@ GameObject:
   - component: {fileID: 6360172936573389886}
   - component: {fileID: 6834013923678330239}
   - component: {fileID: 733503748662689168}
-  - component: {fileID: 6170715181812553343}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -1455,7 +1439,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3873893779673377366}
   m_Father: {fileID: 1240621968042028333}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1525,19 +1510,6 @@ MonoBehaviour:
   m_Spacing: {x: 5, y: 5}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!114 &6170715181812553343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9136266421701280726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa5619ed48a32fa438d72efb14c0ee90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropCookSlot: {fileID: 6676220863362145352}
 --- !u!1 &9153317716002026254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,11 +1544,11 @@ RectTransform:
   m_Children:
   - {fileID: 4102290984457420796}
   - {fileID: 5066747252928707073}
-  m_Father: {fileID: 1240621968042028333}
+  m_Father: {fileID: 3681375199530319409}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 150.00006, y: 1477.875}
+  m_AnchoredPosition: {x: 150.00006, y: 993.5099}
   m_SizeDelta: {x: 270, y: 270}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7829967980619228092

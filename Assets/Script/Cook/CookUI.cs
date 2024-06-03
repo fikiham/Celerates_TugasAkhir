@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CookUI : MonoBehaviour
 {
-
- [System.Serializable]
+    [System.Serializable]
     public class CookRecipe
     {
         public Item result;
@@ -28,14 +26,10 @@ public class CookUI : MonoBehaviour
     [SerializeField] Transform itemSlotContainer;
     [SerializeField] Transform itemSlotTemplate;
 
-    
-
-
-    private void Start(){
-        //  SetRecipeDescription(recipes[0], CanCraft(recipes[0]));
-        //  LogRecipesToConsole();
-
-        
+    private void Start()
+    {
+        // SetRecipeDescription(recipes[0], CanCraft(recipes[0]));
+        // LogRecipesToConsole();
     }
 
     private void Update()
@@ -49,6 +43,7 @@ public class CookUI : MonoBehaviour
 
     public void OpenCook()
     {
+        SoundManager.Instance.PlaySound("Click");
         GameController.Instance.ShowPersistentUI(false);
         gameObject.SetActive(true);
         isCookUIPanelOpen = true;
@@ -74,19 +69,35 @@ public class CookUI : MonoBehaviour
             theItem.GetChild(1).GetComponent<TMP_Text>().text = item.stackCount.ToString();
 
             theItem.GetComponent<DragCook>().itemName = item.itemName;
-
         }
+
+        // Memperbarui tampilan inventaris setelah menambahkan item
+        RefreshInventoryUI();
     }
 
     public void CloseCook()
     {
+        SoundManager.Instance.PlaySound("Click");
         GameController.Instance.ShowPersistentUI(true);
         gameObject.SetActive(false);
         isCookUIPanelOpen = false;
     }
 
-   
-     void LogRecipesToConsole()
+    public void RefreshInventoryUI()
+    {
+        // Implementasi RefreshInventoryUI
+        Debug.Log("Refreshing inventory UI");
+        // Misalnya, lakukan sesuatu seperti memperbarui tampilan slot inventaris
+    }
+
+    public void RefreshCookingUI()
+    {
+        // Implementasi RefreshCookingUI
+        Debug.Log("Refreshing cooking UI");
+        // Misalnya, lakukan sesuatu seperti memperbarui tampilan slot memasak atau hasil memasak
+    }
+
+    void LogRecipesToConsole()
     {
         // mengambil total recipes 
         int recipeCount = recipes.Count;
@@ -94,18 +105,15 @@ public class CookUI : MonoBehaviour
 
         foreach (var recipe in recipes)
         {
-            // mengambil nama item yang di hasilkan 
+            // mengambil nama item yang dihasilkan 
             string recipeDetails = $"Recipe: {recipe.result.itemName}\nIngredients:";
             // mengecek jumlah item dari sebuah resep 
             for (int i = 0; i < recipe.ingredients.Count; i++)
             {
-                // menapilkan ingredients dan ingredients Count
+                // menampilkan ingredients dan ingredients Count
                 recipeDetails += $"\n- {recipe.ingredients[i].itemName} x{recipe.ingredientsCount[i]}";
             }
             Debug.Log(recipeDetails);
         }
     }
-
-
-
 }

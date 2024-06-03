@@ -93,45 +93,58 @@ public class InventoryUI : MonoBehaviour // Attach this to the InventoryUI prefa
         }
     }
 
-    public void SetDescription(Item item)
+   public void SetDescription(Item item)
+{
+    // Set item's texts
+    itemSprite.sprite = item.sprite;
+    itemName.text = item.itemName;
+    itemDesc.text = item.itemDescription;
+
+    // Set the "equip" button functionality
+    itemAction.onClick.RemoveAllListeners();
+    switch (item.type)
     {
-        // Set item's texts
-        itemSprite.sprite = item.sprite;
-        itemName.text = item.itemName;
-        itemDesc.text = item.itemDescription;
-
-        // Set the "equip" button functionality
-        itemAction.onClick.RemoveAllListeners();
-        switch (item.type)
-        {
-            case ItemType.Melee_Combat:
-                itemAction.onClick.AddListener(() => Player_Inventory.Instance.EquipItem(item,0));
-                break;
-            case ItemType.Ranged_Combat:
-                itemAction.onClick.AddListener(() => Player_Inventory.Instance.EquipItem(item,1));
-                break;
-            case ItemType.Heal:
-                itemAction.onClick.AddListener(() => Player_Inventory.Instance.AddQuickSlot(item, 0));
-                break;
-            case ItemType.Buff:
-                itemAction.onClick.AddListener(() => Player_Inventory.Instance.AddQuickSlot(item, 1));
-                break;
-            default: break;
-        }
-
-        // Set the "Equip" button according to item's type
-        string itemUses;
-        if (item.type == ItemType.Item)
-        {
-            itemUses = "CAN'T EQUIP";
-            itemAction.interactable = false;
-        }
-        else
-        {
-            itemUses = "EQUIP";
-            itemAction.interactable = true;
-        }
-        itemAction.GetComponentInChildren<TMP_Text>().text = itemUses;
-
+        case ItemType.Melee_Combat:
+            itemAction.onClick.AddListener(() => {
+                Player_Inventory.Instance.EquipItem(item, 0);
+                SoundManager.Instance.PlaySound("PickUp");
+            });
+            break;
+        case ItemType.Ranged_Combat:
+            itemAction.onClick.AddListener(() => {
+                Player_Inventory.Instance.EquipItem(item, 1);
+                SoundManager.Instance.PlaySound("PickUp");
+            });
+            break;
+        case ItemType.Heal:
+            itemAction.onClick.AddListener(() => {
+                Player_Inventory.Instance.AddQuickSlot(item, 0);
+                SoundManager.Instance.PlaySound("PickUp");
+            });
+            break;
+        case ItemType.Buff:
+            itemAction.onClick.AddListener(() => {
+                Player_Inventory.Instance.AddQuickSlot(item, 1);
+                SoundManager.Instance.PlaySound("PickUp");
+            });
+            break;
+        default:
+            break;
     }
+
+    // Set the "Equip" button according to item's type
+    string itemUses;
+    if (item.type == ItemType.Item)
+    {
+        itemUses = "CAN'T EQUIP";
+        itemAction.interactable = false;
+    }
+    else
+    {
+        itemUses = "EQUIP";
+        itemAction.interactable = true;
+    }
+    itemAction.GetComponentInChildren<TMP_Text>().text = itemUses;
+}
+
 }

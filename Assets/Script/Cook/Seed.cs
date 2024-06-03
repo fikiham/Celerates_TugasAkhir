@@ -58,6 +58,7 @@ public class Seed : MonoBehaviour
     {
         if (isReadyToHarvest)
         {
+            SoundManager.Instance.PlaySound("Pick");
             Debug.Log("Biji dipanen!");
             // Drop item menggunakan ItemPool
             ItemPool.Instance.DropItem("BuahCabai", transform.position + new Vector3(0, 0.5f, 0));

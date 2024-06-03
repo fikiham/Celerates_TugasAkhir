@@ -37,6 +37,7 @@ public class CraftUI : MonoBehaviour
         // Close Shop
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            SoundManager.Instance.PlaySound("Click");
             gameObject.SetActive(false);
             GameController.Instance.ShowPersistentUI(true);
         }
@@ -44,6 +45,7 @@ public class CraftUI : MonoBehaviour
 
     public void OpenCraft()
     {
+        SoundManager.Instance.PlaySound("Click");
         GameController.Instance.ShowPersistentUI(false);
         gameObject.SetActive(true);
 
@@ -127,6 +129,7 @@ public class CraftUI : MonoBehaviour
     // Actually crafting the damn thing
     void Craft(CraftRecipe recipe)
     {
+        SoundManager.Instance.PlaySound("Pick");
         // Add recipe result to player's inventory
         Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(recipe.result.itemName, recipe.resultCount));
         print("crafted " + recipe.result.itemName);

@@ -220,64 +220,69 @@ public class Player_Action : MonoBehaviour
         canAttack = true;
     }
 
-    public void Attack()
+   public void Attack()
+{
+    Item itemToAttack = Player_Inventory.Instance.equippedWeapon;
+    if (itemToAttack.itemName == "Empty")
+        return;
+
+    if (itemToAttack.type == ItemType.Melee_Combat)
     {
-        Item itemToAttack = Player_Inventory.Instance.equippedWeapon;
-        if (itemToAttack.itemName == "Empty")
-            return;
+        // Memanggil suara pedang ketika serangan normal dengan pedang
+        SoundManager.Instance.PlaySound("Sword");
 
-        if (itemToAttack.type == ItemType.Melee_Combat)
+        print("melee normal attacking");
+        switch (itemToAttack.itemName)
         {
-            print("melee normal attacking");
-            switch (itemToAttack.itemName)
-            {
-                case "Tombak Berburu":
-                case "Halberd":
-                    if (Player_Health.Instance.SpendStamina(itemToAttack.SpecialAttackStamina))
-                    {
-                        ActivateHitbox(itemToAttack.Damage, itemToAttack.AreaOfEffect);
-                    }
-                    break;
+            case "Tombak Berburu":
+            case "Halberd":
+                if (Player_Health.Instance.SpendStamina(itemToAttack.SpecialAttackStamina))
+                {
+                    ActivateHitbox(itemToAttack.Damage, itemToAttack.AreaOfEffect);
+                }
+                break;
 
-                default:
-                    ActivateHitbox(itemToAttack.Damage, itemToAttack.AreaOfEffect); break;
-            }
-            StartCoroutine(ActivateAttack(.5f));
+            default:
+                ActivateHitbox(itemToAttack.Damage, itemToAttack.AreaOfEffect); 
+                break;
         }
-        else if (itemToAttack.itemName == "Batu")
-        {
-            print("throwing rock");
-            // throw rock
-            StartCoroutine(ShootProjectile(itemToAttack.RangedWeapon_ProjectilePrefab, itemToAttack.Damage));
-            // check if rock depleted after use then remove as equipped then remove from inventory
-            if (Player_Inventory.Instance.equippedWeapon.stackCount == 1)
-            {
-                Player_Inventory.Instance.EquipItem(ItemPool.Instance.GetItem("Empty"), 1);
-            }
-
-            // minus rock count
-            Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem("Batu"));
-
-            StartCoroutine(ActivateAttack(.5f));
-        }
-        else if (itemToAttack.type == ItemType.Ranged_Combat)
-        {
-            // Check for arrow first
-            if (Player_Inventory.Instance.itemList.Exists(x => x.itemName == "Anak Panah"))
-            {
-                print("shooting arrow");
-                // Shoot arrow if possible
-                StartCoroutine(ShootProjectile(itemToAttack.RangedWeapon_ProjectilePrefab, itemToAttack.Damage));
-                // minus arrow count
-                Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem("Anak Panah"));
-            }
-            else
-            {
-                print("no arrow bish");
-            }
-            StartCoroutine(ActivateAttack(1));
-        }
+        StartCoroutine(ActivateAttack(.5f));
     }
+    else if (itemToAttack.itemName == "Batu")
+    {
+        print("throwing rock");
+        // throw rock
+        StartCoroutine(ShootProjectile(itemToAttack.RangedWeapon_ProjectilePrefab, itemToAttack.Damage));
+        // check if rock depleted after use then remove as equipped then remove from inventory
+        if (Player_Inventory.Instance.equippedWeapon.stackCount == 1)
+        {
+            Player_Inventory.Instance.EquipItem(ItemPool.Instance.GetItem("Empty"), 1);
+        }
+
+        // minus rock count
+        Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem("Batu"));
+
+        StartCoroutine(ActivateAttack(.5f));
+    }
+    else if (itemToAttack.type == ItemType.Ranged_Combat)
+    {
+        // Check for arrow first
+        if (Player_Inventory.Instance.itemList.Exists(x => x.itemName == "Anak Panah"))
+        {
+            print("shooting arrow");
+            // Shoot arrow if possible
+            StartCoroutine(ShootProjectile(itemToAttack.RangedWeapon_ProjectilePrefab, itemToAttack.Damage));
+            // minus arrow count
+            Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem("Anak Panah"));
+        }
+        else
+        {
+            print("no arrow bish");
+        }
+        StartCoroutine(ActivateAttack(1));
+    }
+}
+
 
     public void SpecialAttack()
     {
@@ -289,11 +294,13 @@ public class Player_Action : MonoBehaviour
         {
            if (itemToAttack.itemName == "Penyiram Tanaman")
             {
+                SoundManager.Instance.PlaySound("Siram");
                 print("watering plants");
                 WaterNearbyPlants();
             }
             else if (itemToAttack.itemName == "Pedang Ren")
             {
+                
                 print("buffing");
                 // Buff
                 StartCoroutine(StartBuff_PedangRen(30));

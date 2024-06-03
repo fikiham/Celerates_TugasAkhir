@@ -14,6 +14,12 @@ public class ChangeMapInteractable : Interactable
         LoadingScreenUI.Instance.LoadScene(goToVillage ? 2 : 1);
         //SceneManager.LoadScene(goToVillage ? 2 : 1);
         GameController.Instance.LoadGame();
-    }
 
+        // Jika pindah ke scene "Forest", mainkan suara transisi hutan
+        if (!goToVillage)
+        {
+            Debug.Log("Forest di jalankan");
+            SoundManager.Instance.PlaySound("Forest"); // Pastikan "Forest" terdaftar di SoundManager
+        }
+    }
 }

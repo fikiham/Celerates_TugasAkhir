@@ -59,11 +59,12 @@ public class CookIngredients : MonoBehaviour
                 // button cek ingredient
                 if (slotCook1.item != null || slotCook2.item != null || slotCook3.item != null)
                 {
-                    Debug.Log("Resep tidak bisa dilihat");
+                   
                     ShowErrorPopupForSeconds(2.0f);
                 }
                 else
                 {
+                    SoundManager.Instance.PlaySound("Click");
                     DisplayRecipeInHasilCook(recipe, 0.8f);
                 }
             });
@@ -97,6 +98,7 @@ public class CookIngredients : MonoBehaviour
         Button button = resultItem.AddComponent<Button>();
         button.onClick.AddListener(() =>
         {
+            SoundManager.Instance.PlaySound("Click");
             DestroyRecipeInHasilCook();
         });
 

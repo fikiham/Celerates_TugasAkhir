@@ -22,10 +22,11 @@ public class ItemDropInteractable : Interactable
 
     protected override void Interact()
     {
+        SoundManager.Instance.PlaySound("Pick");
         Debug.Log("item di ambil.");
         Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(item.itemName));
         Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Daging Sapi"));
-        Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Kayu"));
+        Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Pedang Ren"));
         Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Penyiram Tanaman"));
         
         Destroy(gameObject);

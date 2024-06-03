@@ -48,6 +48,9 @@ public class DragCook : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         {
             ResetPosition();
         }
+
+        // Memanggil suara klik ketika item di-drop
+        SoundManager.Instance.PlaySound("Click");
     }
 
     public void ResetPosition()

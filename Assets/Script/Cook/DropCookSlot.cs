@@ -131,6 +131,7 @@ public class DropCookSlot : MonoBehaviour, IDropHandler
         hasilCookButton.onClick.RemoveAllListeners();
         hasilCookButton.onClick.AddListener(() =>
         {
+            SoundManager.Instance.PlaySound("Pick");
             Item resultItemInstance = ItemPool.Instance.GetItem(recipe.result.itemName);
 
             if (resultItemInstance != null)

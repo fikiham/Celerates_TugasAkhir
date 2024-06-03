@@ -31,6 +31,7 @@ public class ShopUI : MonoBehaviour
         // Close Shop
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            SoundManager.Instance.PlaySound("Click");
             gameObject.SetActive(false);
             GameController.Instance.ShowPersistentUI(true);
         }
@@ -38,6 +39,7 @@ public class ShopUI : MonoBehaviour
 
     public void OpenShop()
     {
+        SoundManager.Instance.PlaySound("Click");
         GameController.Instance.ShowPersistentUI(false);
         gameObject.SetActive(true);
         currentMoney.text = "$" + GameEconomy.Instance.Money;

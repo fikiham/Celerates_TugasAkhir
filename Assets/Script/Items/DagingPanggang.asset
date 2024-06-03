@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: DagingPanggang
   m_EditorClassIdentifier: 
   itemName: Daging Panggang
-  type: 4
+  type: 3
   sprite: {fileID: 21300000, guid: 69e696105ccd83d489b74710b7ee8b45, type: 3}
-  itemDescription: 
-  Level: 0
+  itemDescription: 'Sapi yang di masak namun sedikit gosong '
+  Level: 1
   Damage: 0
   AreaOfEffect: 0
   SpecialAttackCD: 0
+  SpecialAttackStamina: 0
   UpgradeCost: 0
   RangedWeapon_ProjectilePrefab: {fileID: 0}
   isStackable: 1
