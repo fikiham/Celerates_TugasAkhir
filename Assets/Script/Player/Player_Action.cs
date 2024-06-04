@@ -24,6 +24,7 @@ public class Player_Action : MonoBehaviour
     [SerializeField] GameObject normalAttackHitArea;
     [SerializeField] GameObject specialAttackHitArea;
 
+    [SerializeField] GameObject swordFX;
     [SerializeField] ParticleSystem swordParticle;
     [SerializeField] ParticleSystem swordAOEParticle;
     [SerializeField] ParticleSystem tombakParticle;
@@ -144,13 +145,13 @@ public class Player_Action : MonoBehaviour
     #endregion
 
     // Helper function for checking interactables nearby
-   bool CheckInteractables()
+    bool CheckInteractables()
     {
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, interactsRadius, Vector2.up, 0, interactablesLayer);
         if (hit.transform != null)
         {
             interactable = hit.transform.GetComponent<Interactable>();
-            
+
             if (interactable != null)
             {
                 if (interactable is PlantInteractable plantInteractable)
@@ -160,10 +161,11 @@ public class Player_Action : MonoBehaviour
                     {
                         PlayerUI.Instance.promptText.text = " klik kanan untuk " + interactable.promptMessage;
                     }
-                    else if(plantInteractable.seed.isReadyToHarvest == false)
+                    else if (plantInteractable.seed.isReadyToHarvest == false)
                     {
-                        PlayerUI.Instance.promptText.text =  interactable.promptMessage;
-                    }else
+                        PlayerUI.Instance.promptText.text = interactable.promptMessage;
+                    }
+                    else
                     {
                         PlayerUI.Instance.promptText.text = "Tekan F untuk " + interactable.promptMessage;
                     }
@@ -172,11 +174,11 @@ public class Player_Action : MonoBehaviour
                 {
                     PlayerUI.Instance.promptText.text = "Tekan F untuk " + interactable.promptMessage;
                 }
-                
+
                 return true;
             }
         }
-        
+
         PlayerUI.Instance.promptText.text = string.Empty;
         return false;
     }
@@ -189,9 +191,12 @@ public class Player_Action : MonoBehaviour
         if (!AOE)
         {
             //ParticleFollow.Instance.StartPath(area);
-            ParticleSystem.ShapeModule theShape = swordParticle.shape;
-            theShape.scale = new(area, 1, 1);
-            swordParticle.Play();
+            //ParticleSystem.ShapeModule theShape = swordParticle.shape;
+            //theShape.scale = new(area, 1, 1);
+            //swordParticle.Play();
+            swordFX.transform.localPosition = new(0.3f * area, 0, 0);
+            swordFX.transform.localScale = new(0.3f * area, .3f, .3f);
+            swordFX.GetComponent<SwordAnim>().StartFX();
             Transform theTransform = normalAttackHitArea.transform;
             theTransform.name = damage.ToString();
             theTransform.localPosition = new(area / 2, theTransform.localPosition.y, theTransform.localPosition.z);
@@ -220,68 +225,68 @@ public class Player_Action : MonoBehaviour
         canAttack = true;
     }
 
-   public void Attack()
-{
-    Item itemToAttack = Player_Inventory.Instance.equippedWeapon;
-    if (itemToAttack.itemName == "Empty")
-        return;
-
-    if (itemToAttack.type == ItemType.Melee_Combat)
+    public void Attack()
     {
-        // Memanggil suara pedang ketika serangan normal dengan pedang
-        SoundManager.Instance.PlaySound("Sword");
+        Item itemToAttack = Player_Inventory.Instance.equippedWeapon;
+        if (itemToAttack.itemName == "Empty")
+            return;
 
-        print("melee normal attacking");
-        switch (itemToAttack.itemName)
+        if (itemToAttack.type == ItemType.Melee_Combat)
         {
-            case "Tombak Berburu":
-            case "Halberd":
-                if (Player_Health.Instance.SpendStamina(itemToAttack.SpecialAttackStamina))
-                {
+            // Memanggil suara pedang ketika serangan normal dengan pedang
+            SoundManager.Instance.PlaySound("Sword");
+
+            print("melee normal attacking");
+            switch (itemToAttack.itemName)
+            {
+                case "Tombak Berburu":
+                case "Halberd":
+                    if (Player_Health.Instance.SpendStamina(itemToAttack.SpecialAttackStamina))
+                    {
+                        ActivateHitbox(itemToAttack.Damage, itemToAttack.AreaOfEffect);
+                    }
+                    break;
+
+                default:
                     ActivateHitbox(itemToAttack.Damage, itemToAttack.AreaOfEffect);
-                }
-                break;
-
-            default:
-                ActivateHitbox(itemToAttack.Damage, itemToAttack.AreaOfEffect); 
-                break;
+                    break;
+            }
+            StartCoroutine(ActivateAttack(.5f));
         }
-        StartCoroutine(ActivateAttack(.5f));
-    }
-    else if (itemToAttack.itemName == "Batu")
-    {
-        print("throwing rock");
-        // throw rock
-        StartCoroutine(ShootProjectile(itemToAttack.RangedWeapon_ProjectilePrefab, itemToAttack.Damage));
-        // check if rock depleted after use then remove as equipped then remove from inventory
-        if (Player_Inventory.Instance.equippedWeapon.stackCount == 1)
+        else if (itemToAttack.itemName == "Batu")
         {
-            Player_Inventory.Instance.EquipItem(ItemPool.Instance.GetItem("Empty"), 1);
-        }
-
-        // minus rock count
-        Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem("Batu"));
-
-        StartCoroutine(ActivateAttack(.5f));
-    }
-    else if (itemToAttack.type == ItemType.Ranged_Combat)
-    {
-        // Check for arrow first
-        if (Player_Inventory.Instance.itemList.Exists(x => x.itemName == "Anak Panah"))
-        {
-            print("shooting arrow");
-            // Shoot arrow if possible
+            print("throwing rock");
+            // throw rock
             StartCoroutine(ShootProjectile(itemToAttack.RangedWeapon_ProjectilePrefab, itemToAttack.Damage));
-            // minus arrow count
-            Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem("Anak Panah"));
+            // check if rock depleted after use then remove as equipped then remove from inventory
+            if (Player_Inventory.Instance.equippedWeapon.stackCount == 1)
+            {
+                Player_Inventory.Instance.EquipItem(ItemPool.Instance.GetItem("Empty"), 1);
+            }
+
+            // minus rock count
+            Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem("Batu"));
+
+            StartCoroutine(ActivateAttack(.5f));
         }
-        else
+        else if (itemToAttack.type == ItemType.Ranged_Combat)
         {
-            print("no arrow bish");
+            // Check for arrow first
+            if (Player_Inventory.Instance.itemList.Exists(x => x.itemName == "Anak Panah"))
+            {
+                print("shooting arrow");
+                // Shoot arrow if possible
+                StartCoroutine(ShootProjectile(itemToAttack.RangedWeapon_ProjectilePrefab, itemToAttack.Damage));
+                // minus arrow count
+                Player_Inventory.Instance.RemoveItem(ItemPool.Instance.GetItem("Anak Panah"));
+            }
+            else
+            {
+                print("no arrow bish");
+            }
+            StartCoroutine(ActivateAttack(1));
         }
-        StartCoroutine(ActivateAttack(1));
     }
-}
 
 
     public void SpecialAttack()
@@ -292,7 +297,7 @@ public class Player_Action : MonoBehaviour
 
         if (Player_Health.Instance.SpendStamina(itemToAttack.SpecialAttackStamina))
         {
-           if (itemToAttack.itemName == "Penyiram Tanaman")
+            if (itemToAttack.itemName == "Penyiram Tanaman")
             {
                 SoundManager.Instance.PlaySound("Siram");
                 print("watering plants");
@@ -300,7 +305,7 @@ public class Player_Action : MonoBehaviour
             }
             else if (itemToAttack.itemName == "Pedang Ren")
             {
-                
+
                 print("buffing");
                 // Buff
                 StartCoroutine(StartBuff_PedangRen(30));
