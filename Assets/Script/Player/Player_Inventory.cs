@@ -24,7 +24,7 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
 
     KeyCode openInventoryInput = KeyCode.B;
     InventoryUI inventoryUI;
-    bool inventoryOpened;
+    [HideInInspector] public bool inventoryOpened;
 
     private void Awake()
     {
@@ -55,15 +55,14 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
 
     private void Update()
     {
-
         // Close inventory with escape when opened
         if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(openInventoryInput)) && inventoryOpened)
         {
             SoundManager.Instance.PlaySound("Click");
             PlayerUI.Instance.inventoryUI.SetActive(false);
             GameController.Instance.ShowPersistentUI(true);
+            GameController.Instance.ResumeGame();
             inventoryOpened = false;
-            GameController.Instance.gamePaused = false;
         }
 
         if (GameController.Instance.enablePlayerInput)
@@ -75,7 +74,7 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
                 inventoryOpened = !inventoryOpened;
                 PlayerUI.Instance.inventoryUI.SetActive(inventoryOpened);
                 GameController.Instance.ShowPersistentUI(!inventoryOpened);
-                GameController.Instance.gamePaused = inventoryOpened;
+                GameController.Instance.PauseGame();
 
                 inventoryUI.SetInventory(itemList);
                 if (itemList.Count > 0)
@@ -145,15 +144,15 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
 
     public void EquipItem(Item item, int index)
     {
-        
+
         if (!itemList.Exists(x => x.itemName == item.itemName) && item.itemName != "Empty")
             return;
-      
-        
+
+
         equippedCombat[index] = item;
         PlayerUI.Instance.inventoryUI.GetComponent<InventoryUI>().SetActiveItem(index, item);
         print(item.itemName + " equipped");
-        
+
     }
 
     // Add item to quick slot according index (0,1)
@@ -182,7 +181,7 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
         Item item = quickSlots[which - 1];
         if (item == null || item.itemName == "Empty")
         {
-           
+
             print("No item bish");
             return;
         }
@@ -193,7 +192,7 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
         item.stackCount--;
         if (item.stackCount <= 0)
         {
-            SoundManager.Instance.PlaySound("Eat");        
+            SoundManager.Instance.PlaySound("Eat");
 
             itemList.Remove(item);
             AddQuickSlot(emptyItem, which - 1);

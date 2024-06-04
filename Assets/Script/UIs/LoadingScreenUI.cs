@@ -37,7 +37,7 @@ public class LoadingScreenUI : MonoBehaviour
                 index = 7;
             loadingText.text = loading[..index];
             index++;
-            yield return null;
+            yield return new WaitForSeconds(.1f);
         }
         transform.GetChild(0).gameObject.SetActive(false);
     }

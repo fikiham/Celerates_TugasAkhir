@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class RaidSystem : MonoBehaviour
 {
+    public static RaidSystem Instance;
+
     [SerializeField] Transform spawners;
 
     [SerializeField] bool raidStart = false;
@@ -19,6 +22,7 @@ public class RaidSystem : MonoBehaviour
     [SerializeField] float gracePeriod = 5;
     float periodTimer;
 
+    bool currentlySpawning;
     [SerializeField] int totalWave;
     [SerializeField] int currentWave;
     [SerializeField] int enemiesNumber;
@@ -35,6 +39,13 @@ public class RaidSystem : MonoBehaviour
     [SerializeField] TMP_Text raidEndDescText;
     [SerializeField] Button raidEndButton;
 
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -42,24 +53,36 @@ public class RaidSystem : MonoBehaviour
         {
             if (raiding)
             {
+                Debug.Log("START RAIDING");
                 raidTimer += Time.deltaTime;
                 raidTimerText.text = (raidTimer / 60).ToString("F0") + ":" + (int)(raidTimer % 60);
                 if (raidTimer > raidTimeLimit)
+                {
+                    Debug.Log("TIME's UP");
                     RaidEnd(false);
 
-                // Always check enemy number
-                enemiesNumber = GetCurrentNumber();
-                raidProgress.fillAmount = (float)enemiesNumber / enemiesNumbers;
-
-                // If enemy all died, go to next wave or end raid
-                if (enemiesNumber <= 0)
-                {
-                    // If there are no next wave, raid finished
-                    if (currentWave >= totalWave)
-                        RaidEnd(true);
-                    else
-                        NextWave();
                 }
+
+                if (!currentlySpawning)
+                {
+                    // Always check enemy number
+                    enemiesNumber = GetCurrentNumber();
+                    raidProgress.fillAmount = (float)enemiesNumber / enemiesNumbers;
+
+                    // If enemy all died, go to next wave or end raid
+                    if (enemiesNumber <= 0)
+                    {
+                        // If there are no next wave, raid finished
+                        if (currentWave >= totalWave)
+                        {
+                            Debug.Log("ALL ENEMIES DEAD AND WAVES END");
+                            RaidEnd(true);
+                        }
+                        else
+                            NextWave();
+                    }
+                }
+
             }
             else
             {
@@ -99,8 +122,9 @@ public class RaidSystem : MonoBehaviour
         StartRaid(1, 100);
     }
 
-    void StartRaid(int totalWave, int theLoot)
+    public void StartRaid(int totalWave, int theLoot, UnityAction afterAction = null)
     {
+        currentlySpawning = true;
         raidStart = true;
         raiding = true;
 
@@ -116,10 +140,20 @@ public class RaidSystem : MonoBehaviour
         this.totalWave = totalWave;
 
         currentLoot += theLoot;
+
+        SetActionAfter(afterAction);
+    }
+
+    public void SetActionAfter(UnityAction afterAction = null)
+    {
+        raidEndButton.onClick.RemoveAllListeners();
+        if (afterAction != null)
+            raidEndButton.onClick.AddListener(afterAction);
     }
 
     void NextWave()
     {
+        currentlySpawning = true;
         // Wait a sec before next wave
         periodTimer += Time.deltaTime;
         if (periodTimer > gracePeriod)
@@ -150,6 +184,7 @@ public class RaidSystem : MonoBehaviour
         {
             spawner.GetComponent<Enemy_Spawner>().CanSpawn = false;
         }
+        currentlySpawning = false;
     }
 
     int GetCurrentNumber()

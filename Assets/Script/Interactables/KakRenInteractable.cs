@@ -7,7 +7,7 @@ public class KakRenInteractable : Interactable
     [SerializeField] Dialogues SecDialogue;
     protected override void Interact()
     {
-        if (GameEventSystem.Instance.DoneDialogue_3 && !GameEventSystem.Instance.DoneDialogue_4)
+        if (GameEventSystem.Instance.DoneDialogue_FirstDesaWarga && !GameEventSystem.Instance.DoneDialogue_FirstKakRen)
         {
             DialogueSystem.Instance.StartDialogue(SecDialogue);
         }

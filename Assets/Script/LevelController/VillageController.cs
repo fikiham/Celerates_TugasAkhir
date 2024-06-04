@@ -10,6 +10,7 @@ public class VillageController : MonoBehaviour
     [SerializeField] Transform playerSpawnSpot;
 
 
+    public Transform WargaDesaTransform;
     public Transform KakRenTransform;
     public Transform TanamanCabaiTransform;
     public Transform TengahKota;
@@ -25,19 +26,16 @@ public class VillageController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        //player.position = playerSpawnSpot.position;
+        player.position = playerSpawnSpot.position;
+
+        if (!GameEventSystem.Instance.DoneDialogue_FirstDesaWarga && GameEventSystem.Instance.DoneDialogue_DanauPertamaKeDesa)
+        {
+            Player_Direction.Instance.Target = WargaDesaTransform;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameEventSystem.Instance.DoneDialogue_1 && !GameEventSystem.Instance.DoneDialogue_2)
-        {
-            Player_Direction.Instance.Target = KakRenTransform;
-        }
-        if (!GameEventSystem.Instance.DoneDialogue_3 && GameEventSystem.Instance.DoneDialogue_2)
-        {
-            Player_Direction.Instance.Target = TengahKota;
-        }
     }
 }

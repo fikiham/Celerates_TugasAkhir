@@ -87,12 +87,12 @@ public class GameData
 
             // GAME EVENTS
             gameEvent_DoneFirstNarration = GameEventSystem.Instance.DoneFirstNarration;
-            gameEvent_DoneDialogue_1 = GameEventSystem.Instance.DoneDialogue_1;
-            gameEvent_DoneDialogue_2 = GameEventSystem.Instance.DoneDialogue_2;
-            gameEvent_DoneDialogue_3 = GameEventSystem.Instance.DoneDialogue_3;
-            gameEvent_DoneDialogue_4 = GameEventSystem.Instance.DoneDialogue_4;
-            gameEvent_DoneDialogue_5 = GameEventSystem.Instance.DoneDialogue_5;
-            gameEvent_DoneDialogue_6 = GameEventSystem.Instance.DoneDialogue_6;
+            gameEvent_DoneDialogue_1 = GameEventSystem.Instance.DoneDialogue_TamashiiGiveName;
+            gameEvent_DoneDialogue_2 = GameEventSystem.Instance.DoneDialogue_DanauPertamaKeDesa;
+            gameEvent_DoneDialogue_3 = GameEventSystem.Instance.DoneDialogue_FirstDesaWarga;
+            gameEvent_DoneDialogue_4 = GameEventSystem.Instance.DoneDialogue_FirstKakRen;
+            gameEvent_DoneDialogue_5 = GameEventSystem.Instance.DoneDialogue_FirstBandit;
+            gameEvent_DoneDialogue_6 = GameEventSystem.Instance.DoneDialogue_FirstBanditDone;
             gameEvent_DoneDialogue_7 = GameEventSystem.Instance.DoneDialogue_7;
         }
     }

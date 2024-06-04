@@ -14,11 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Besi
   type: 4
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 4b3d5065b7010ef498a6cdf20e81d27c, type: 3}
   itemDescription: dari metal lizard
   Level: 1
   Damage: 0
+  AreaOfEffect: 0
+  SpecialAttackCD: 0
+  SpecialAttackStamina: 0
   UpgradeCost: 0
+  RangedWeapon_ProjectilePrefab: {fileID: 0}
   isStackable: 1
   stackCount: 1
   BuyValue: 0

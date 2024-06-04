@@ -7,17 +7,15 @@ public class GameEventSystem : MonoBehaviour
     public static GameEventSystem Instance;
 
     [SerializeField] GameObject playerNameInputUI;
-
-
-
+    [SerializeField] Dialogues afterFirstBandit;
 
     public bool DoneFirstNarration;
-    public bool DoneDialogue_1;
-    public bool DoneDialogue_2;
-    public bool DoneDialogue_3;
-    public bool DoneDialogue_4;
-    public bool DoneDialogue_5;
-    public bool DoneDialogue_6;
+    public bool DoneDialogue_TamashiiGiveName;
+    public bool DoneDialogue_DanauPertamaKeDesa;
+    public bool DoneDialogue_FirstDesaWarga;
+    public bool DoneDialogue_FirstKakRen;
+    public bool DoneDialogue_FirstBandit;
+    public bool DoneDialogue_FirstBanditDone;
     public bool DoneDialogue_7;
 
     private void Awake()
@@ -43,44 +41,60 @@ public class GameEventSystem : MonoBehaviour
 
             Player_Direction.Instance.Target = ForestController.Instance.FirstSpawner.transform;
             Player_Quest.Instance.SetQuest("Bunuh semua serigala");
+            TamashiiFollow.Instance.SetFollowing(true);
         }
         else if (prompt == "1Dialogue")
         {
-            DoneDialogue_1 = true;
+            DoneDialogue_TamashiiGiveName = true;
             Player_Direction.Instance.Target = ForestController.Instance.DanauKetenangan;
             Player_Quest.Instance.SetQuest("Pergi ke danau ketenangan");
         }
         else if (prompt == "2Dialogue")
         {
-            DoneDialogue_2 = true;
+            DoneDialogue_DanauPertamaKeDesa = true;
             Player_Direction.Instance.Target = ForestController.Instance.VillagePortal;
             Player_Quest.Instance.SetQuest("Kembali ke desa");
         }
         else if (prompt == "3Dialogue")
         {
-            DoneDialogue_3 = true;
+            DoneDialogue_FirstDesaWarga = true;
             Player_Direction.Instance.Target = VillageController.Instance.KakRenTransform;
             Player_Quest.Instance.SetQuest("Bertemu Kak Ren");
         }
         else if (prompt == "4Dialogue")
         {
-            DoneDialogue_4 = true;
+            DoneDialogue_FirstKakRen = true;
             Player_Direction.Instance.Target = VillageController.Instance.TanamanCabaiTransform;
-            Player_Quest.Instance.SetQuest("Pergi ke Kebun");
+
+            Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Penyiram Tanaman"));
+            ItemDisplay.Instance.ShowItemDisplay(ItemPool.Instance.GetItem("Penyiram Tanaman"));
+            ItemDisplay.Instance.AddButtonListener(null);
+
+            Player_Quest.Instance.SetQuest("" +
+                "- Gunakan penyiram tanaman di Inventory\n" +
+                "- Berkebun bersama Tamashii");
         }
         else if (prompt == "givePedang")
         {
             Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Pedang Ren"));
             ItemDisplay.Instance.ShowItemDisplay(ItemPool.Instance.GetItem("Pedang Ren"));
+            ItemDisplay.Instance.AddButtonListener(ItemDisplay.Instance.DialoguePedangPart2);
         }
         else if (prompt == "5Dialogue")
         {
-            DoneDialogue_5 = true;
-            Player_Quest.Instance.SetQuest("Bunuh semua bandit");
+            DoneDialogue_FirstBandit = true;
+            RaidSystem.Instance.StartRaid(1, 500, () => DialogueSystem.Instance.StartDialogue(afterFirstBandit));
+
+            Player_Direction.Instance.Target = null;
+            Player_Quest.Instance.SetQuest("" +
+                "- Gunakan pedang Kak Ren di Inventory\n" +
+                "- Bunuh semua bandit");
         }
         else if (prompt == "6Dialogue")
         {
-            DoneDialogue_6 = true;
+            DoneDialogue_FirstBanditDone = true;
+            Player_Direction.Instance.Target = null;
+            Player_Quest.Instance.SetQuest("");
         }
         else if (prompt == "7Dialogue")
         {

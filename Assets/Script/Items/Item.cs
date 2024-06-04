@@ -23,6 +23,7 @@ public class Item : ScriptableObject
     // Combat Item
     [Header("COMBAT")]
     public int Level;
+    public int MaxLevel;
     public int Damage;
     public int AreaOfEffect;
     public int SpecialAttackCD;

@@ -90,7 +90,30 @@ public class ShopUI : MonoBehaviour
             if (buySellOrUpgrade == 1 && item.stackCount == 0)
             {
                 itemInInventory.GetChild(2).GetComponent<Button>().interactable = false;
-                itemInInventory.GetChild(2).GetComponentInChildren<TMP_Text>().text = "SOLD";
+            }
+
+            if (buySellOrUpgrade == 3)
+            {
+                if (item.Level < item.MaxLevel)
+                {
+                    itemInInventory.GetChild(2).GetComponent<Button>().interactable = true;
+                    itemInInventory.GetChild(2).GetComponentInChildren<TMP_Text>().text = "UPGRADE";
+                }
+                else
+                {
+                    itemInInventory.GetChild(2).GetComponent<Button>().interactable = false;
+                    itemInInventory.GetChild(2).GetComponentInChildren<TMP_Text>().text = "MAXED";
+                }
+
+                Transform upgradesContainer = itemInInventory.GetChild(3);
+                Transform levelTemplate = itemInInventory.GetChild(3).GetChild(0);
+                for (int i = 0; i < item.MaxLevel; i++)
+                {
+                    Transform level = Instantiate(levelTemplate, upgradesContainer);
+                    level.gameObject.SetActive(true);
+                    if (i < item.Level)
+                        level.GetChild(0).gameObject.SetActive(true);
+                }
             }
 
             itemInInventory.GetComponentInChildren<Button>().onClick.RemoveAllListeners();
@@ -154,10 +177,12 @@ public class ShopUI : MonoBehaviour
     }
     void UpgradeItem(Item item)
     {
-        // Check if money enough then subtract
-        if (GameEconomy.Instance.SpendMoney(item.UpgradeCost))
-            item.Level++; // Add item level
-        OpenShop();
-
+        if (item.Level < item.MaxLevel)
+        {
+            // Check if money enough then subtract
+            if (GameEconomy.Instance.SpendMoney(item.UpgradeCost))
+                item.Level++; // Add item level
+            OpenShop();
+        }
     }
 }

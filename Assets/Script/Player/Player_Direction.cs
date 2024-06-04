@@ -27,7 +27,7 @@ public class Player_Direction : MonoBehaviour
         }
         else
         {
-            arrow.gameObject.SetActive(true);
+            arrow.gameObject.SetActive(false);
         }
     }
 }

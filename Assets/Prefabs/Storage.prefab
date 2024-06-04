@@ -93,8 +93,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 242766782310632990}
-  - component: {fileID: 4410029220642078272}
   - component: {fileID: 549079658707127487}
+  - component: {fileID: 5904119402055187217}
   m_Layer: 8
   m_Name: Storage
   m_TagString: Untagged
@@ -112,14 +112,30 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.49, y: -4.14, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6287593365397047235}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &4410029220642078272
-BoxCollider2D:
+--- !u!114 &549079658707127487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5454017072709228803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8202c11f5ddf99c4b80d809aa759abf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useEvents: 0
+  promptMessage: Buka Gubuk
+  Items: []
+  storageUI: {fileID: 0}
+--- !u!60 &5904119402055187217
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -150,32 +166,23 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.12901914, y: -0.33460557}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.3333334, y: 1.3333334}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4.2100363, y: 2.163914}
-  m_EdgeRadius: 0
---- !u!114 &549079658707127487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5454017072709228803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8202c11f5ddf99c4b80d809aa759abf5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useEvents: 0
-  promptMessage: Buka Gubuk
-  Items: []
-  storageUI: {fileID: 0}
+  m_Points:
+    m_Paths:
+    - - {x: 1.9827666, y: 1.0664085}
+      - {x: -1.0364388, y: 0.9825884}
+      - {x: -2.114078, y: 0.90513587}
+      - {x: -2.2977827, y: -0.8031369}
+      - {x: -2.0772316, y: -1.4161797}
+      - {x: 2.2574835, y: -1.3972063}
+      - {x: 2.3930683, y: -0.21276385}
+  m_UseDelaunayMesh: 0

@@ -93,8 +93,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8168844948068069531}
-  - component: {fileID: 7851772617590387548}
   - component: {fileID: 5055354418458172506}
+  - component: {fileID: 192409798052791706}
   m_Layer: 8
   m_Name: Cook
   m_TagString: Untagged
@@ -118,8 +118,23 @@ Transform:
   - {fileID: 8924419057877489167}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &7851772617590387548
-BoxCollider2D:
+--- !u!114 &5055354418458172506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8687371611602760786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cf7a5a3e6b26b4ebc874c9da8ac8df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useEvents: 0
+  promptMessage: Open Cook
+  cookUI: {fileID: 0}
+--- !u!60 &192409798052791706
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -150,31 +165,27 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.16076016, y: -0.40559196}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 5.3425527, y: 3.4657097}
-  m_EdgeRadius: 0
---- !u!114 &5055354418458172506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8687371611602760786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78cf7a5a3e6b26b4ebc874c9da8ac8df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useEvents: 0
-  promptMessage: Open Cook
-  cookUI: {fileID: 0}
+  m_Points:
+    m_Paths:
+    - - {x: 2.3331568, y: 0.85635185}
+      - {x: 1.7175986, y: 0.8305111}
+      - {x: 1.6962614, y: 1.3529129}
+      - {x: -0.5280397, y: 1.3942575}
+      - {x: -0.48171687, y: 0.87684345}
+      - {x: -1.360621, y: 0.92776775}
+      - {x: -2.5139694, y: 0.65626144}
+      - {x: -2.9205418, y: -1.0229466}
+      - {x: -2.534501, y: -2.1409817}
+      - {x: 2.7963405, y: -2.1409805}
+      - {x: 2.8636196, y: -0.59034353}
+  m_UseDelaunayMesh: 0

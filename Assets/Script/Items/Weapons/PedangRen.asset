@@ -17,10 +17,12 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 8d7f4b8f68fec4f4ebf617c0f2892d0d, type: 3}
   itemDescription: "Pedang pemberian ren, cukup untuk mengusir bandit \nSpecial Skill:
     Meningkatkan atk sebesar 100% selama 30 detik. Cd: 40 detik; Stamina: 20"
-  Level: 0
+  Level: 1
+  MaxLevel: 3
   Damage: 20
   AreaOfEffect: 3
   SpecialAttackCD: 40
+  SpecialAttackStamina: 0
   UpgradeCost: 15
   RangedWeapon_ProjectilePrefab: {fileID: 0}
   isStackable: 0

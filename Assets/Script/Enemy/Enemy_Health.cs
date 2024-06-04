@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEditorInternal;
 using UnityEngine;
 
@@ -7,7 +9,7 @@ using UnityEngine;
 public class Enemy_Health : MonoBehaviour
 {
     Rigidbody2D rb;
-    SpriteRenderer sr;
+    [SerializeField] SpriteRenderer sr;
     [HideInInspector] public Transform player;
 
     public Enemy_Spawner theSpawner;
@@ -23,12 +25,13 @@ public class Enemy_Health : MonoBehaviour
     [SerializeField] int maxHealth = 100;
     [SerializeField] int health = 100;
     public bool justGotHit;
-    [SerializeField] List<string> ItemDrops;
+    public bool CanDrop = false;
+    [SerializeField] string ItemDrop;
+    [SerializeField] float DropChance;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
         health = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -102,7 +105,11 @@ public class Enemy_Health : MonoBehaviour
         }
         GameEconomy.Instance.GainMoney(10);
         Destroy(gameObject);
-        ItemPool.Instance.DropItem(ItemDrops[Random.Range(0, ItemDrops.Count)], transform.position);
+        if (CanDrop)
+        {
+            if (Random.Range(0, 100) <= DropChance)
+                ItemPool.Instance.DropItem(ItemDrop, transform.position);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

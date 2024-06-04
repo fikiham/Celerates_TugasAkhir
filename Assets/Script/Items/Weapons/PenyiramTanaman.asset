@@ -20,6 +20,7 @@ MonoBehaviour:
     Special skill:
     menyiram tanaman; Stamina: 1'
   Level: 1
+  MaxLevel: 1
   Damage: 1
   AreaOfEffect: 1
   SpecialAttackCD: 0

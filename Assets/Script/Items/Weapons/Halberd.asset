@@ -16,7 +16,8 @@ MonoBehaviour:
   type: 0
   sprite: {fileID: 21300000, guid: 0449fdedfc45aa64aaa4c88d0271205d, type: 3}
   itemDescription: Tombak yang berfokus dalam serangan skala luas
-  Level: 0
+  Level: 1
+  MaxLevel: 1
   Damage: 15
   AreaOfEffect: 7
   SpecialAttackCD: 0

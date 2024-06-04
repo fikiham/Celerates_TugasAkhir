@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
 
     [SerializeField] GameObject[] persistentUI;
 
-    bool canPause = true;
+    [HideInInspector] public bool canPause = true;
     public bool gamePaused;
     [SerializeField] GameObject pauseUI;
 
@@ -60,11 +60,13 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (canPause)
-            {
-                PauseWithUI();
-            }
-            else if (gamePaused)
+            //if (canPause)
+            //{
+            //    Debug.Log("deez");
+            //    PauseWithUI();
+            //}
+            //else 
+            if (gamePaused)
             {
                 ResumeGame();
                 ShowPersistentUI(true);
@@ -92,7 +94,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void PauseWithUI()
+    public void PauseWithUI()
     {
         PauseGame();
         ShowPersistentUI(false);
@@ -152,7 +154,7 @@ public class GameController : MonoBehaviour
         inventory.AddQuickSlot(inventory.FindItemInInventory(data.PlayerInventory_ActiveItemAndCount[3].itemName), 1);
 
         // Load storage items to each storage container
-        if (StorageSystem.Instance.isActiveAndEnabled)
+        if (StorageSystem.Instance == null)
         {
             foreach (KeyValuePair<int, List<GameData.SimpleItem>> ele in data.Storages_ItemNameAndCount)
             {
@@ -166,12 +168,12 @@ public class GameController : MonoBehaviour
         }
 
         GameEventSystem.Instance.DoneFirstNarration = data.gameEvent_DoneFirstNarration;
-        GameEventSystem.Instance.DoneDialogue_1 = data.gameEvent_DoneDialogue_1;
-        GameEventSystem.Instance.DoneDialogue_2 = data.gameEvent_DoneDialogue_2;
-        GameEventSystem.Instance.DoneDialogue_3 = data.gameEvent_DoneDialogue_3;
-        GameEventSystem.Instance.DoneDialogue_4 = data.gameEvent_DoneDialogue_4;
-        GameEventSystem.Instance.DoneDialogue_5 = data.gameEvent_DoneDialogue_5;
-        GameEventSystem.Instance.DoneDialogue_6 = data.gameEvent_DoneDialogue_6;
+        GameEventSystem.Instance.DoneDialogue_TamashiiGiveName = data.gameEvent_DoneDialogue_1;
+        GameEventSystem.Instance.DoneDialogue_DanauPertamaKeDesa = data.gameEvent_DoneDialogue_2;
+        GameEventSystem.Instance.DoneDialogue_FirstDesaWarga = data.gameEvent_DoneDialogue_3;
+        GameEventSystem.Instance.DoneDialogue_FirstKakRen = data.gameEvent_DoneDialogue_4;
+        GameEventSystem.Instance.DoneDialogue_FirstBandit = data.gameEvent_DoneDialogue_5;
+        GameEventSystem.Instance.DoneDialogue_FirstBanditDone = data.gameEvent_DoneDialogue_6;
         GameEventSystem.Instance.DoneDialogue_7 = data.gameEvent_DoneDialogue_7;
     }
 

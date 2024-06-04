@@ -20,9 +20,11 @@ MonoBehaviour:
     Special Skill: Menembakkan
     5 anak panah sekaligus. Stamina: 15; Cd: 10'
   Level: 1
+  MaxLevel: 1
   Damage: 20
   AreaOfEffect: 0
   SpecialAttackCD: 0
+  SpecialAttackStamina: 0
   UpgradeCost: 0
   RangedWeapon_ProjectilePrefab: {fileID: 6794102656783284840, guid: 63d9c524196efda4a9b8cb3925b4c084, type: 3}
   isStackable: 0

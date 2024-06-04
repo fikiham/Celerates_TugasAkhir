@@ -13,22 +13,12 @@ public class ItemDropInteractable : Interactable
         Debug.Log("ItemDropInteractable: Start method called.");
     }
 
-     private void Update()
-    {
-        
-        promptMessage = "Panen Tanaman";
-
-    }
-
     protected override void Interact()
     {
         SoundManager.Instance.PlaySound("Pick");
-        Debug.Log("item di ambil.");
+        Debug.Log(item.itemName + " di ambil.");
         Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(item.itemName));
-        Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Daging Sapi"));
-        Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Pedang Ren"));
-        Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Penyiram Tanaman"));
-        
+
         Destroy(gameObject);
     }
 

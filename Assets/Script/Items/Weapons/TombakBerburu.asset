@@ -16,10 +16,12 @@ MonoBehaviour:
   type: 0
   sprite: {fileID: 21300000, guid: d497a64bf306e49489a51745ee0b5418, type: 3}
   itemDescription: Tombak yang digunakan untuk berburu
-  Level: 0
+  Level: 1
+  MaxLevel: 1
   Damage: 10
   AreaOfEffect: 5
   SpecialAttackCD: 0
+  SpecialAttackStamina: 0
   UpgradeCost: 0
   RangedWeapon_ProjectilePrefab: {fileID: 0}
   isStackable: 0

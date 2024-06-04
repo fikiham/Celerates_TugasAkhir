@@ -18,10 +18,12 @@ MonoBehaviour:
   itemDescription: "Memberikanmu Kesempatan untuk menyerang musuh, tidak lebih. \nSpecial
     Skill: Menebas dengan kuat sebanyak 1 kali disekitar area player, memberikan
     dmg sebesar 400% dari atk senjata ini. Stamina: 10; Cd: 10 Detik"
-  Level: 0
+  Level: 1
+  MaxLevel: 1
   Damage: 10
   AreaOfEffect: 1
   SpecialAttackCD: 10
+  SpecialAttackStamina: 0
   UpgradeCost: 15
   RangedWeapon_ProjectilePrefab: {fileID: 0}
   isStackable: 0
