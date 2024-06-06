@@ -144,4 +144,9 @@ public class DialogueSystem : MonoBehaviour
         NextButton.onClick.AddListener(NextDialogue);
 
     }
+
+      public void PlayClickSound()
+    {
+        SoundManager.Instance.PlaySound("Click");
+    }
 }

@@ -3,15 +3,23 @@ using UnityEngine.UI;
 
 public class VolumeSetting : MonoBehaviour
 {
-    [SerializeField] private SoundManager soundManager;
     [SerializeField] private Slider volumeSlider;
 
     private void Start()
     {
-         // Pastikan volumeSlider tidak null sebelum menggunakannya
+        // Pastikan SoundManager ditemukan
+        SoundManager soundManager = SoundManager.Instance;
+        if (soundManager == null)
+        {
+            Debug.LogError("SoundManager tidak ditemukan!");
+            return;
+        }
+
+        // Pastikan slider terhubung sebelum digunakan
         if (volumeSlider != null)
         {
-            SetMusicVolume();
+            volumeSlider.onValueChanged.AddListener(SetMusicVolume);
+            SetMusicVolume(volumeSlider.value); // Set initial volume
         }
         else
         {
@@ -19,12 +27,8 @@ public class VolumeSetting : MonoBehaviour
         }
     }
 
-  public void SetMusicVolume()
+    public void SetMusicVolume(float volume)
     {
-        if (volumeSlider != null)
-        {
-            float volume = volumeSlider.value;
-            soundManager.SetMusicVolume(volume);
-        }
+        SoundManager.Instance.SetMusicVolume(volume);
     }
 }

@@ -88,7 +88,7 @@ public class RaidSystem : MonoBehaviour
             {
                 if (winStatus)
                 {
-                    SoundManager.Instance.PlaySound("WinRaid");
+                     
                     // Win
                     raidEndText.color = Color.yellow;
                     raidEndText.text = "Successfully Defended the Village";
@@ -99,6 +99,9 @@ public class RaidSystem : MonoBehaviour
                     // Give Money
                     GameEconomy.Instance.GainMoney(currentLoot);
                     currentLoot = 0;
+
+                     // Mainkan sound "WinRaid"
+                    SoundManager.Instance.PlaySound("WinRaid");
                 }
                 else
                 {

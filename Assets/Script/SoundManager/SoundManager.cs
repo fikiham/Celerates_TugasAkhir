@@ -67,23 +67,27 @@ public class SoundManager : MonoBehaviour
     {
         if (bgmSource.clip != null && bgmSource.isPlaying && bgmSource.clip.name == soundName)
         {
-            Debug.Log("suara danau dihentikan");
             bgmSource.Stop();
         }
-        else if (sfxSource.isPlaying && sfxSource.clip.name == soundName)
+        else if (sfxSource.isPlaying && sfxSource.clip != null && sfxSource.clip.name == soundName)
         {
             sfxSource.Stop();
         }
     }
 
-      public void StopBGM()
-        {
-            bgmSource.Stop();
-        }
+    public void StopBGM()
+    {
+        bgmSource.Stop();
+    }
 
-        public void SetMusicVolume(float volume)
-        {
-            bgmSource.volume = volume;
-        }
+    public void SetMusicVolume(float volume)
+    {
+        bgmSource.volume = volume;
+    }
 
+    // Tambahkan metode untuk mengatur volume SFX jika diperlukan
+    public void SetSFXVolume(float volume)
+    {
+        sfxSource.volume = volume;
+    }
 }
