@@ -17,6 +17,9 @@ public class PedangRenInteractable : Interactable
     protected override void Interact()
     {
         if (GameEventSystem.Instance.DoneDialogue_FirstKakRen && !GameEventSystem.Instance.DoneDialogue_FirstBandit)
+        {
             DialogueSystem.Instance.StartDialogue(pedangRenDialogue);
+            Destroy(gameObject);
+        }
     }
 }

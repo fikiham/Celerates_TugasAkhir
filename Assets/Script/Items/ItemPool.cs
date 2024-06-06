@@ -34,7 +34,6 @@ public class ItemPool : MonoBehaviour
     public void DropItem(string itemName, Vector2 pos, int count = 1, int level = 1)
     {
         GameObject droppedItem = Instantiate(itemDropPrefab, pos, Quaternion.identity);
-        droppedItem.GetComponent<SpriteRenderer>().sprite = GetItem(itemName).sprite;
 
         // Tambahkan komponen Rigidbody2D jika belum ada
         Rigidbody2D rb = droppedItem.GetComponent<Rigidbody2D>();

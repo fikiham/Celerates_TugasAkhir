@@ -57,4 +57,4 @@ MonoBehaviour:
   - name: 
     sentence: "Raid ini bukanlah raid biasa\u2026 ada apa ini\u2026.?\r"
   mainSpeaker: 
-  promptAfterDialogue: 
+  promptAfterDialogue: FinishDialogue

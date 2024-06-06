@@ -11,19 +11,19 @@ public class ItemDropInteractable : Interactable
 
     private void Start()
     {
-        Debug.Log("ItemDropInteractable: Start method called.");
         if (item == null)
             item = ItemPool.Instance.GetItem(itemName);
         promptMessage = "Ambil " + item.itemName;
-
+        GetComponent<SpriteRenderer>().sprite = item.sprite;
     }
 
     protected override void Interact()
     {
-        SoundManager.Instance.PlaySound("Pick");
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySound("Pick");
         Debug.Log(item.itemName + " di ambil.");
         Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(item.itemName));
-        if (item.type == ItemType.Quest) { GameController.QuestItemCount++; }
+        if (item.type == ItemType.Quest) { GetComponent<QuestQuanta>().Take(); }
 
         Destroy(gameObject);
     }

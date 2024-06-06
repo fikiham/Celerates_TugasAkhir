@@ -31,7 +31,8 @@ public class StorageUI : MonoBehaviour
         // Close
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SoundManager.Instance.PlaySound("Click");
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySound("Click");
             gameObject.SetActive(false);
             GameController.Instance.ShowPersistentUI(true);
             theStorage.Items = Items;
@@ -40,13 +41,14 @@ public class StorageUI : MonoBehaviour
 
     public void OpenStorage(StorageInteractable theStorage, List<Item> Items)
     {
-        SoundManager.Instance.PlaySound("Click");
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySound("Click");
         GameController.Instance.ShowPersistentUI(false);
         gameObject.SetActive(true);
 
         this.theStorage = theStorage;
         this.Items = new();
-        foreach(Item item in Items)
+        foreach (Item item in Items)
         {
             this.Items.Add(item);
         }

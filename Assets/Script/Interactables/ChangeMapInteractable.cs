@@ -12,7 +12,7 @@ public class ChangeMapInteractable : Interactable
         Debug.Log("Going to " + direction);
         GameController.Instance.SaveGame();
         LoadingScreenUI.Instance.LoadScene(goToVillage ? 2 : 1);
-        GameController.Instance.LoadGame();
+
 
         if (!goToVillage)
         {

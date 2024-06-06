@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public static int LatestMap = 1;
     Vector2 latestPlayerPos;
     public static int QuestItemCount = 0;
+    public static bool CanFinishStory = false;
 
     public string playerName;
     public bool enablePlayerInput;
@@ -49,7 +50,6 @@ public class GameController : MonoBehaviour
         {
             LoadGame();
         }
-
         InitializePlayer();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -63,6 +63,8 @@ public class GameController : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+
+
         PlayCurrentSceneBGM();
         InitializePlayer();
     }
@@ -164,6 +166,7 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("HaveSaved", 99);
         LatestMap = SceneManager.GetActiveScene().buildIndex;
         SaveSystem.SaveData();
+        NewGame = false;
     }
 
     [ContextMenu("Load Game")]
@@ -210,13 +213,12 @@ public class GameController : MonoBehaviour
         GameEventSystem.Instance.DoneDialogue_FirstKakRen = data.gameEvent_DoneDialogue_4;
         GameEventSystem.Instance.DoneDialogue_FirstBandit = data.gameEvent_DoneDialogue_5;
         GameEventSystem.Instance.DoneDialogue_FirstBanditDone = data.gameEvent_DoneDialogue_6;
-        GameEventSystem.Instance.DoneDialogue_7 = data.gameEvent_DoneDialogue_7;
+        GameEventSystem.Instance.DoneDialogue_FinshDialogue = data.gameEvent_DoneDialogue_7;
     }
 
     public void GoToMainMenu()
     {
         SaveGame();
-        NewGame = false;
         LoadingScreenUI.Instance.LoadScene(0);
         Destroy(transform.root.gameObject);
     }

@@ -93,7 +93,7 @@ public class GameData
             gameEvent_DoneDialogue_4 = GameEventSystem.Instance.DoneDialogue_FirstKakRen;
             gameEvent_DoneDialogue_5 = GameEventSystem.Instance.DoneDialogue_FirstBandit;
             gameEvent_DoneDialogue_6 = GameEventSystem.Instance.DoneDialogue_FirstBanditDone;
-            gameEvent_DoneDialogue_7 = GameEventSystem.Instance.DoneDialogue_7;
+            gameEvent_DoneDialogue_7 = GameEventSystem.Instance.DoneDialogue_FinshDialogue;
         }
     }
 
