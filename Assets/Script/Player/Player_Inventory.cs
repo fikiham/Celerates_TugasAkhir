@@ -47,10 +47,10 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
     {
         inventoryUI = PlayerUI.Instance.inventoryUI.GetComponent<InventoryUI>();
         // Handle so that equipped items never null
-        EquipItem(emptyItem, 0);
-        EquipItem(emptyItem, 1);
-        AddQuickSlot(emptyItem, 0);
-        AddQuickSlot(emptyItem, 1);
+        //EquipItem(emptyItem, 0);
+        //EquipItem(emptyItem, 1);
+        //AddQuickSlot(emptyItem, 0);
+        //AddQuickSlot(emptyItem, 1);
     }
 
     private void Update()

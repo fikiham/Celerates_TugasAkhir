@@ -24,6 +24,9 @@ public class ForestController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!GameController.NewGame)
+            GameController.Instance.LoadGame();
+
         if (!GameEventSystem.Instance.DoneFirstNarration)
         {
             DialogueSystem.Instance.StartFirstDialogue();

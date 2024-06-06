@@ -50,7 +50,6 @@ public class GameController : MonoBehaviour
         {
             LoadGame();
         }
-
         InitializePlayer();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -64,6 +63,8 @@ public class GameController : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+
+
         PlayCurrentSceneBGM();
         InitializePlayer();
     }
@@ -157,6 +158,7 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("HaveSaved", 99);
         LatestMap = SceneManager.GetActiveScene().buildIndex;
         SaveSystem.SaveData();
+        NewGame = false;
     }
 
     [ContextMenu("Load Game")]
@@ -209,7 +211,6 @@ public class GameController : MonoBehaviour
     public void GoToMainMenu()
     {
         SaveGame();
-        NewGame = false;
         LoadingScreenUI.Instance.LoadScene(0);
         Destroy(transform.root.gameObject);
     }

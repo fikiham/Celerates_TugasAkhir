@@ -28,6 +28,11 @@ public class VillageController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         player.position = playerSpawnSpot.position;
 
+        if (!GameController.NewGame)
+            GameController.Instance.LoadGame();
+
+
+
         if (!GameEventSystem.Instance.DoneDialogue_FirstDesaWarga && GameEventSystem.Instance.DoneDialogue_DanauPertamaKeDesa)
         {
             Player_Direction.Instance.Target = WargaDesaTransform;

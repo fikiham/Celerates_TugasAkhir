@@ -24,6 +24,9 @@ public class Player_Action : MonoBehaviour
     [SerializeField] GameObject normalAttackHitArea;
     [SerializeField] GameObject specialAttackHitArea;
 
+    float specialAttackTimer;
+    bool canSpecialAttack = true;
+
     [SerializeField] GameObject swordFX;
     [SerializeField] ParticleSystem swordParticle;
     [SerializeField] ParticleSystem swordAOEParticle;
@@ -71,8 +74,9 @@ public class Player_Action : MonoBehaviour
             // Secondary Action (Sepcial Attacking)
             if (Input.GetKeyDown(specialInput))
             {
-                if (combatMode && canAttack)
+                if (combatMode && canAttack && canSpecialAttack)
                 {
+                    canSpecialAttack = false;
                     SpecialAttack();
                     StartCoroutine(HandleUICD(PlayerUI.Instance.specialAttackUI, Player_Inventory.Instance.equippedWeapon.SpecialAttackCD));
                 }
@@ -186,6 +190,13 @@ public class Player_Action : MonoBehaviour
 
 
     #region COMBAT_ACTIONS
+
+    IEnumerator HandleSpecialAttackCD(float dur)
+    {
+        yield return new WaitForSeconds(dur);
+        canSpecialAttack = true;
+    }
+
     public void ActivateHitbox(int damage, float area, float howLong = .5f, bool AOE = false)
     {
         if (!AOE)
@@ -298,6 +309,7 @@ public class Player_Action : MonoBehaviour
 
         if (Player_Health.Instance.SpendStamina(itemToAttack.SpecialAttackStamina))
         {
+            StartCoroutine(HandleSpecialAttackCD(itemToAttack.SpecialAttackCD));
             if (itemToAttack.itemName == "Penyiram Tanaman")
             {
                 SoundManager.Instance.PlaySound("Siram");
