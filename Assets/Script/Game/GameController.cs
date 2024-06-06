@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public static int LatestMap = 1;
     Vector2 latestPlayerPos;
     public static int QuestItemCount = 0;
+    public static bool CanFinishStory = false;
 
     public string playerName;
     public bool enablePlayerInput;
@@ -202,7 +203,7 @@ public class GameController : MonoBehaviour
         GameEventSystem.Instance.DoneDialogue_FirstKakRen = data.gameEvent_DoneDialogue_4;
         GameEventSystem.Instance.DoneDialogue_FirstBandit = data.gameEvent_DoneDialogue_5;
         GameEventSystem.Instance.DoneDialogue_FirstBanditDone = data.gameEvent_DoneDialogue_6;
-        GameEventSystem.Instance.DoneDialogue_7 = data.gameEvent_DoneDialogue_7;
+        GameEventSystem.Instance.DoneDialogue_FinshDialogue = data.gameEvent_DoneDialogue_7;
     }
 
     public void GoToMainMenu()

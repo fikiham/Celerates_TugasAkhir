@@ -234,7 +234,8 @@ public class Player_Action : MonoBehaviour
         if (itemToAttack.type == ItemType.Melee_Combat)
         {
             // Memanggil suara pedang ketika serangan normal dengan pedang
-            SoundManager.Instance.PlaySound("Sword");
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySound("Sword");
 
             print("melee normal attacking");
             switch (itemToAttack.itemName)

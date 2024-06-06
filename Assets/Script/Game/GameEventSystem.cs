@@ -8,6 +8,7 @@ public class GameEventSystem : MonoBehaviour
 
     [SerializeField] GameObject playerNameInputUI;
     [SerializeField] Dialogues afterFirstBandit;
+    [SerializeField] Dialogues afterFinishDialogue;
 
     public bool DoneFirstNarration;
     public bool DoneDialogue_TamashiiGiveName;
@@ -16,7 +17,7 @@ public class GameEventSystem : MonoBehaviour
     public bool DoneDialogue_FirstKakRen;
     public bool DoneDialogue_FirstBandit;
     public bool DoneDialogue_FirstBanditDone;
-    public bool DoneDialogue_7;
+    public bool DoneDialogue_FinshDialogue;
 
     private void Awake()
     {
@@ -96,9 +97,10 @@ public class GameEventSystem : MonoBehaviour
             Player_Direction.Instance.Target = null;
             Player_Quest.Instance.SetQuest("");
         }
-        else if (prompt == "7Dialogue")
+        else if (prompt == "FinishDialogue")
         {
-            DoneDialogue_7 = true;
+            DoneDialogue_FinshDialogue = true;
+            RaidSystem.Instance.StartRaid(3, 500, () => DialogueSystem.Instance.StartDialogue(afterFinishDialogue));
         }
         else
         {
