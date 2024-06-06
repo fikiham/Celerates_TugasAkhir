@@ -88,6 +88,7 @@ public class RaidSystem : MonoBehaviour
             {
                 if (winStatus)
                 {
+                      SoundManager.Instance.PlaySound("WinRaid");
                     // Win
                     raidEndText.color = Color.yellow;
                     raidEndText.text = "Successfully Defended the Village";

@@ -18,6 +18,9 @@ public class ItemDropInteractable : Interactable
         SoundManager.Instance.PlaySound("Pick");
         Debug.Log(item.itemName + " di ambil.");
         Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(item.itemName));
+        Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Besi"));
+        Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem("Kayu"));
+        
 
         Destroy(gameObject);
     }

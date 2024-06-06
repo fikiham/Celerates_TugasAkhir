@@ -13,28 +13,27 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance;
 
     public List<SoundEffect> soundEffects;
+    public List<SoundEffect> bgmTracks;
 
-    private AudioSource audioSource;
+    private AudioSource sfxSource;
+    private AudioSource bgmSource;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // This ensures the SoundManager is not destroyed on scene load
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject); // If another instance exists, destroy the new one
-            return; // Early return to avoid setting up audio source again
+            Destroy(gameObject);
+            return;
         }
 
-        audioSource = GetComponent<AudioSource>();
-
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
+        sfxSource = gameObject.AddComponent<AudioSource>();
+        bgmSource = gameObject.AddComponent<AudioSource>();
+        bgmSource.loop = true;
     }
 
     public void PlaySound(string soundName)
@@ -42,11 +41,38 @@ public class SoundManager : MonoBehaviour
         SoundEffect sfx = soundEffects.Find(s => s.soundName == soundName);
         if (sfx != null && sfx.clip != null)
         {
-            audioSource.PlayOneShot(sfx.clip);
+            sfxSource.PlayOneShot(sfx.clip);
         }
         else
         {
             Debug.LogWarning("Sound not found: " + soundName);
+        }
+    }
+
+    public void PlayBGM(string bgmName)
+    {
+        SoundEffect bgm = bgmTracks.Find(b => b.soundName == bgmName);
+        if (bgm != null && bgm.clip != null && bgmSource.clip != bgm.clip)
+        {
+            bgmSource.clip = bgm.clip;
+            bgmSource.Play();
+        }
+        else if (bgm == null)
+        {
+            Debug.LogWarning("BGM not found: " + bgmName);
+        }
+    }
+
+    public void Stop(string soundName)
+    {
+        if (bgmSource.clip != null && bgmSource.isPlaying && bgmSource.clip.name == soundName)
+        {
+            Debug.Log("suara danau dihentikan");
+            bgmSource.Stop();
+        }
+        else if (sfxSource.isPlaying && sfxSource.clip.name == soundName)
+        {
+            sfxSource.Stop();
         }
     }
 }

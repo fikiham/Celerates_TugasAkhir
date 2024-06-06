@@ -26225,6 +26225,58 @@ PrefabInstance:
       propertyPath: m_Name
       value: SYSTEMS
       objectReference: {fileID: 0}
+    - target: {fileID: 4722786311886554048, guid: de4a80c8ec66b084082cb2198957d308, type: 3}
+      propertyPath: DoneDialogue_1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722786311886554048, guid: de4a80c8ec66b084082cb2198957d308, type: 3}
+      propertyPath: DoneDialogue_2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722786311886554048, guid: de4a80c8ec66b084082cb2198957d308, type: 3}
+      propertyPath: DoneDialogue_3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722786311886554048, guid: de4a80c8ec66b084082cb2198957d308, type: 3}
+      propertyPath: DoneDialogue_4
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722786311886554048, guid: de4a80c8ec66b084082cb2198957d308, type: 3}
+      propertyPath: DoneDialogue_5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722786311886554048, guid: de4a80c8ec66b084082cb2198957d308, type: 3}
+      propertyPath: DoneDialogue_7
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722786311886554048, guid: de4a80c8ec66b084082cb2198957d308, type: 3}
+      propertyPath: DoneFirstNarration
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722786311886554048, guid: de4a80c8ec66b084082cb2198957d308, type: 3}
+      propertyPath: DoneDialogue_FirstBandit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722786311886554048, guid: de4a80c8ec66b084082cb2198957d308, type: 3}
+      propertyPath: DoneDialogue_FirstKakRen
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722786311886554048, guid: de4a80c8ec66b084082cb2198957d308, type: 3}
+      propertyPath: DoneDialogue_FirstDesaWarga
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722786311886554048, guid: de4a80c8ec66b084082cb2198957d308, type: 3}
+      propertyPath: DoneDialogue_FirstBanditDone
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722786311886554048, guid: de4a80c8ec66b084082cb2198957d308, type: 3}
+      propertyPath: DoneDialogue_TamashiiGiveName
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722786311886554048, guid: de4a80c8ec66b084082cb2198957d308, type: 3}
+      propertyPath: DoneDialogue_DanauPertamaKeDesa
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7915405124011612827, guid: de4a80c8ec66b084082cb2198957d308, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -26265,11 +26317,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5435869505800188875, guid: de4a80c8ec66b084082cb2198957d308, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7533737460017124578, guid: de4a80c8ec66b084082cb2198957d308, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 153990557110953067}
   m_SourcePrefab: {fileID: 100100000, guid: de4a80c8ec66b084082cb2198957d308, type: 3}
+--- !u!1 &153990557110953066 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7533737460017124578, guid: de4a80c8ec66b084082cb2198957d308, type: 3}
+  m_PrefabInstance: {fileID: 153990557110953065}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &153990557110953067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153990557110953066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ef96b94bcf7294daed7c6d9b3541ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmName: BGMFarm
 --- !u!1001 &834217733702715984
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27146,6 +27220,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cabai
       objectReference: {fileID: 0}
+    - target: {fileID: 2733230255810905508, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 277bc0ab817f1064cb3bb24de4e43de0, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

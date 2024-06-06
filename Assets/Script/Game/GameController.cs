@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
@@ -34,7 +33,6 @@ public class GameController : MonoBehaviour
         persistent = transform.root.gameObject;
         DontDestroyOnLoad(persistent);
         Instance = this;
-
     }
 
     private void Start()
@@ -49,10 +47,55 @@ public class GameController : MonoBehaviour
         {
             LoadGame();
         }
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        InitializePlayer();
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        PlayCurrentSceneBGM();
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        PlayCurrentSceneBGM();
+        InitializePlayer();
+    }
+
+    private void InitializePlayer()
+    {
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        if (player == null)
+        {
+            Debug.LogError("Player not found in the scene!");
+            return;
+        }
+
         if (PlayerPrefs.GetInt("HaveSaved") == 99)
         {
             player.position = latestPlayerPos;
+        }
+    }
+
+    private void PlayCurrentSceneBGM()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        switch (currentSceneName)
+        {
+            case "Village":
+                SoundManager.Instance.PlayBGM("VillageBGM");
+                //  SoundManager.Instance.Stop("BGMDanau");
+
+                break;
+            case "Forest":
+                SoundManager.Instance.PlayBGM("ForestBGM");
+                break;
+            default:
+                SoundManager.Instance.PlayBGM("DefaultBGM");
+                break;
         }
     }
 
@@ -60,12 +103,6 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //if (canPause)
-            //{
-            //    Debug.Log("deez");
-            //    PauseWithUI();
-            //}
-            //else 
             if (gamePaused)
             {
                 ResumeGame();
@@ -74,15 +111,11 @@ public class GameController : MonoBehaviour
             }
         }
 
-        if (!Player_Action.Instance.canAttack || gamePaused)
+        // Update enablePlayerInput logic
+        if (Player_Action.Instance != null)
         {
-            enablePlayerInput = false;
+            enablePlayerInput = Player_Action.Instance.canAttack && !gamePaused;
         }
-        else
-        {
-            enablePlayerInput = true;
-        }
-
     }
 
     public void ShowPersistentUI(bool show)
@@ -99,7 +132,6 @@ public class GameController : MonoBehaviour
         PauseGame();
         ShowPersistentUI(false);
         pauseUI.SetActive(true);
-
     }
 
     public void PauseGame()
@@ -128,11 +160,7 @@ public class GameController : MonoBehaviour
     public void LoadGame(GameData theData = null)
     {
         Debug.Log("Loading Game");
-        GameData data;
-        if (theData == null)
-            data = SaveSystem.LoadData();
-        else
-            data = theData;
+        GameData data = theData ?? SaveSystem.LoadData();
         Player_Inventory inventory = Player_Inventory.Instance;
 
         playerName = data.playerName;
@@ -140,21 +168,18 @@ public class GameController : MonoBehaviour
         LatestMap = data.LatestMap;
         latestPlayerPos = new(data.playerPos[0], data.playerPos[1]);
 
-        // Load player inventory data
         inventory.itemList = new();
         foreach (GameData.SimpleItem item in data.PlayerInventory_ItemNameAndCount)
         {
             inventory.AddItem(ItemPool.Instance.GetItem(item.itemName, item.stackCount, item.level));
         }
 
-        // Load Player Active Items
         inventory.EquipItem(inventory.FindItemInInventory(data.PlayerInventory_ActiveItemAndCount[0].itemName), 0);
         inventory.EquipItem(inventory.FindItemInInventory(data.PlayerInventory_ActiveItemAndCount[1].itemName), 1);
         inventory.AddQuickSlot(inventory.FindItemInInventory(data.PlayerInventory_ActiveItemAndCount[2].itemName), 0);
         inventory.AddQuickSlot(inventory.FindItemInInventory(data.PlayerInventory_ActiveItemAndCount[3].itemName), 1);
 
-        // Load storage items to each storage container
-        if (StorageSystem.Instance == null)
+        if (StorageSystem.Instance != null)
         {
             foreach (KeyValuePair<int, List<GameData.SimpleItem>> ele in data.Storages_ItemNameAndCount)
             {
@@ -183,13 +208,10 @@ public class GameController : MonoBehaviour
         NewGame = false;
         LoadingScreenUI.Instance.LoadScene(0);
         Destroy(transform.root.gameObject);
-        //SceneManager.LoadScene(0);
     }
 
     public void PlayerDied()
     {
         PauseGame();
     }
-
-
 }

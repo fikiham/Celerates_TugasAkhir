@@ -9,6 +9,7 @@ public class KakRenInteractable : Interactable
     {
         if (GameEventSystem.Instance.DoneDialogue_FirstDesaWarga && !GameEventSystem.Instance.DoneDialogue_FirstKakRen)
         {
+            Debug.Log("cerita kak ren jalan ");
             DialogueSystem.Instance.StartDialogue(SecDialogue);
         }
     }

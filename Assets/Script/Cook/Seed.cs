@@ -37,13 +37,7 @@ public class Seed : MonoBehaviour
 
                 // Pindahkan objek ke posisi tertentu pada growthCount
 
-                if (growthCount == 1)
-
-                {
-                    Vector3 newPosition = transform.position;
-                    newPosition.y += 0.83f;
-                    transform.position = newPosition;
-                }
+                
 
                 if (growthCount == maxGrowthCount)
                 {
@@ -69,10 +63,7 @@ public class Seed : MonoBehaviour
             isReadyToHarvest = false;
             siram = true;
 
-            // Reset posisi y
-            Vector3 newPosition = transform.position;
-            newPosition.y -= 0.83f * (maxGrowthCount - 1); // Reset posisi sesuai dengan growthCount maksimum
-            transform.position = newPosition;
+           
         }
         else if (siram)
         {
