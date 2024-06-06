@@ -75,4 +75,15 @@ public class SoundManager : MonoBehaviour
             sfxSource.Stop();
         }
     }
+
+      public void StopBGM()
+        {
+            bgmSource.Stop();
+        }
+
+        public void SetMusicVolume(float volume)
+        {
+            bgmSource.volume = volume;
+        }
+
 }
