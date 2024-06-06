@@ -7,7 +7,8 @@ public enum ItemType
     Ranged_Combat,
     Heal,
     Buff,
-    Item
+    Item,
+    Quest
 }
 
 [CreateAssetMenu(menuName = "Make an Item")]

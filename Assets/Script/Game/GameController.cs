@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     public static bool NewGame = true;
     public static int LatestMap = 1;
     Vector2 latestPlayerPos;
+    public static int QuestItemCount = 0;
 
     public string playerName;
     public bool enablePlayerInput;
@@ -18,6 +19,7 @@ public class GameController : MonoBehaviour
     public Transform player;
 
     [SerializeField] GameObject[] persistentUI;
+    [SerializeField] GameObject playeyDiedUI;
 
     [HideInInspector] public bool canPause = true;
     public bool gamePaused;
@@ -179,6 +181,7 @@ public class GameController : MonoBehaviour
         inventory.AddQuickSlot(inventory.FindItemInInventory(data.PlayerInventory_ActiveItemAndCount[2].itemName), 0);
         inventory.AddQuickSlot(inventory.FindItemInInventory(data.PlayerInventory_ActiveItemAndCount[3].itemName), 1);
 
+        // Load storage items to each storage container
         if (StorageSystem.Instance != null)
         {
             foreach (KeyValuePair<int, List<GameData.SimpleItem>> ele in data.Storages_ItemNameAndCount)
@@ -213,5 +216,11 @@ public class GameController : MonoBehaviour
     public void PlayerDied()
     {
         PauseGame();
+        playeyDiedUI.SetActive(true);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
