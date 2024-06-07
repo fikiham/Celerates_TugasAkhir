@@ -17,6 +17,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 7dea3635a9d439a43983b6bb80779bf0, type: 3}
   itemDescription: 
   Level: 0
+  MaxLevel: 0
   Damage: 0
   AreaOfEffect: 0
   SpecialAttackCD: 0
@@ -25,5 +26,5 @@ MonoBehaviour:
   RangedWeapon_ProjectilePrefab: {fileID: 0}
   isStackable: 1
   stackCount: 1
-  BuyValue: 20
-  SellValue: 20
+  BuyValue: 100
+  SellValue: 100

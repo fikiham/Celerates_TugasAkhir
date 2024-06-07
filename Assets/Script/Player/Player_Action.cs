@@ -28,6 +28,7 @@ public class Player_Action : MonoBehaviour
     bool canSpecialAttack = true;
 
     [SerializeField] GameObject swordFX;
+    [SerializeField] GameObject swordAOEFX;
     [SerializeField] ParticleSystem swordParticle;
     [SerializeField] ParticleSystem swordAOEParticle;
     [SerializeField] ParticleSystem tombakParticle;
@@ -216,9 +217,13 @@ public class Player_Action : MonoBehaviour
         }
         else
         {
-            ParticleSystem.ShapeModule theShape = swordAOEParticle.shape;
-            theShape.scale = new(area, 1, 1);
-            swordAOEParticle.Play();
+            //ParticleSystem.ShapeModule theShape = swordAOEParticle.shape;
+            //theShape.scale = new(area, 1, 1);
+            //swordAOEParticle.Play();
+
+            swordAOEFX.transform.localScale = new(area * 4, area * 4, 1);
+            swordAOEFX.GetComponent<SwordAnim>().StartFX();
+
             // Adding constant so the area isn't too small
             area += 1;
             Transform theTransform = specialAttackHitArea.transform;

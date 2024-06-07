@@ -153,6 +153,8 @@ public class ShopUI : MonoBehaviour
                     itemInInventory.GetChild(2).GetComponentInChildren<TMP_Text>().text = "MAXED";
                 }
 
+                itemInInventory.GetChild(4).GetComponent<TMP_Text>().text = "$ " + (item.UpgradeCost);
+
                 Transform upgradesContainer = itemInInventory.GetChild(3);
                 Transform levelTemplate = itemInInventory.GetChild(3).GetChild(0);
                 for (int i = 0; i < item.MaxLevel; i++)

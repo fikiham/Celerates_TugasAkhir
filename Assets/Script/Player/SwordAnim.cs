@@ -6,6 +6,7 @@ public class SwordAnim : MonoBehaviour
 {
     [SerializeField] Sprite[] sprites;
     [SerializeField] SpriteRenderer sr;
+    [SerializeField] float animSpd = .5f;
 
     public void StartFX()
     {
@@ -16,12 +17,23 @@ public class SwordAnim : MonoBehaviour
     IEnumerator Slashing()
     {
         sr.enabled = true;
+        //while (currentFrame < sprites.Length)
+        //{
+        //    sr.sprite = sprites[currentFrame];
+        //    currentFrame++;
+        //    yield return new WaitForSeconds(.1f);
+        //}
         int currentFrame = 0;
-        while (currentFrame < sprites.Length)
+        float startTime = Time.time;
+        while (true)
         {
+            currentFrame = (int)((Time.time - startTime) * sprites.Length / animSpd);
+            if (currentFrame >= sprites.Length)
+            {
+                break;
+            }
             sr.sprite = sprites[currentFrame];
-            currentFrame++;
-            yield return new WaitForSeconds(.1f);
+            yield return null;
         }
         sr.enabled = false;
     }

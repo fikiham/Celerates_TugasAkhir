@@ -59,7 +59,7 @@ public class RaidSystem : MonoBehaviour
     }
 
     // Update is called once per frame
-   void Update()
+    void Update()
     {
         if (raidStart)
         {
@@ -100,10 +100,8 @@ public class RaidSystem : MonoBehaviour
                 {
                     // Win
                     raidEndText.color = Color.yellow;
-                    raidEndText.text = "Successfully Defended the Village";
-                    raidEndDescText.text = "Gain some " + " coins";
-                    raidEndButton.image.color = Color.green;
-                    raidEndButton.GetComponentInChildren<TMP_Text>().text = "Ok";
+                    raidEndText.text = "Raid Complete";
+                    raidEndDescText.text = "Gained Coins: " + currentLoot;
 
                     // Give Money
                     GameEconomy.Instance.GainMoney(currentLoot);
@@ -120,10 +118,8 @@ public class RaidSystem : MonoBehaviour
                 {
                     // Lost
                     raidEndText.color = Color.red;
-                    raidEndText.text = "Failed Defending the Village";
-                    raidEndDescText.text = "Lose some " + " coins";
-                    raidEndButton.image.color = Color.red;
-                    raidEndButton.GetComponentInChildren<TMP_Text>().text = "Revive";
+                    raidEndText.text = "The Bandits Have Finished Looting the Goods";
+                    raidEndDescText.text = "Coins: -" + currentLoot;
 
                     // Lost money
                     GameEconomy.Instance.LostMoney(currentLoot);

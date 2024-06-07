@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: SpicyBeef
   m_EditorClassIdentifier: 
   itemName: SpicyBeef
-  type: 3
+  type: 2
   sprite: {fileID: 21300000, guid: fd959386eee05b54abed49e629fe1e45, type: 3}
   itemDescription: blablabla
   Level: 0
+  MaxLevel: 0
   Damage: 0
   AreaOfEffect: 0
   SpecialAttackCD: 0
@@ -25,5 +26,5 @@ MonoBehaviour:
   RangedWeapon_ProjectilePrefab: {fileID: 0}
   isStackable: 1
   stackCount: 1
-  BuyValue: 20
-  SellValue: 20
+  BuyValue: 100
+  SellValue: 100

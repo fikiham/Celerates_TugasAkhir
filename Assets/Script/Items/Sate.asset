@@ -13,16 +13,18 @@ MonoBehaviour:
   m_Name: Sate
   m_EditorClassIdentifier: 
   itemName: Sate
-  type: 4
+  type: 2
   sprite: {fileID: 21300000, guid: 054660555946d2048b30426fb74c2e6f, type: 3}
   itemDescription: 
   Level: 0
+  MaxLevel: 0
   Damage: 0
   AreaOfEffect: 0
   SpecialAttackCD: 0
+  SpecialAttackStamina: 0
   UpgradeCost: 0
   RangedWeapon_ProjectilePrefab: {fileID: 0}
   isStackable: 1
   stackCount: 1
-  BuyValue: 20
-  SellValue: 20
+  BuyValue: 100
+  SellValue: 100

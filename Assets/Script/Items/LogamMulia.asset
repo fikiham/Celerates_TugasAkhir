@@ -26,5 +26,5 @@ MonoBehaviour:
   RangedWeapon_ProjectilePrefab: {fileID: 0}
   isStackable: 1
   stackCount: 1
-  BuyValue: 0
-  SellValue: 0
+  BuyValue: 100
+  SellValue: 100
