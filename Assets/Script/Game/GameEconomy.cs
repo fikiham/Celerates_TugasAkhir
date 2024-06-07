@@ -35,5 +35,7 @@ public class GameEconomy : MonoBehaviour // Attach this to a persistent game obj
     public void LostMoney(int lost)
     {
         Money -= lost;
+        if (Money < 0)
+            Money = 0;
     }
 }

@@ -46,6 +46,14 @@ public class RaidSystem : MonoBehaviour
             Instance = this;
     }
 
+    private void Start()
+    {
+        if (GameController.Instance.supposedRaid)
+        {
+            StartRaid(2, 500);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -88,7 +96,7 @@ public class RaidSystem : MonoBehaviour
             {
                 if (winStatus)
                 {
-                     
+
                     // Win
                     raidEndText.color = Color.yellow;
                     raidEndText.text = "Successfully Defended the Village";
@@ -100,7 +108,7 @@ public class RaidSystem : MonoBehaviour
                     GameEconomy.Instance.GainMoney(currentLoot);
                     currentLoot = 0;
 
-                     // Mainkan sound "WinRaid"
+                    // Mainkan sound "WinRaid"
                     SoundManager.Instance.PlaySound("WinRaid");
                 }
                 else

@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour
 
     public Transform player;
 
+    public bool supposedRaid = false;
+
     [SerializeField] GameObject[] persistentUI;
     [SerializeField] GameObject playeyDiedUI;
 
