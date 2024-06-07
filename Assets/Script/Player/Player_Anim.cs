@@ -11,6 +11,8 @@ public class Player_Anim : MonoBehaviour
     enum AnimState
     {
         Idle,
+        Sword,
+        Bow,
         Walking
     }
     AnimState currentState = AnimState.Idle;
@@ -18,9 +20,13 @@ public class Player_Anim : MonoBehaviour
 
     [SerializeField] float idleAnimSpd = 3;
     [SerializeField] float walkingAnimSpd = .5f;
+    [SerializeField] float swordAnimSpd = 3;
+    [SerializeField] float bowAnimSpd = .5f;
 
     [SerializeField] Sprite[] idleAnim;
     [SerializeField] Sprite[] walkingAnim;
+    [SerializeField] Sprite[] swordAnim;
+    [SerializeField] Sprite[] bowAnim;
 
     // Start is called before the first frame update
     void Start()

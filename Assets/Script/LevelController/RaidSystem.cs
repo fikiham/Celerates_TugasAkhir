@@ -30,6 +30,8 @@ public class RaidSystem : MonoBehaviour
 
     [SerializeField] int currentLoot;
 
+    [SerializeField] List<GameObject> uniqueSpawners;
+
     [Header("UI STUFF")]
     [SerializeField] GameObject raidUI;
     [SerializeField] TMP_Text raidTimerText;
@@ -131,6 +133,7 @@ public class RaidSystem : MonoBehaviour
     [ContextMenu("Start Raid")]
     void StartRaidFromMenu()
     {
+
         StartRaid(1, 100);
     }
 
@@ -154,6 +157,27 @@ public class RaidSystem : MonoBehaviour
         currentLoot += theLoot;
 
         SetActionAfter(afterAction);
+    }
+
+    public void StartRaid(bool endOfStory, UnityAction afterAction = null)
+    {
+        foreach (GameObject spawner in uniqueSpawners)
+        {
+            spawner.SetActive(true);
+        }
+        StartRaid(5, 500, () =>
+        {
+            afterAction?.Invoke();
+            EndOfStoryRaid();
+        });
+    }
+
+    void EndOfStoryRaid()
+    {
+        foreach (GameObject spawner in uniqueSpawners)
+        {
+            spawner.SetActive(false);
+        }
     }
 
     public void SetActionAfter(UnityAction afterAction = null)

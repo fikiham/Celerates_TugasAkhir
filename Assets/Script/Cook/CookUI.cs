@@ -43,7 +43,8 @@ public class CookUI : MonoBehaviour
 
     public void OpenCook()
     {
-        SoundManager.Instance.PlaySound("Click");
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySound("Click");
         GameController.Instance.ShowPersistentUI(false);
         gameObject.SetActive(true);
         isCookUIPanelOpen = true;

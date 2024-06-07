@@ -45133,14 +45133,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RaidSystem
       objectReference: {fileID: 0}
-    - target: {fileID: 6277495494385662531, guid: 35dd30e31c3004d4f9fa18ae3db69fb8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 24.23
-      objectReference: {fileID: 0}
-    - target: {fileID: 6277495494385662531, guid: 35dd30e31c3004d4f9fa18ae3db69fb8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 7.65
-      objectReference: {fileID: 0}
     - target: {fileID: 8451827714523367544, guid: 35dd30e31c3004d4f9fa18ae3db69fb8, type: 3}
       propertyPath: raidUI
       value: 
@@ -45366,11 +45358,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2803414185839649624, guid: b023ead12298f3044aecbbe3af90b9b8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.22
+      value: -17.46
       objectReference: {fileID: 0}
     - target: {fileID: 2803414185839649624, guid: b023ead12298f3044aecbbe3af90b9b8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.92
+      value: 6.85
       objectReference: {fileID: 0}
     - target: {fileID: 2803414185839649624, guid: b023ead12298f3044aecbbe3af90b9b8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -45407,14 +45399,6 @@ PrefabInstance:
     - target: {fileID: 3731897444073131432, guid: b023ead12298f3044aecbbe3af90b9b8, type: 3}
       propertyPath: m_Name
       value: Shop
-      objectReference: {fileID: 0}
-    - target: {fileID: 4991677456446011839, guid: b023ead12298f3044aecbbe3af90b9b8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.74
-      objectReference: {fileID: 0}
-    - target: {fileID: 4991677456446011839, guid: b023ead12298f3044aecbbe3af90b9b8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.38
       objectReference: {fileID: 0}
     - target: {fileID: 6468942894311733346, guid: b023ead12298f3044aecbbe3af90b9b8, type: 3}
       propertyPath: shopUI

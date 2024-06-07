@@ -100,7 +100,7 @@ public class GameEventSystem : MonoBehaviour
         else if (prompt == "FinishDialogue")
         {
             DoneDialogue_FinshDialogue = true;
-            RaidSystem.Instance.StartRaid(3, 500, () => DialogueSystem.Instance.StartDialogue(afterFinishDialogue));
+            RaidSystem.Instance.StartRaid(true, () => DialogueSystem.Instance.StartDialogue(afterFinishDialogue));
         }
         else
         {
