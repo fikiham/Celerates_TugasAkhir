@@ -39,6 +39,10 @@ public class RaidSystem : MonoBehaviour
     [SerializeField] TMP_Text raidEndDescText;
     [SerializeField] Button raidEndButton;
 
+    // sound 
+    private bool hasPlayedWinSound = false;
+
+
 
     private void Awake()
     {
@@ -55,7 +59,7 @@ public class RaidSystem : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+   void Update()
     {
         if (raidStart)
         {
@@ -68,7 +72,6 @@ public class RaidSystem : MonoBehaviour
                 {
                     Debug.Log("TIME's UP");
                     RaidEnd(false);
-
                 }
 
                 if (!currentlySpawning)
@@ -90,13 +93,11 @@ public class RaidSystem : MonoBehaviour
                             NextWave();
                     }
                 }
-
             }
             else
             {
                 if (winStatus)
                 {
-
                     // Win
                     raidEndText.color = Color.yellow;
                     raidEndText.text = "Successfully Defended the Village";
@@ -109,7 +110,11 @@ public class RaidSystem : MonoBehaviour
                     currentLoot = 0;
 
                     // Mainkan sound "WinRaid"
-                    SoundManager.Instance.PlaySound("WinRaid");
+                    if (!hasPlayedWinSound)
+                    {
+                        SoundManager.Instance.PlaySound("WinRaid");
+                        hasPlayedWinSound = true;
+                    }
                 }
                 else
                 {
@@ -122,7 +127,6 @@ public class RaidSystem : MonoBehaviour
 
                     // Lost money
                     GameEconomy.Instance.LostMoney(currentLoot);
-
                 }
             }
         }
