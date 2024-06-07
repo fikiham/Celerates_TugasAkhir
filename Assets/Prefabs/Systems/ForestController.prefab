@@ -47,8 +47,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpawnSpot: {fileID: 2562037365813362663}
+  FirstSpawner: {fileID: 0}
+  danauKetenanganDialogue: {fileID: 11400000, guid: 7585a1b4dae62f744a7f9fb0adcff3f4, type: 2}
   DanauKetenangan: {fileID: 8408365060982618954}
   VillagePortal: {fileID: 0}
+  QUEST_GagangPedang: {fileID: 0}
+  QUEST_Perisai: {fileID: 0}
+  QUEST_Armor: {fileID: 0}
+  QUEST_Buku: {fileID: 0}
+  QUEST_Tongkat: {fileID: 0}
 --- !u!1 &4643284929039396665
 GameObject:
   m_ObjectHideFlags: 0

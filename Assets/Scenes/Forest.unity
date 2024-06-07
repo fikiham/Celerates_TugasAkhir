@@ -75731,17 +75731,33 @@ PrefabInstance:
     m_TransformParent: {fileID: 1821573617}
     m_Modifications:
     - target: {fileID: 3082923496831931177, guid: efb178f1873573a40842337aa201809e, type: 3}
+      propertyPath: QUEST_Buku
+      value: 
+      objectReference: {fileID: 1774206343}
+    - target: {fileID: 3082923496831931177, guid: efb178f1873573a40842337aa201809e, type: 3}
+      propertyPath: QUEST_Armor
+      value: 
+      objectReference: {fileID: 415205431}
+    - target: {fileID: 3082923496831931177, guid: efb178f1873573a40842337aa201809e, type: 3}
       propertyPath: FirstSpawner
       value: 
       objectReference: {fileID: 2108545872}
+    - target: {fileID: 3082923496831931177, guid: efb178f1873573a40842337aa201809e, type: 3}
+      propertyPath: QUEST_Perisai
+      value: 
+      objectReference: {fileID: 1933316407}
+    - target: {fileID: 3082923496831931177, guid: efb178f1873573a40842337aa201809e, type: 3}
+      propertyPath: QUEST_Tongkat
+      value: 
+      objectReference: {fileID: 152484931}
     - target: {fileID: 3082923496831931177, guid: efb178f1873573a40842337aa201809e, type: 3}
       propertyPath: VillagePortal
       value: 
       objectReference: {fileID: 1269040504}
     - target: {fileID: 3082923496831931177, guid: efb178f1873573a40842337aa201809e, type: 3}
-      propertyPath: danauKetenanganDialogue
+      propertyPath: QUEST_GagangPedang
       value: 
-      objectReference: {fileID: 11400000, guid: 7585a1b4dae62f744a7f9fb0adcff3f4, type: 2}
+      objectReference: {fileID: 1829528422}
     - target: {fileID: 3300332004106517295, guid: efb178f1873573a40842337aa201809e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

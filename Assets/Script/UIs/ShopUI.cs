@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,10 +10,34 @@ public class ShopUI : MonoBehaviour
 {
     [SerializeField] TMP_Text currentMoney;
 
+    [SerializeField] Image itemSprite;
+    [SerializeField] TMP_Text itemName;
+    [SerializeField] TMP_Text itemDesc;
+
     [Header("BUY UI")]
     [SerializeField] Transform itemsToBuyContainer;
     [SerializeField] Transform itemsToBuyTemplate;
-    public List<Item> itemsToBuy;
+    List<Item> itemsToBuy;
+    [Serializable]
+    struct ItemListing
+    {
+        public string tag;
+        public int amount;
+        public Item Item;
+        public ItemListing(int amount, Item Item, string tag)
+        {
+            this.amount = amount;
+            this.Item = Item;
+            this.tag = tag;
+        }
+        public ItemListing(ItemListing itemListing)
+        {
+            this.amount = itemListing.amount;
+            this.Item = itemListing.Item;
+            this.tag = itemListing.tag;
+        }
+    }
+    [SerializeField] List<ItemListing> listings;
 
 
     [Header("SELL UI")]
@@ -25,12 +50,26 @@ public class ShopUI : MonoBehaviour
     [SerializeField] Transform itemsToUpgradeTemplate;
     public List<Item> itemsToUpgrade;
 
+    private void Awake()
+    {
+        List<ItemListing> temp = new(listings);
+        itemsToBuy = new List<Item>();
+        itemsToBuy.Clear();
+        foreach (ItemListing item in temp)
+        {
+            Item thisItem = ItemPool.Instance.GetItem(item.Item.itemName);
+            thisItem.stackCount = item.amount;
+            AddToStore(thisItem);
+        }
+    }
+
     private void Update()
     {
         // Close Shop
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SoundManager.Instance.PlaySound("Click");
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySound("Click");
             gameObject.SetActive(false);
             GameController.Instance.ShowPersistentUI(true);
         }
@@ -38,7 +77,8 @@ public class ShopUI : MonoBehaviour
 
     public void OpenShop()
     {
-        SoundManager.Instance.PlaySound("Click");
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySound("Click");
         GameController.Instance.ShowPersistentUI(false);
         gameObject.SetActive(true);
         currentMoney.text = "$" + GameEconomy.Instance.Money;
@@ -85,10 +125,19 @@ public class ShopUI : MonoBehaviour
             itemInInventory.name = item.itemName;
             itemInInventory.GetChild(0).GetComponent<Image>().sprite = item.sprite;
             itemInInventory.GetChild(1).GetComponent<TMP_Text>().text = item.stackCount.ToString();
+            itemInInventory.GetComponent<Button>().onClick.AddListener(() => SetDescription(item));
 
-            if (buySellOrUpgrade == 1 && item.stackCount == 0)
+            if (buySellOrUpgrade == 1)
             {
-                itemInInventory.GetChild(2).GetComponent<Button>().interactable = false;
+                itemInInventory.GetChild(3).GetComponent<TMP_Text>().text = "$ " + item.BuyValue;
+
+                if (item.stackCount == 0)
+                    itemInInventory.GetChild(2).GetComponent<Button>().interactable = false;
+            }
+
+            if (buySellOrUpgrade == 2)
+            {
+                itemInInventory.GetChild(3).GetComponent<TMP_Text>().text = "$ " + item.SellValue;
             }
 
             if (buySellOrUpgrade == 3)
@@ -115,17 +164,18 @@ public class ShopUI : MonoBehaviour
                 }
             }
 
-            itemInInventory.GetComponentInChildren<Button>().onClick.RemoveAllListeners();
+            Button theButton = itemInInventory.GetChild(2).GetComponent<Button>();
+            theButton.onClick.RemoveAllListeners();
             switch (buySellOrUpgrade)
             {
                 case 1:
-                    itemInInventory.GetComponentInChildren<Button>().onClick.AddListener(() => BuyItem(item));
+                    theButton.onClick.AddListener(() => BuyItem(item));
                     break;
                 case 2:
-                    itemInInventory.GetComponentInChildren<Button>().onClick.AddListener(() => SellItem(item));
+                    theButton.onClick.AddListener(() => SellItem(item));
                     break;
                 case 3:
-                    itemInInventory.GetComponentInChildren<Button>().onClick.AddListener(() => UpgradeItem(item));
+                    theButton.onClick.AddListener(() => UpgradeItem(item));
                     break;
             }
         }
@@ -148,6 +198,15 @@ public class ShopUI : MonoBehaviour
     }
 
 
+    public void SetDescription(Item item)
+    {
+        // Set item's texts
+        itemSprite.sprite = item.sprite;
+        itemName.text = item.itemName;
+        itemDesc.text = item.itemDescription;
+    }
+
+
     // Usable Function for buying, selling, and upgrading items
     void BuyItem(Item item)
     {
@@ -155,7 +214,7 @@ public class ShopUI : MonoBehaviour
         if (GameEconomy.Instance.SpendMoney(item.BuyValue))
         {
             // Add Item to inventory
-            Player_Inventory.Instance.AddItem(item);
+            Player_Inventory.Instance.AddItem(ItemPool.Instance.GetItem(item.itemName, 1));
             // Remove/Disable from shop
             item.stackCount--;
         }

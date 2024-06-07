@@ -10,6 +10,8 @@ public class GameData
     public int LatestMap;
     public float[] playerPos = new float[3];
 
+
+    #region STORY_STUFF
     public bool gameEvent_DoneFirstNarration;
     public bool gameEvent_DoneDialogue_1;
     public bool gameEvent_DoneDialogue_2;
@@ -18,6 +20,15 @@ public class GameData
     public bool gameEvent_DoneDialogue_5;
     public bool gameEvent_DoneDialogue_6;
     public bool gameEvent_DoneDialogue_7;
+
+    public bool pedangKakRen;
+
+    public bool quanta_pedang;
+    public bool quanta_tongkat;
+    public bool quanta_perisai;
+    public bool quanta_armor;
+    public bool quanta_buku;
+    #endregion
 
     #region ITEM_STUFF
 
@@ -94,6 +105,23 @@ public class GameData
             gameEvent_DoneDialogue_5 = GameEventSystem.Instance.DoneDialogue_FirstBandit;
             gameEvent_DoneDialogue_6 = GameEventSystem.Instance.DoneDialogue_FirstBanditDone;
             gameEvent_DoneDialogue_7 = GameEventSystem.Instance.DoneDialogue_FinshDialogue;
+
+            if (VillageController.Instance != null)
+            {
+                pedangKakRen = VillageController.Instance.PedangKakRen == null;
+            }
+
+            if (ForestController.Instance != null)
+            {
+                var theForest = ForestController.Instance;
+
+                quanta_pedang = theForest.QUEST_GagangPedang == null;
+                quanta_tongkat = theForest.QUEST_Tongkat == null;
+                quanta_perisai = theForest.QUEST_Perisai == null;
+                quanta_armor = theForest.QUEST_Armor == null;
+                quanta_buku = theForest.QUEST_Buku == null;
+            }
+
         }
     }
 

@@ -58,7 +58,8 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
         // Close inventory with escape when opened
         if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(openInventoryInput)) && inventoryOpened)
         {
-            SoundManager.Instance.PlaySound("Click");
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySound("Click");
             PlayerUI.Instance.inventoryUI.SetActive(false);
             GameController.Instance.ShowPersistentUI(true);
             GameController.Instance.ResumeGame();
@@ -70,7 +71,8 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
             // Open inventory on open inventory input (B)
             if (Input.GetKeyDown(openInventoryInput))
             {
-                SoundManager.Instance.PlaySound("Click");
+                if (SoundManager.Instance != null)
+                    SoundManager.Instance.PlaySound("Click");
                 inventoryOpened = !inventoryOpened;
                 PlayerUI.Instance.inventoryUI.SetActive(inventoryOpened);
                 GameController.Instance.ShowPersistentUI(!inventoryOpened);

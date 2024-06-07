@@ -16,6 +16,13 @@ public class ForestController : MonoBehaviour
     public Transform DanauKetenangan;
     public Transform VillagePortal;
 
+
+    public GameObject QUEST_GagangPedang;
+    public GameObject QUEST_Perisai;
+    public GameObject QUEST_Armor;
+    public GameObject QUEST_Buku;
+    public GameObject QUEST_Tongkat;
+
     private void Awake()
     {
         Instance = this;

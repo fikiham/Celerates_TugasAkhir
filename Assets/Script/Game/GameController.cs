@@ -90,7 +90,7 @@ public class GameController : MonoBehaviour
         switch (currentSceneName)
         {
             case "Village":
-                 SoundManager.Instance.StopBGM();
+                SoundManager.Instance.StopBGM();
                 SoundManager.Instance.PlayBGM("VillageBGM");
                 //  SoundManager.Instance.Stop("BGMDanau");
 
@@ -210,6 +210,28 @@ public class GameController : MonoBehaviour
         GameEventSystem.Instance.DoneDialogue_FirstBandit = data.gameEvent_DoneDialogue_5;
         GameEventSystem.Instance.DoneDialogue_FirstBanditDone = data.gameEvent_DoneDialogue_6;
         GameEventSystem.Instance.DoneDialogue_FinshDialogue = data.gameEvent_DoneDialogue_7;
+
+        if (VillageController.Instance != null)
+        {
+            if (data.pedangKakRen)
+                Destroy(VillageController.Instance.PedangKakRen);
+        }
+
+        if (ForestController.Instance != null)
+        {
+            var theForest = ForestController.Instance;
+
+            if (data.quanta_pedang)
+                Destroy(theForest.QUEST_GagangPedang);
+            if (data.quanta_tongkat)
+                Destroy(theForest.QUEST_Tongkat);
+            if (data.quanta_perisai)
+                Destroy(theForest.QUEST_Perisai);
+            if (data.quanta_armor)
+                Destroy(theForest.QUEST_Armor);
+            if (data.quanta_buku)
+                Destroy(theForest.QUEST_Buku);
+        }
     }
 
     public void GoToMainMenu()

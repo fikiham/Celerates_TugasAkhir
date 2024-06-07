@@ -16,6 +16,8 @@ public class VillageController : MonoBehaviour
     public Transform TengahKota;
     public Transform SumberBandit;
 
+    public GameObject PedangKakRen;
+
 
     private void Awake()
     {

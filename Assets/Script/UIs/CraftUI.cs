@@ -37,7 +37,8 @@ public class CraftUI : MonoBehaviour
         // Close Shop
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SoundManager.Instance.PlaySound("Click");
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySound("Click");
             gameObject.SetActive(false);
             GameController.Instance.ShowPersistentUI(true);
         }
@@ -45,7 +46,8 @@ public class CraftUI : MonoBehaviour
 
     public void OpenCraft()
     {
-        SoundManager.Instance.PlaySound("Click");
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySound("Click");
         GameController.Instance.ShowPersistentUI(false);
         gameObject.SetActive(true);
 
