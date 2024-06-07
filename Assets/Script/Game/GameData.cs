@@ -12,6 +12,8 @@ public class GameData
 
 
     #region STORY_STUFF
+    public string currentQuest;
+
     public bool gameEvent_DoneFirstNarration;
     public bool gameEvent_DoneDialogue_1;
     public bool gameEvent_DoneDialogue_2;
@@ -95,6 +97,8 @@ public class GameData
                     index++;
                 }
             }
+
+            currentQuest = Player_Quest.Instance.GetQuest();
 
             // GAME EVENTS
             gameEvent_DoneFirstNarration = GameEventSystem.Instance.DoneFirstNarration;

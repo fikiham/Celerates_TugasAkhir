@@ -45458,6 +45458,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 380977492676328244, guid: 77d805fc38e77894499cd2e233b66524, type: 3}
+      propertyPath: PedangKakRen
+      value: 
+      objectReference: {fileID: 1391537510}
+    - target: {fileID: 380977492676328244, guid: 77d805fc38e77894499cd2e233b66524, type: 3}
       propertyPath: SumberBandit
       value: 
       objectReference: {fileID: 2054514316520312199}

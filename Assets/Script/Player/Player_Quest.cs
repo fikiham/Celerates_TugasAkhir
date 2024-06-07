@@ -15,4 +15,9 @@ public class Player_Quest : MonoBehaviour
     {
         PlayerUI.Instance.currentQuestText.text = quest;
     }
+
+    public string GetQuest()
+    {
+        return PlayerUI.Instance.currentQuestText.text;
+    }
 }

@@ -24,9 +24,9 @@ MonoBehaviour:
   AreaOfEffect: 1
   SpecialAttackCD: 10
   SpecialAttackStamina: 0
-  UpgradeCost: 15
+  UpgradeCost: 500
   RangedWeapon_ProjectilePrefab: {fileID: 0}
   isStackable: 0
   stackCount: 1
-  BuyValue: 20
-  SellValue: 20
+  BuyValue: 500
+  SellValue: 500

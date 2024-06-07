@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
 
     public Transform player;
 
+    public bool fromPortal = true;
     public bool supposedRaid = false;
 
     [SerializeField] GameObject[] persistentUI;
@@ -206,6 +207,9 @@ public class GameController : MonoBehaviour
                 }
             }
         }
+
+        if (data.currentQuest != string.Empty)
+            Player_Quest.Instance.SetQuest(data.currentQuest);
 
         GameEventSystem.Instance.DoneFirstNarration = data.gameEvent_DoneFirstNarration;
         GameEventSystem.Instance.DoneDialogue_TamashiiGiveName = data.gameEvent_DoneDialogue_1;

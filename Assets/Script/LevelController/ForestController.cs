@@ -31,17 +31,20 @@ public class ForestController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameController.Instance.ResumeGame();
+
         if (!GameController.NewGame)
             GameController.Instance.LoadGame();
 
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         if (!GameEventSystem.Instance.DoneFirstNarration)
         {
             DialogueSystem.Instance.StartFirstDialogue();
         }
         else
         {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
-            player.position = playerSpawnSpot.position;
+            if (GameController.Instance.fromPortal)
+                player.position = playerSpawnSpot.position;
         }
     }
 

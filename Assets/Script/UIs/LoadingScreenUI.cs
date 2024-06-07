@@ -20,6 +20,7 @@ public class LoadingScreenUI : MonoBehaviour
 
     public void LoadScene(int i)
     {
+        Debug.Log("LOAD SCENE");
         tipsText.text = "Tips: \n" + tips[Random.Range(0, tips.Length)];
         transform.GetChild(0).gameObject.SetActive(true);
         StartCoroutine(LoadingScene(i));
@@ -27,6 +28,7 @@ public class LoadingScreenUI : MonoBehaviour
 
     IEnumerator LoadingScene(int i)
     {
+        Debug.Log("LOADING SCENE");
         AsyncOperation loadLevel = SceneManager.LoadSceneAsync(i);
         string loading = "Loading...";
         int index = 7;
@@ -40,5 +42,6 @@ public class LoadingScreenUI : MonoBehaviour
             yield return new WaitForSeconds(.1f);
         }
         transform.GetChild(0).gameObject.SetActive(false);
+        Debug.Log("DONE");
     }
 }

@@ -37,7 +37,7 @@ public class Seed : MonoBehaviour
 
                 // Pindahkan objek ke posisi tertentu pada growthCount
 
-                
+
 
                 if (growthCount == maxGrowthCount)
                 {
@@ -52,7 +52,8 @@ public class Seed : MonoBehaviour
     {
         if (isReadyToHarvest)
         {
-            SoundManager.Instance.PlaySound("Pick");
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySound("Pick");
             Debug.Log("Biji dipanen!");
             // Drop item menggunakan ItemPool
             ItemPool.Instance.DropItem("BuahCabai", transform.position + new Vector3(0, 0.5f, 0));
@@ -63,7 +64,7 @@ public class Seed : MonoBehaviour
             isReadyToHarvest = false;
             siram = true;
 
-           
+
         }
         else if (siram)
         {

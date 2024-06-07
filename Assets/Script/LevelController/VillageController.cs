@@ -27,8 +27,11 @@ public class VillageController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameController.Instance.ResumeGame();
+
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        player.position = playerSpawnSpot.position;
+        if (GameController.Instance.fromPortal)
+            player.position = playerSpawnSpot.position;
 
         if (!GameController.NewGame)
             GameController.Instance.LoadGame();
