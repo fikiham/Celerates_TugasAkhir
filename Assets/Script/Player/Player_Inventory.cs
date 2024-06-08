@@ -26,6 +26,9 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
     InventoryUI inventoryUI;
     [HideInInspector] public bool inventoryOpened;
 
+
+    [SerializeField] ParticleSystem healParticle;
+
     private void Awake()
     {
         Instance = this;
@@ -206,6 +209,7 @@ public class Player_Inventory : MonoBehaviour // Handle Player Inventory with In
             case ItemType.Heal:
                 // Heal Player
                 print("HEALED");
+                healParticle.Play();
                 Player_Health.Instance.Heal(10);
                 break;
 
