@@ -70,7 +70,6 @@ public class Enemy_Wolf : MonoBehaviour
         {
             if (IsInReach()) // Attack if in reach
             {
-                path.canMove = false;
                 //Try to attack player
                 attackTimer += Time.deltaTime;
                 if (attackTimer > attackDelay)
@@ -89,11 +88,9 @@ public class Enemy_Wolf : MonoBehaviour
             else if (IsNearPlayer()) // Aggro if near
             {
                 //rb.position = Vector2.MoveTowards(rb.position, target.position, runSpd * Time.deltaTime);
-                path.canMove = true;
             }
             else // Idle if neither
             {
-                path.canMove = false;
                 // Target Idle is zero if it reach targetted idling pos
                 if (targetIdle == Vector2.zero || caughtInCollision)
                 {

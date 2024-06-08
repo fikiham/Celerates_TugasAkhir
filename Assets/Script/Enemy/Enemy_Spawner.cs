@@ -20,7 +20,8 @@ public class Enemy_Spawner : MonoBehaviour
     {
         for (int i = 0; i < spawnCount; i++)
         {
-            SpawnEnemy();
+            if (CanSpawn)
+                SpawnEnemy();
         }
     }
 

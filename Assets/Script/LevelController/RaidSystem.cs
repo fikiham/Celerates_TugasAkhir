@@ -67,12 +67,10 @@ public class RaidSystem : MonoBehaviour
         {
             if (raiding)
             {
-                Debug.Log("START RAIDING");
                 raidTimer += Time.deltaTime;
                 raidTimerText.text = (raidTimer / 60).ToString("F0") + ":" + (int)(raidTimer % 60);
                 if (raidTimer > raidTimeLimit)
                 {
-                    Debug.Log("TIME's UP");
                     RaidEnd(false);
                 }
 
@@ -112,7 +110,8 @@ public class RaidSystem : MonoBehaviour
                     // Mainkan sound "WinRaid"
                     if (!hasPlayedWinSound)
                     {
-                        SoundManager.Instance.PlaySound("WinRaid");
+                        if (SoundManager.Instance != null)
+                            SoundManager.Instance.PlaySound("WinRaid");
                         hasPlayedWinSound = true;
                     }
                 }
@@ -211,6 +210,7 @@ public class RaidSystem : MonoBehaviour
 
     IEnumerator EnableSpawners()
     {
+        Debug.Log("spawning");
         foreach (Transform spawner in spawners)
         {
             spawner.GetComponent<Enemy_Spawner>().CanSpawn = true;
@@ -220,6 +220,7 @@ public class RaidSystem : MonoBehaviour
         {
             spawner.GetComponent<Enemy_Spawner>().CanSpawn = false;
         }
+        Debug.Log("not spawning");
         currentlySpawning = false;
     }
 

@@ -11,14 +11,19 @@ public class Enemy_Anim : MonoBehaviour
 
     [SerializeField] Sprite[] idleSprites;
     [SerializeField] Sprite[] walkSprites;
+    [SerializeField] Sprite[] attackSprites;
 
     [SerializeField] float idleAnimSpd = 3;
     [SerializeField] float walkingAnimSpd = .5f;
+    [SerializeField] float attackAnimSpd = .5f;
+
+    bool doneAttacking = false;
 
     enum AnimState
     {
         Idle,
-        Walking
+        Walking,
+        Attack
     }
     AnimState currentState = AnimState.Idle;
     AnimState prevState = AnimState.Idle;
@@ -32,16 +37,28 @@ public class Enemy_Anim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!path.reachedDestination)
-            currentState = AnimState.Walking;
-        else
-            currentState = AnimState.Idle;
+        if (doneAttacking && path.reachedDestination && attackSprites.Length != 0)
+        {
+            currentState = AnimState.Attack;
+        }
+        else if (!doneAttacking)
+        {
+            if (!path.reachedDestination)
+                currentState = AnimState.Walking;
+            else
+                currentState = AnimState.Idle;
+        }
+
+
 
 
         if (prevState != currentState)
         {
             switch (currentState)
             {
+                case AnimState.Attack:
+                    LoopSprite(attackSprites, attackAnimSpd);
+                    break;
                 case AnimState.Idle:
                     LoopSprite(idleSprites, idleAnimSpd);
                     break;
@@ -69,11 +86,21 @@ public class Enemy_Anim : MonoBehaviour
             currentFrame = (int)((Time.time - startTime) * images.Length / animSpd);
             if (currentFrame >= images.Length)
             {
+                if (attackSprites.Length != 0)
+                    StartCoroutine(countingAttack());
+                doneAttacking = false;
                 startTime = Time.time;
                 currentFrame = (int)((Time.time - startTime) * images.Length / animSpd);
             }
             theSprite.sprite = images[currentFrame];
             yield return null;
         }
+    }
+
+    IEnumerator countingAttack()
+    {
+        yield return new WaitForSeconds(.5f);
+        doneAttacking = true;
+
     }
 }

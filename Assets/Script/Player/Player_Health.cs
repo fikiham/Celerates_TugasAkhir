@@ -16,6 +16,8 @@ public class Player_Health : MonoBehaviour
     public float stamina = 100;
     [SerializeField] float staminaRegenRate = 15;
 
+    [SerializeField] SpriteRenderer sr;
+
     private void Awake()
     {
         Instance = this;
@@ -39,8 +41,19 @@ public class Player_Health : MonoBehaviour
     {
         health -= damage;
 
+        StartCoroutine(TakeDamageVisual());
         if (health <= 0)
             Die();
+    }
+
+    IEnumerator TakeDamageVisual()
+    {
+        float startTime = Time.time;
+        while (Time.time < startTime + .5f)
+        {
+            sr.color = Color.Lerp(new(1, 0, 0), new(1, 1, 1), (Time.time - startTime) / .5f);
+            yield return null;
+        }
     }
 
     public void Heal(int heal)

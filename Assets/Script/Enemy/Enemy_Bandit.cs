@@ -2,6 +2,7 @@ using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEditor.Build;
 using UnityEngine;
 
 public class Enemy_Bandit : MonoBehaviour
@@ -69,19 +70,17 @@ public class Enemy_Bandit : MonoBehaviour
             if (!IsNearPlayer())
             {
                 //rb.position = Vector2.MoveTowards(rb.position, target.position, moveSpd * Time.deltaTime);
-                path.canMove = true;
             }
             else
             {
-                path.canMove = false;
                 //Try to attack player
-                attackTimer += Time.deltaTime;
-                if (attackTimer > attackDelay)
+                if (Time.time > attackTimer)
                 {
                     attackHitBox.SetActive(true);
                     attackingTimer += Time.deltaTime;
                     if (attackingTimer > attackDur)
                     {
+                        attackTimer = Time.time + attackDelay;
                         attackHitBox.SetActive(false);
                         attackingTimer = 0;
                         attackTimer = 0;
