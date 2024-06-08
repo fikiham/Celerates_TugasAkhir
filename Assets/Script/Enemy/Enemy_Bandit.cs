@@ -2,7 +2,6 @@ using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-using UnityEditor.Build;
 using UnityEngine;
 
 public class Enemy_Bandit : MonoBehaviour
