@@ -13164,17 +13164,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1926727346964493745, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
   m_PrefabInstance: {fileID: 8178868590069973248}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &845131788 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4863667371651220497, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
-  m_PrefabInstance: {fileID: 8178868590069973248}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76b279178199cc242a16388409039c53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &854775260
 GameObject:
   m_ObjectHideFlags: 0
@@ -45221,11 +45210,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5998541882732084300, guid: f582ea4934c566747a7d7495d0a0efc4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.17
+      value: 26.38
       objectReference: {fileID: 0}
     - target: {fileID: 5998541882732084300, guid: f582ea4934c566747a7d7495d0a0efc4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -14.78
+      value: -14.72
       objectReference: {fileID: 0}
     - target: {fileID: 5998541882732084300, guid: f582ea4934c566747a7d7495d0a0efc4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -45817,14 +45806,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 906908347}
     m_Modifications:
-    - target: {fileID: 844028588475844384, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
-      propertyPath: seed
-      value: 
-      objectReference: {fileID: 845131788}
-    - target: {fileID: 844028588475844384, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1926727346964493745, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.7700005
@@ -45869,10 +45850,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cabai
       objectReference: {fileID: 0}
-    - target: {fileID: 2733230255810905508, guid: 329268e891fe0f5408eb97a6158e7804, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 277bc0ab817f1064cb3bb24de4e43de0, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

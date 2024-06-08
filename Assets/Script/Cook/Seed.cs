@@ -15,12 +15,15 @@ public class Seed : MonoBehaviour
 
     private void Start()
     {
+        transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+        transform.GetChild(1).GetComponent<ParticleSystem>().Stop();
         spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(Grow());
     }
 
     private IEnumerator Grow()
     {
+        transform.GetChild(1).GetComponent<ParticleSystem>().Play();
         while (isGrowing)
         {
             yield return new WaitForSeconds(growthTime); // Tunggu growthTime detik
@@ -41,6 +44,7 @@ public class Seed : MonoBehaviour
 
                 if (growthCount == maxGrowthCount)
                 {
+                    transform.GetChild(1).GetComponent<ParticleSystem>().Stop();
                     isReadyToHarvest = true;
                     isGrowing = false; // Berhenti pertumbuhan setelah biji siap panen
                 }
@@ -52,6 +56,9 @@ public class Seed : MonoBehaviour
     {
         if (isReadyToHarvest)
         {
+            if (GameEventSystem.Instance.DoneDialogue_FirstKakRen && !GameEventSystem.Instance.DoneDialogue_FirstBandit)
+                Player_Quest.Instance.SetQuest("Cari sebilah pedang di samping rumah");
+
             if (SoundManager.Instance != null)
                 SoundManager.Instance.PlaySound("Pick");
             Debug.Log("Biji dipanen!");
@@ -64,6 +71,7 @@ public class Seed : MonoBehaviour
             isReadyToHarvest = false;
             siram = true;
 
+            transform.GetChild(0).GetComponent<ParticleSystem>().Play();
 
         }
         else if (siram)
@@ -80,6 +88,7 @@ public class Seed : MonoBehaviour
     {
         if (siram == true)
         {
+            transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
             isGrowing = true; // Mulai pertumbuhan kembali
             StartCoroutine(Grow());
             siram = false;

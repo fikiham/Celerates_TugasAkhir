@@ -33,6 +33,8 @@ public class Player_Action : MonoBehaviour
     [SerializeField] ParticleSystem swordAOEParticle;
     [SerializeField] ParticleSystem tombakParticle;
 
+    [SerializeField] ParticleSystem buffParticle;
+
     float damageMult = 1;
     #endregion
 
@@ -326,6 +328,7 @@ public class Player_Action : MonoBehaviour
 
                 print("buffing");
                 // Buff
+                buffParticle.Play();
                 StartCoroutine(StartBuff_PedangRen(30));
                 StartCoroutine(ActivateAttack(1));
 
