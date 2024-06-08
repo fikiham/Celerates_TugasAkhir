@@ -53,10 +53,13 @@ MonoBehaviour:
   gracePeriod: 5
   totalWave: 0
   currentWave: 0
-  enemiesNumber: 2
+  enemiesNumber: 5
   enemiesNumbers: 0
   currentLoot: 0
-  uniqueSpawners: []
+  uniqueSpawners:
+  - {fileID: 6247987058768172873}
+  - {fileID: 1322671086687722891}
+  - {fileID: 4962538162162668121}
   raidUI: {fileID: 0}
   raidTimerText: {fileID: 0}
   raidProgress: {fileID: 0}
@@ -164,7 +167,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8904713916914028977, guid: 81f4302e82d231e48ae4163503ab178e, type: 3}
       propertyPath: spawnCount
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8904713916914028977, guid: 81f4302e82d231e48ae4163503ab178e, type: 3}
       propertyPath: enemyPrefab
@@ -179,6 +182,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81f4302e82d231e48ae4163503ab178e, type: 3}
+--- !u!1 &1322671086687722891 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4462828541567617859, guid: 81f4302e82d231e48ae4163503ab178e, type: 3}
+  m_PrefabInstance: {fileID: 3437430353309947592}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1436781993769971841 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4342680799774598729, guid: 81f4302e82d231e48ae4163503ab178e, type: 3}
@@ -246,7 +254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8904713916914028977, guid: 81f4302e82d231e48ae4163503ab178e, type: 3}
       propertyPath: spawnCount
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8904713916914028977, guid: 81f4302e82d231e48ae4163503ab178e, type: 3}
       propertyPath: enemyPrefab
@@ -261,6 +269,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81f4302e82d231e48ae4163503ab178e, type: 3}
+--- !u!1 &6247987058768172873 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4462828541567617859, guid: 81f4302e82d231e48ae4163503ab178e, type: 3}
+  m_PrefabInstance: {fileID: 7735611625033538570}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6277495494385662531 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4342680799774598729, guid: 81f4302e82d231e48ae4163503ab178e, type: 3}
@@ -332,7 +345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8904713916914028977, guid: 81f4302e82d231e48ae4163503ab178e, type: 3}
       propertyPath: spawnCount
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8904713916914028977, guid: 81f4302e82d231e48ae4163503ab178e, type: 3}
       propertyPath: enemyPrefab
@@ -347,6 +360,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81f4302e82d231e48ae4163503ab178e, type: 3}
+--- !u!1 &4962538162162668121 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4462828541567617859, guid: 81f4302e82d231e48ae4163503ab178e, type: 3}
+  m_PrefabInstance: {fileID: 8732863147949054234}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5004926276518231891 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4342680799774598729, guid: 81f4302e82d231e48ae4163503ab178e, type: 3}

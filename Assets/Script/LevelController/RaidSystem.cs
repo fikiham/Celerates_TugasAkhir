@@ -146,7 +146,11 @@ public class RaidSystem : MonoBehaviour
 
         raidUI.SetActive(true);
         SetNumberTotal(enemiesNumber);
-        enemiesNumbers = enemiesNumber;
+        foreach (Transform child in spawners)
+        {
+            if (child.gameObject.activeInHierarchy)
+                enemiesNumbers += enemiesNumber;
+        }
 
         StartCoroutine(EnableSpawners());
 
@@ -236,10 +240,9 @@ public class RaidSystem : MonoBehaviour
 
     void SetNumberTotal(int numbers)
     {
-        int number = numbers / spawners.childCount;
         foreach (Transform spawner in spawners)
         {
-            spawner.GetComponent<Enemy_Spawner>().spawnCount = number;
+            spawner.GetComponent<Enemy_Spawner>().spawnCount = numbers;
         }
     }
 }
